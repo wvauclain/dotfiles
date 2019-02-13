@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+const { Option, Command, selectOptionAndRun } = require("./js/rofi");
+
+class Keymap extends Option {
+  constructor(name, locale) {
+    super(name, new Command("setxkbmap", [locale]));
+  }
+}
+
+const keymaps = [new Keymap("US English", "us"), new Keymap("Spanish", "es")];
+
+selectOptionAndRun(keymaps);

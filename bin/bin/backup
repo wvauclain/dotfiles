@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+BACKUP_PATH="$1"
+read -p "Are you sure that you would like to begin a backup to $BACKUP_PATH (y/N)? " choice
+case "$choice" in 
+  y|Y ) echo "Starting..." ;;
+  * ) exit 1 ;;
+esac
+
+rsync -aAXvH --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} / "$BACKUP_PATH"

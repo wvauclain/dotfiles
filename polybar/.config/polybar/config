@@ -1,0 +1,419 @@
+;;;;;
+; Polybar Config
+;;;;;
+
+[colors]
+foreground = #F8F8F2
+background = #282A36
+color0 = #000000
+color1 = #FF5555
+color2 = #50FA7B
+color3 = #F1FA8C
+color4 = #BD93F9
+color5 = #FF79C6
+color6 = #8BE9FD
+color7 = #BFBFBF
+color8 = #4D4D4D
+color9 = #FF6E67
+color10 = #5AF78E
+color11 = #F4F99D
+color12 = #CAA9FA
+color13 = #FF92D0
+color14 = #9AEDFE
+color15 = #E6E6E6
+
+[module/network]
+type = internal/network
+interface = wlp4s0
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3.0
+
+label-connected =  %essid%
+
+[module/internalbattery]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 100
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = ADP1
+
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
+poll-interval = 5
+
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging = I: <ramp-capacity> <label-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+format-discharging = I: <ramp-capacity> <label-discharging>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+format-full = I: <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = C %percentage%% %time%
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = D %percentage%% %time%
+
+; Available tokens:
+;   %percentage% (default)
+label-full = C %percentage%%
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.color1}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.color3}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.color3}
+ramp-capacity-3 = 
+ramp-capacity-3-foreground = ${colors.color2}
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colors.color2}
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+[module/externalbattery]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 100
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT1
+adapter = ADP1
+
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
+poll-interval = 5
+
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>E
+format-charging = E: <ramp-capacity> <label-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+format-discharging = E: <ramp-capacity> <label-discharging>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+format-full = E: <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = C %percentage%% %time%
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = D %percentage%% %time%
+
+; Available tokens:
+;   %percentage% (default)
+label-full = C %percentage%%
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.color1}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.color3}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.color3}
+ramp-capacity-3 = 
+ramp-capacity-3-foreground = ${colors.color2}
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colors.color2}
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+enable-click = true
+enable-scroll = false
+
+label-focused = %name%
+label-focused-padding = 1
+label-focused-underline = ${colors.foreground}
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+label-empty = %name%
+label-empty-padding = 1
+label-empty-foreground = ${colors.color8}
+
+label-urgent = %name%
+label-urgent-underline = ${colors.color1}
+
+[module/date]
+type = internal/date
+interval = 1.0
+date = "%A, %e %b %Y, %Y-%m-%d"
+time = "%r (%Z)"
+label = "%date% - %time%"
+
+[module/homefs]
+type = internal/fs
+
+; Mountpoints to display
+mount-0 = /home
+
+; Seconds to sleep between updates
+; Default: 30
+interval = 10
+
+; Display fixed precision values
+; Default: false
+fixed-values = true
+
+; Spacing between entries
+; Default: 2
+spacing = 4
+
+; Available tags:
+;   <label-mounted> (default)
+;   <bar-free>
+;   <bar-used>
+;   <ramp-capacity>
+format-mounted =  /home: <label-mounted>
+
+; Available tokens:
+;   %mountpoint%
+;   %type%
+;   %fsname%
+;   %percentage_free%
+;   %percentage_used%
+;   %total%
+;   %free%
+;   %used%
+; Default: %mountpoint% %percentage_free%%
+label-mounted = %free%
+
+[module/rootfs]
+type = internal/fs
+
+; Mountpoints to display
+mount-0 = /
+
+; Seconds to sleep between updates
+; Default: 30
+interval = 10
+
+; Display fixed precision values
+; Default: false
+fixed-values = true
+
+; Spacing between entries
+; Default: 2
+spacing = 4
+
+; Available tags:
+;   <label-mounted> (default)
+;   <bar-free>
+;   <bar-used>
+;   <ramp-capacity>
+format-mounted =  /: <label-mounted>
+
+; Available tokens:
+;   %mountpoint%
+;   %type%
+;   %fsname%
+;   %percentage_free%
+;   %percentage_used%
+;   %total%
+;   %free%
+;   %used%
+; Default: %mountpoint% %percentage_free%%
+label-mounted = %free%
+
+[module/backlight]
+type = internal/xbacklight
+
+; XRandR output to get get values from
+; Default: the monitor defined for the running bar
+output = eDP1
+
+; Create scroll handlers used to set the backlight value
+; Default: true
+enable-scroll = false
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format =  <bar> <label>
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-fill = ─
+bar-empty = ─
+
+[module/volume]
+type = internal/alsa
+
+; Soundcard to be used
+master-soundcard = default
+
+; Use volume mapping (similar to amixer -M and alsamixer), where the increase in volume is linear to the ear
+; Default: false
+mapped = true
+
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume =  <bar-volume> <label-volume>
+
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-muted =  <bar-volume> <label-muted>
+
+; Available tokens:
+;   %percentage% (default)
+label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+label-muted = muted (%percentage%%)
+label-muted-foreground = ${colors.color1}
+
+; Only applies if <bar> is used
+bar-volume-width = 10
+bar-volume-indicator = |
+bar-volume-fill = ─
+bar-volume-empty = ─
+
+[module/pianobar]
+type = "custom/script"
+exec = ~/.config/pianobar/info.rb
+exec-if = pgrep -x pianobar
+
+[module/mpd]
+type = "custom/script"
+exec = mpc current
+exec-if = ruby .config/mpd/playing.rb
+
+[module/vpn]
+type = "custom/script"
+exec = ~/.config/polybar/vpn.sh
+exec-if = nmcli connection show --active | grep vpn
+
+[bar/nordbar]
+locale = en_US.UTF-8
+font-0 = "Iosevka Nerd Font:size=10:weight=Medium"
+
+monitor = eDP1
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+bottom = false
+border-size = 2
+border-color = ${colors.background}
+line-size = 2
+
+wm-name = bspwm
+wm-restack = bspwm
+
+separator = " | "
+fixed-center = true
+
+modules-left = bspwm backlight volume
+modules-center = date pianobar mpd
+modules-right = internalbattery externalbattery rootfs network vpn
+tray-position = right
+
+padding-right = 1

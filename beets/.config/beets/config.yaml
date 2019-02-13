@@ -1,0 +1,7 @@
+directory: ~/Music
+library: ~/Music/library.db
+plugins: missing ftintitle
+ftintitle:
+        auto: yes
+        #match:
+        #        ignored: missing_tracks
