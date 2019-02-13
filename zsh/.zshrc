@@ -11,5 +11,5 @@ plugins=(
 )
 
 export ZSH="/home/will/.oh-my-zsh"
-export ZSH_CUSTOM="/home/will/git/oh-my-zsh-custom"
+export ZSH_CUSTOM="/home/will/.oh-my-zsh-custom"
 source $ZSH/oh-my-zsh.sh
