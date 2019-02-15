@@ -1,0 +1,31 @@
+! ------------------------------------------------------------------------------
+! Dracula color scheme variables
+! ------------------------------------------------------------------------------
+#define foreground #F8F8F2
+#define background #282A36
+#define color0 #000000
+#define color1 #FF5555
+#define color2 #50FA7B
+#define color3 #F1FA8C
+#define color4 #BD93F9
+#define color5 #FF79C6
+#define color6 #8BE9FD
+#define color7 #BFBFBF
+#define color8 #4D4D4D
+#define color9 #FF6E67
+#define color10 #5AF78E
+#define color11 #F4F99D
+#define color12 #CAA9FA
+#define color13 #FF92D0
+#define color14 #9AEDFE
+#define color15 #E6E6E6
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: background, background, background
+rofi.color-normal: background, foreground, background, color14, background
+rofi.color-active: background, color5, background, color5, background
+rofi.color-urgent: background, color1, background, color1, background
+rofi.font: Iosevka 12
