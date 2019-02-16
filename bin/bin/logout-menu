@@ -4,6 +4,7 @@ const { Option, Command, selectOptionAndRun } = require("./js/rofi");
 const options = [
   new Option("Shut Down", new Command("shutdown", ["now"])),
   new Option("Restart", new Command("reboot", [])),
+  new Option("Hibernate", new Command("systemctl", ["hibernate"])),
   new Option("Log Out", new Command("bspc", ["quit"])),
   new Option("Sleep", new Command("systemctl", ["suspend"]))
 ];
