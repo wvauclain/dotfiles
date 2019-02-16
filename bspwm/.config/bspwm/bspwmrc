@@ -6,6 +6,9 @@ sxhkd &
 # Launch mpd
 mpd &
 
+# Launch gebaar
+sh /home/will/.config/gebaar/launch.sh
+
 # Launch nitrogen with the last selected wallpaper
 nitrogen --restore &
 
