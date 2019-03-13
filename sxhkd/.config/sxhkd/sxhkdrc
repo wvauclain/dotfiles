@@ -88,6 +88,10 @@ Print
 shift + Print
 	scrot -u ~/scrots/%Y-%m-%d-%T-screenshot.png
 
+# bookmarks manager
+super + {_,shift + }b
+	~/bin/bookmark{s,_}
+
 #
 # bspwm hotkeys
 #
