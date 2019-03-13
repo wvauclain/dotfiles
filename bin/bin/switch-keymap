@@ -1,12 +1,8 @@
-#!/usr/bin/env node
-const { Option, Command, selectOptionAndRun } = require("./js/rofi");
+#!/bin/sh
+KEYMAPS="US English|us
+Spanish|es"
 
-class Keymap extends Option {
-  constructor(name, locale) {
-    super(name, new Command("setxkbmap", [locale]));
-  }
-}
+KEYMAP=$(echo "$KEYMAPS" | awk -F "|" '{print $1}' | rofi -dmenu -i)
 
-const keymaps = [new Keymap("US English", "us"), new Keymap("Spanish", "es")];
-
-selectOptionAndRun(keymaps);
+setxkbmap $(echo "$KEYMAPS" | grep "$KEYMAP" | awk -F "|" '{print $2}')
+dunstify -r 44 "Keymap" "Changed to $KEYMAP"
