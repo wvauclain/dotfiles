@@ -13,3 +13,7 @@ plugins=(
 export ZSH="/home/will/.oh-my-zsh"
 export ZSH_CUSTOM="/home/will/.oh-my-zsh-custom"
 source $ZSH/oh-my-zsh.sh
+
+export BROWSER="firefox --new-tab"
+
+[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x bspwm >/dev/null && exec startx || true
