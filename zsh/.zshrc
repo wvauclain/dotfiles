@@ -16,4 +16,4 @@ source $ZSH/oh-my-zsh.sh
 
 export BROWSER="firefox --new-tab"
 
-[ "$(tty)" = "/dev/tty1" ] && ! pgrep -x bspwm >/dev/null && exec startx || true
+if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then exec startx; fi
