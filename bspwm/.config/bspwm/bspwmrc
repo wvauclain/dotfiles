@@ -49,3 +49,4 @@ bspc config initial_polarity second_child
 bspc rule -a '*:libreofficedev' state=tiled
 bspc rule -a '*:soffice' state=tiled
 bspc rule -a '*:zathura' state=tiled
+bspc rule -a '*:emacs' state=tiled
