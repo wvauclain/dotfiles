@@ -1,7 +1,11 @@
 #!/bin/sh
 BOOKMARKS=~/.bookmarks
 
-URL=$(xprop -id $(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) _NET_WM_NAME | egrep -o "http\S*")
+URL=$(xprop -id $(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) _NET_WM_NAME | egrep -o "http\S*" || rofi -dmenu -lines 0 -p "url" | egrep -o "http\S*")
+if [[ $URL == "" ]]; then
+	dunstify -C 27
+	exit 0
+fi
 dunstify -r 27 "URL to grab" "$URL"
 NAME=$(rofi -dmenu -lines 0 -p "name")
 if [[ $NAME == "" ]]; then
