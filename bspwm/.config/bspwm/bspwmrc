@@ -21,8 +21,11 @@ nitrogen --restore &
 # Launch polybar with the correct configuration
 sh /home/will/.config/polybar/launch.sh
 
-# Launch dropbox
-/usr/bin/dropbox &
+# Launch juiced
+juiced &
+
+# Launcth syncthing
+syncthing -no-browser &
 
 # Mute sound on boot
 amixer sset Master mute
@@ -50,3 +53,9 @@ bspc rule -a '*:libreofficedev' state=tiled
 bspc rule -a '*:soffice' state=tiled
 bspc rule -a '*:zathura' state=tiled
 bspc rule -a '*:emacs' state=tiled
+
+#
+# Keyboard options
+#
+# setxkbmap -option caps:swapescape
+setxkbmap -option caps:escape
