@@ -14,6 +14,6 @@ export ZSH="/home/will/.oh-my-zsh"
 export ZSH_CUSTOM="/home/will/.oh-my-zsh-custom"
 source $ZSH/oh-my-zsh.sh
 
-export BROWSER="firefox --new-tab"
+export BROWSER="firefox"
 
 if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then exec startx; fi
