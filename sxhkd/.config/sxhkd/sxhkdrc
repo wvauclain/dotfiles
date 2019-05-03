@@ -42,6 +42,10 @@ super + h
 super + grave
 	~/bin/switch-keymap
 
+# emoji selector
+super + e
+	~/bin/emoji
+
 # make sxhkd reload its configuration files:
 super + r
 	pkill -USR1 -x sxhkd
