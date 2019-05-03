@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+EMOJIFILE=~/.emoji
+
+SELECTION=$(grep -v "#" $EMOJIFILE | awk -F ";" '{print $1}' | rofi -dmenu -i -p "emoji")
+if [[ $SELECTION != "" ]]; then
+	CHAR=$(echo "$SELECTION" | sed "s/ .*//")
+	echo "$CHAR" | tr -d '\n' | xclip -selection clipboard
+	dunstify -u low "'$CHAR' copied to clipboard."
+fi
