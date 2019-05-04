@@ -3,8 +3,14 @@
 
 # Print the user and hostname (e.g. user@hostname)
 function user_and_hostname {
+    # If over ssh, make hostname red. Otherwise, cyan
+    if [ -n "$SSH_CLIENT" ] && [ -n "$SSH_TTY" ]; then
+        HOSTNAME_COLOR="$fg_bold[red]"
+    else
+        HOSTNAME_COLOR="$fg_bold[cyan]"
+    fi
     # If root, make username red. Otherwise, purple
-    echo "%(!.%{$fg_bold[red]%}.%{$fg_bold[magenta]%})%n%{$fg_bold[yellow]%}@%{$fg_bold[cyan]%}%m"
+    echo "%(!.%{$fg_bold[red]%}.%{$fg_bold[magenta]%})%n%{$fg_bold[yellow]%}@%{$HOSTNAME_COLOR%}%m"
 }
 
 function filepath {
@@ -40,3 +46,5 @@ PROMPT='$(make_prompt)%{$reset_color%} '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="{"
 ZSH_THEME_GIT_PROMPT_SUFFIX="} "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg_bold[red]%}*%{$fg_bold[green]%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
