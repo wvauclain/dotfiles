@@ -94,6 +94,7 @@ if (( ${+commands[trizen]} )); then
   alias trin='trizen -S'
   alias trrem='trizen -Rns'
 fi
+alias mirror='wget -e robots=off -r -nc -np -R "index.html*"'
 
 # exports
 export PATH="$HOME/.node_modules/bin:$PATH:$HOME/bin:$HOME/.local/bin"
