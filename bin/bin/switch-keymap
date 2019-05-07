@@ -4,5 +4,7 @@ Spanish|es"
 
 KEYMAP=$(echo "$KEYMAPS" | awk -F "|" '{print $1}' | rofi -dmenu -i)
 
-setxkbmap $(echo "$KEYMAPS" | grep "$KEYMAP" | awk -F "|" '{print $2}')
-dunstify -r 44 "Keymap" "Changed to $KEYMAP"
+if [[ $KEYMAP != "" ]]; then
+	setxkbmap $(echo "$KEYMAPS" | grep "$KEYMAP" | awk -F "|" '{print $2}')
+	dunstify -r 44 "Keymap" "Changed to $KEYMAP"
+fi
