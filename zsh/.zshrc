@@ -18,7 +18,6 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt share_history          # share command history data
 
-
 ##
 # zsh imports
 ##
@@ -31,6 +30,10 @@ done
 # setup the prompt
 setopt prompt_subst # allow for variable substitution in the prompt
 source ~/.zsh-theme
+
+# setup completion
+autoload -U compinit
+compinit -i -C -d
 
 
 ##
@@ -50,8 +53,8 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle -N zle-line-finish
 fi
 
-# use emacs keybindings
-bindkey -e
+# use vim keybindings
+bindkey -v
 
 # start typing + [Up-Arrow] - fuzzy find history forward
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
