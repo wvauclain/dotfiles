@@ -100,7 +100,6 @@ fi
 alias mirror='wget -e robots=off -r -nc -np -R "index.html*"'
 
 # exports
-export PATH="$HOME/.node_modules/bin:$PATH:$HOME/bin:$HOME/.local/bin"
 export npm_config_prefix=~/.node_modules
 export BROWSER="firefox"
 export EDITOR="vim"
