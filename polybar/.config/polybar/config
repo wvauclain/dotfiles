@@ -340,7 +340,7 @@ bar-fill = ─
 bar-empty = ─
 
 [module/volume]
-type = internal/alsa
+type = internal/pulseaudio
 
 ; Soundcard to be used
 master-soundcard = default

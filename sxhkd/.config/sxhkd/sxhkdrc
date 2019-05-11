@@ -65,22 +65,22 @@ shift + XF86MonBrightnessDown
 
 # volume keys
 XF86AudioRaiseVolume
-	amixer -M sset Master 10%+
+	ponymix increase 10
 
 shift + XF86AudioRaiseVolume
-	amixer -M sset Master 5%+
+	ponymix increase 5
 
 XF86AudioLowerVolume
-	amixer -M sset Master 10%-
+	ponymix decrease 10
 
 shift + XF86AudioLowerVolume
-	amixer -M sset Master 5%-
+	ponymix decrease 5
 
 XF86AudioMute
-	amixer -M sset Master toggle
+	ponymix toggle
 
 shift + XF86AudioMute
-	amixer -M sset Master 0%
+	ponymix set-volume 0
 
 super + XF86AudioMute
 	mpc toggle
