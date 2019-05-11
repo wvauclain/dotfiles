@@ -1,5 +1,7 @@
 #! /bin/sh
 
+HOSTNAME=$(hostname)
+
 # Launch SXHKD
 sxhkd &
 
@@ -16,7 +18,13 @@ dunst &
 sh /home/will/.config/gebaar/launch.sh
 
 # Launch nitrogen with the last selected wallpaper
-nitrogen --restore &
+# nitrogen --restore &
+
+# Launch feh with the correct wallpaper
+case $HOSTNAME in
+    goldenarches)
+        feh --no-fehbg --bg-center ~/.wallpapers/l_garage01_big.jpg
+esac
 
 # Launch polybar with the correct configuration
 sh /home/will/.config/polybar/launch.sh
