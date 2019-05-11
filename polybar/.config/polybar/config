@@ -22,9 +22,19 @@ color13 = #FF92D0
 color14 = #9AEDFE
 color15 = #E6E6E6
 
-[module/network]
+[module/network-goldenarches]
 type = internal/network
 interface = wlp4s0
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3.0
+
+label-connected =  %essid%
+
+[module/network-shadowboxpc]
+type = internal/network
+interface = wls1
 
 ; Seconds to sleep between updates
 ; Default: 1
@@ -231,43 +241,6 @@ date = "%A, %e %b %Y, %Y-%m-%d"
 time = "%r (%Z)"
 label = "%date% - %time%"
 
-[module/homefs]
-type = internal/fs
-
-; Mountpoints to display
-mount-0 = /home
-
-; Seconds to sleep between updates
-; Default: 30
-interval = 10
-
-; Display fixed precision values
-; Default: false
-fixed-values = true
-
-; Spacing between entries
-; Default: 2
-spacing = 4
-
-; Available tags:
-;   <label-mounted> (default)
-;   <bar-free>
-;   <bar-used>
-;   <ramp-capacity>
-format-mounted =  /home: <label-mounted>
-
-; Available tokens:
-;   %mountpoint%
-;   %type%
-;   %fsname%
-;   %percentage_free%
-;   %percentage_used%
-;   %total%
-;   %free%
-;   %used%
-; Default: %mountpoint% %percentage_free%%
-label-mounted = %free%
-
 [module/rootfs]
 type = internal/fs
 
@@ -342,13 +315,6 @@ bar-empty = ─
 [module/volume]
 type = internal/pulseaudio
 
-; Soundcard to be used
-master-soundcard = default
-
-; Use volume mapping (similar to amixer -M and alsamixer), where the increase in volume is linear to the ear
-; Default: false
-mapped = true
-
 ; Available tags:
 ;   <label-volume> (default)
 ;   <ramp-volume>
@@ -376,22 +342,7 @@ bar-volume-indicator = |
 bar-volume-fill = ─
 bar-volume-empty = ─
 
-[module/pianobar]
-type = "custom/script"
-exec = ~/.config/pianobar/info.rb
-exec-if = pgrep -x pianobar
-
-[module/mpd]
-type = "custom/script"
-exec = mpc current
-exec-if = ruby .config/mpd/playing.rb
-
-[module/vpn]
-type = "custom/script"
-exec = ~/.config/polybar/vpn.sh
-exec-if = nmcli connection show --active | grep vpn
-
-[bar/nordbar]
+[bar/goldenarches]
 locale = en_US.UTF-8
 font-0 = "Iosevka Nerd Font:size=10:weight=Medium"
 
@@ -412,8 +363,57 @@ separator = " | "
 fixed-center = true
 
 modules-left = bspwm backlight volume
-modules-center = date pianobar mpd
-modules-right = internalbattery externalbattery rootfs network vpn
+modules-center = date
+modules-right = internalbattery externalbattery rootfs network-goldenarches
 tray-position = right
 
 padding-right = 1
+
+[bar/shadowboxpc-main]
+locale = en_US.UTF-8
+font-0 = "Iosevka Nerd Font:size=10:weight=Medium"
+
+monitor = DVI-D-0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+bottom = false
+border-size = 2
+border-color = ${colors.background}
+line-size = 2
+
+wm-name = bspwm
+wm-restack = bspwm
+
+separator = " | "
+fixed-center = true
+
+modules-left = bspwm volume
+modules-center = date
+modules-right = rootfs network-shadowboxpc
+tray-position = right
+
+padding-right = 1
+
+[bar/shadowboxpc-side]
+locale = en_US.UTF-8
+font-0 = "Iosevka Nerd Font:size=10:weight=Medium"
+
+monitor = HDMI-0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+bottom = false
+border-size = 2
+border-color = ${colors.background}
+line-size = 2
+
+wm-name = bspwm
+wm-restack = bspwm
+
+separator = " | "
+fixed-center = true
+
+modules-center = bspwm
