@@ -5,38 +5,47 @@ HOSTNAME=$(hostname)
 # Launch SXHKD
 sxhkd &
 
-# Launch mpd
-mpd &
-
 # Launch compton
 compton -b
 
 # Launch dunst
 dunst &
 
-# Launch gebaar
-sh /home/will/.config/gebaar/launch.sh
+# Launch machine-specific programs
+case $HOSTNAME in
+    goldenarches)
+        # Launch gebaar
+        sh /home/will/.config/gebaar/launch.sh
 
-# Launch nitrogen with the last selected wallpaper
-# nitrogen --restore &
+        # Launch mpd
+        mpd &
 
-# Launch feh with the correct wallpaper
+        # Launch juiced
+        juiced &
+
+        ;;
+    shadowboxpc)
+        ;;
+esac
+
+# Configure the wallpaper per machine
 case $HOSTNAME in
     goldenarches)
         feh --no-fehbg --bg-center ~/.wallpapers/l_garage01_big.jpg
+        ;;
+    shadowboxpc)
+        feh --no-fehbg --bg-center ~/.wallpapers/l_ash03_big.1920x1080.jpg ~/.wallpapers/l_ash06_big.1920x1080.jpg
+        ;;
 esac
 
 # Launch polybar with the correct configuration
 sh /home/will/.config/polybar/launch.sh
 
-# Launch juiced
-juiced &
-
-# Launcth syncthing
+# Launch syncthing
 syncthing -no-browser &
 
 # Mute sound on boot
-amixer sset Master mute
+ponymix mute
 
 # Disable screen saver blanking
 xset s off -dpms
@@ -44,7 +53,17 @@ xset s off -dpms
 #
 # BSPWM initialization
 #
-bspc monitor -d I II III IV V VI VII VIII IX X
+
+# configure monitors per-machine
+case $HOSTNAME in
+    goldenarches)
+        bspc monitor -d I II III IV V VI VII VIII IX X
+        ;;
+    shadowboxpc)
+        bspc monitor DVI-D-0 -d I II III IV V VI VII
+        bspc monitor HDMI-0 -d VIII IX X
+        ;;
+esac
 
 bspc config border_width         2
 bspc config window_gap           8
