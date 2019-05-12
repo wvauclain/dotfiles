@@ -1,7 +1,5 @@
 #! /bin/sh
 
-HOSTNAME=$(hostname)
-
 # Launch SXHKD
 sxhkd &
 
@@ -10,33 +8,6 @@ compton -b
 
 # Launch dunst
 dunst &
-
-# Launch machine-specific programs
-case $HOSTNAME in
-    goldenarches)
-        # Launch gebaar
-        sh /home/will/.config/gebaar/launch.sh
-
-        # Launch mpd
-        mpd &
-
-        # Launch juiced
-        juiced &
-
-        ;;
-    shadowboxpc)
-        ;;
-esac
-
-# Configure the wallpaper per machine
-case $HOSTNAME in
-    goldenarches)
-        feh --no-fehbg --bg-center ~/.wallpapers/l_garage01_big.jpg
-        ;;
-    shadowboxpc)
-        feh --no-fehbg --bg-center ~/.wallpapers/l_ash03_big.1920x1080.jpg ~/.wallpapers/l_ash06_big.1920x1080.jpg
-        ;;
-esac
 
 # Launch polybar with the correct configuration
 sh /home/will/.config/polybar/launch.sh
@@ -50,20 +21,51 @@ ponymix mute
 # Disable screen saver blanking
 xset s off -dpms
 
+
 #
-# BSPWM initialization
+# Per-machine Configuration
 #
 
-# configure monitors per-machine
-case $HOSTNAME in
+case $(hostname) in
     goldenarches)
+        # Launch gebaar
+        sh /home/will/.config/gebaar/launch.sh
+
+        # Launch mpd
+        mpd &
+
+        # Launch juiced
+        juiced &
+
+        # Launch polybar
+        sh .config/polybar/launch.sh goldenarches
+
+        # Set wallpaper
+        feh --no-fehbg --bg-center ~/.wallpapers/l_garage01_big.jpg
+
+        # Configure desktops
         bspc monitor -d I II III IV V VI VII VIII IX X
+
         ;;
+
+
     shadowboxpc)
+        # Launch polybar
+        sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side 
+
+        # Set wallpaper
+        feh --no-fehbg --bg-center ~/.wallpapers/l_ash03_big.1920x1080.jpg ~/.wallpapers/l_ash06_big.1920x1080.jpg
+
+        # Configure desktops
         bspc monitor DVI-D-0 -d I II III IV V VI VII
         bspc monitor HDMI-0 -d VIII IX X
         ;;
 esac
+
+
+#
+# BSPWM initialization
+#
 
 bspc config border_width         2
 bspc config window_gap           8
