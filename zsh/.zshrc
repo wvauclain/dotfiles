@@ -103,6 +103,7 @@ alias mirror='wget -e robots=off -r -nc -np -R "index.html*"'
 export npm_config_prefix=~/.node_modules
 export BROWSER="firefox"
 export EDITOR="vim"
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # startx if we are running on the 1st tty
 if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then exec startx; fi
