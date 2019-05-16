@@ -1,6 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 BACKUP_PATH="$1"
-read -p "Are you sure that you would like to begin a backup to $BACKUP_PATH (y/N)? " choice
+printf "Are you sure that you would like to begin a backup to $BACKUP_PATH (y/N)? "
+read choice
 case "$choice" in 
   y|Y ) echo "Starting..." ;;
   * ) exit 1 ;;

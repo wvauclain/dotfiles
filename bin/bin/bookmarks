@@ -2,6 +2,6 @@
 BOOKMARKS=~/.bookmarks
 
 SELECTION=$(awk -F "\t" '{print $1}' $BOOKMARKS | sort | rofi -dmenu -i)
-if [[ $SELECTION != "" ]]; then
+if [ -n "$SELECTION" ]; then
 	egrep "^$SELECTION	" $BOOKMARKS | awk -F "\t" '{print $2}' | xargs $BROWSER
 fi

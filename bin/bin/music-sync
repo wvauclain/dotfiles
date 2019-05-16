@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
+#!/bin/sh
 adb-sync -d ~/Music /sdcard
