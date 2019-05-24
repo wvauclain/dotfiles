@@ -98,6 +98,7 @@ if (( ${+commands[trizen]} )); then
   alias trrem='trizen -Rns'
 fi
 alias mirror='wget -e robots=off -r -nc -np -R "index.html*"'
+alias fixkeyboard='setxkbmap -option caps:escape'
 
 # exports
 export npm_config_prefix=~/.node_modules
