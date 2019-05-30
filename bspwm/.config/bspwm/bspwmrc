@@ -21,6 +21,8 @@ ponymix mute
 # Disable screen saver blanking
 xset s off -dpms
 
+# Launch emacs in daemon mode
+emacs --daemon
 
 #
 # Per-machine Configuration
