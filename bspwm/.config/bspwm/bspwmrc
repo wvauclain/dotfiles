@@ -22,7 +22,7 @@ ponymix mute
 xset s off -dpms
 
 # Launch emacs in daemon mode
-emacs --daemon
+emacs --daemon &
 
 #
 # Per-machine Configuration
