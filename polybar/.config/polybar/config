@@ -416,4 +416,5 @@ wm-restack = bspwm
 separator = " | "
 fixed-center = true
 
+modules-left = volume
 modules-center = bspwm
