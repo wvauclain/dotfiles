@@ -84,9 +84,3 @@ bspc rule -a '*:libreofficedev' state=tiled
 bspc rule -a '*:soffice' state=tiled
 bspc rule -a '*:zathura' state=tiled
 bspc rule -a '*:emacs' state=tiled
-
-#
-# Keyboard options
-#
-# setxkbmap -option caps:swapescape
-setxkbmap -option caps:escape

@@ -1,4 +1,5 @@
 #!/bin/sh
+setxkbmap -option caps:escape -option compose:ralt
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
