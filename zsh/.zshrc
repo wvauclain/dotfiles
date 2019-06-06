@@ -24,7 +24,7 @@ setopt share_history          # share command history data
 
 # setup functions
 for file (~/.zsh/*.zsh); do
-  source $file
+    source $file
 done
 
 # setup the prompt
@@ -43,14 +43,14 @@ compinit -i -C -d
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-  function zle-line-init() {
-    echoti smkx
-  }
-  function zle-line-finish() {
-    echoti rmkx
-  }
-  zle -N zle-line-init
-  zle -N zle-line-finish
+    function zle-line-init() {
+        echoti smkx
+    }
+    function zle-line-finish() {
+        echoti rmkx
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
 fi
 
 # use vim keybindings
@@ -58,16 +58,16 @@ bindkey -v
 
 # start typing + [Up-Arrow] - fuzzy find history forward
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
-  autoload -U up-line-or-beginning-search
-  zle -N up-line-or-beginning-search
-  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+    autoload -U up-line-or-beginning-search
+    zle -N up-line-or-beginning-search
+    bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
 fi
 
 # start typing + [Down-Arrow] - fuzzy find history backward
 if [[ "${terminfo[kcud1]}" != "" ]]; then
-  autoload -U down-line-or-beginning-search
-  zle -N down-line-or-beginning-search
-  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+    autoload -U down-line-or-beginning-search
+    zle -N down-line-or-beginning-search
+    bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
 
 # [Ctrl-RightArrow] - move forward one word
@@ -88,14 +88,14 @@ alias md='mkdir -p'
 alias l='ls -lAh'
 alias ll='ls -lh'
 if (( ${+commands[pacman]} )); then
-  alias pacupg='sudo pacman -Syu'
-  alias pacin='sudo pacman -S'
-  alias pacrem='sudo pacman -Rns'
+    alias pacupg='sudo pacman -Syu'
+    alias pacin='sudo pacman -S'
+    alias pacrem='sudo pacman -Rns'
 fi
 if (( ${+commands[trizen]} )); then
-  alias trupg='trizen -Syua'
-  alias trin='trizen -S'
-  alias trrem='trizen -Rns'
+    alias trupg='trizen -Syua'
+    alias trin='trizen -S'
+    alias trrem='trizen -Rns'
 fi
 alias mirror='wget -e robots=off -r -nc -np -R "index.html*"'
 alias fixkeyboard='setxkbmap -option caps:escape'
@@ -104,7 +104,9 @@ alias fixkeyboard='setxkbmap -option caps:escape'
 export npm_config_prefix=~/.node_modules
 export BROWSER="firefox"
 export EDITOR="vim"
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+if which rustc > /dev/null; then
+    export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+fi
 
 # startx if we are running on the 1st tty
 if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then exec startx; fi

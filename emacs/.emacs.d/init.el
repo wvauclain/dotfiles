@@ -249,9 +249,9 @@
 ;; Appearance
 (use-package dracula-theme :ensure t)
 (set-frame-font "Iosevka-12" nil t)
-(scroll-bar-mode -1)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+(and (functionp 'scroll-bar-mode) (scroll-bar-mode -1))
+(and (functionp 'menu-bar-mode) (menu-bar-mode -1))
+(and (functionp 'tool-bar-mode) (tool-bar-mode -1))
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
