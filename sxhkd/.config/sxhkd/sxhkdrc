@@ -86,10 +86,10 @@ super + XF86AudioMute
 	mpc toggle
 
 # print screen key
-Print
+super + p
 	scrot ~/scrots/%Y-%m-%d-%T-screenshot.png
 
-shift + Print
+shift + super + p
 	scrot -u ~/scrots/%Y-%m-%d-%T-screenshot.png
 
 # bookmarks manager
