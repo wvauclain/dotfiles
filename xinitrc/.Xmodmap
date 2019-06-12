@@ -1,3 +1,9 @@
+!! The point of this xmodmap is to rebind some keys to hyper keys for emacs
 clear mod3
+clear mod4
+! PrtSc (for laptops)
 keycode 107 = Hyper_R
-add mod3 = Hyper_R
+! Menu (for desktops)
+keycode 135 = Hyper_L
+add mod3 = Hyper_L Hyper_R
+add mod4 = Super_L Super_R
