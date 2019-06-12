@@ -97,8 +97,8 @@
 	:init 
 	(add-hook 'after-init-hook 'global-company-mode)
 	:config
-	(setq company-idle-delay 0
-	      company-minimum-prefix-length 1
+	(setq company-idle-delay 0.2
+	      company-minimum-prefix-length 2
 	      company-require-match nil)
 	(setq company-backends (delete 'company-dabbrev company-backends)))
     #+END_SRC
@@ -315,10 +315,13 @@
 	("k" evil-window-up "up")
 	("h" evil-window-left "left")
 	("l" evil-window-right "right")
+	("o" delete-other-windows "delete other windows" :color blue)
 	("f" counsel-find-file "file" :color blue)
 	("p" counsel-projectile-find-file "project file" :color blue)
-	("D" delete-other-windows "delete other windows" :color blue)
-	("ESC" nil "quit" :color blue))
+	("b" counsel-switch-buffer "buffer" :color blue)
+	("D" evil-delete-buffer "delete buffer")
+	("ESC" nil "quit" :color blue)
+	("q" nil "quit" :color blue))
 
       (general-define-key "H-w" 'hydra-window-management/body)
     #+END_SRC
