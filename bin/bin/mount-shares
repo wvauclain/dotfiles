@@ -1,0 +1,12 @@
+#!/bin/sh
+case $1 in
+    mount)
+		    mkdir -p ~/renegade
+        stty -echo
+        printf "Password: "
+	      read password
+        stty echo
+        printf "\n"
+	      echo $password
+		;;
+esac
