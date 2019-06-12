@@ -36,8 +36,8 @@ case $(hostname) in
         # Launch mpd
         mpd &
 
-        # Launch juiced
-        juiced &
+        # Launch batt
+        batt &
 
         # Launch polybar
         sh .config/polybar/launch.sh goldenarches
