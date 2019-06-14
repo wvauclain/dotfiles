@@ -266,44 +266,17 @@
 	(interactive "p")
 	(save-excursion (end-of-line) (newline count)))
     #+END_SRC
+*** Kill-current-buffer
+    #+BEGIN_SRC emacs-lisp
+      (defun kill-current-buffer ()
+	"Kill the current buffer"
+	(interactive)
+	(kill-buffer))
+    #+END_SRC
 ** Keybindings
 *** Make escape abort key
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-    #+END_SRC
-*** General keybindings
-    #+BEGIN_SRC emacs-lisp
-      (general-define-key "H-g" 'magit-status
-			  "M-x" 'counsel-M-x
-			  "H-e" 'eval-last-sexp
-			  "H-;" 'evilnc-comment-operator
-			  "H-=" 'iwb
-			  [(hyper tab)] 'switch-to-other-buffer
-			  "H-/" 'counsel-ag
-
-			  ;; Buffers
-			  "H-b d" 'evil-delete-buffer
-			  "H-b b" 'ivy-switch-buffer
-
-			  ;; Files
-			  "H-f f" 'counsel-find-file
-			  "H-f C" 'open-init-el
-			  "H-f c" 'open-config-org
-			  "H-f r" 'reload-config-org
-
-			  ;; Projects
-			  "H-p f" '(counsel-projectile-find-file :which-key "find file")
-			  "H-p /" '(counsel-projectile-ag :which-key "ag")
-			  "H-p p" '(counsel-projectile-switch-project :which-key "switch project")
-
-			  ;; Toggles
-			  "H-t n" '(toggle-relative-line-numbers :which-key "line number format")
-			  "H-t w" 'whitespace-mode
-
-			  ;; Quit
-			  "H-q" 'save-buffers-kill-terminal
-			  "H-Q" 'save-buffers-kill-emacs
-			  )
     #+END_SRC
 *** Window management
     #+BEGIN_SRC emacs-lisp
@@ -319,7 +292,7 @@
 	("f" counsel-find-file "file" :color blue)
 	("p" counsel-projectile-find-file "project file" :color blue)
 	("b" counsel-switch-buffer "buffer" :color blue)
-	("D" evil-delete-buffer "delete buffer")
+	("D" kill-current-buffer "delete buffer")
 	("ESC" nil "quit" :color blue)
 	("q" nil "quit" :color blue))
 
@@ -337,7 +310,8 @@
 *** Local prefix
     #+BEGIN_SRC emacs-lisp
       (general-create-definer local-leader-def
-	:prefix "H-,")
+	:prefix ","
+	:non-normal-prefix "H-,")
 
       (local-leader-def
 	:states '(normal visual insert emacs)
@@ -349,6 +323,57 @@
 	"fp" '(flycheck-previous-error :which-key "previous error")
 	"fl" '(flycheck-list-errors :which-key "list errors")
 	)
+    #+END_SRC
+*** General keybindings
+    #+BEGIN_SRC emacs-lisp
+      (general-define-key
+       :states '(normal visual insert emacs)
+       :keymaps 'override
+       :prefix "SPC"
+       :non-normal-prefix "H-SPC"
+
+       ;; General Functions
+       "g" 'magit-status
+       "e" 'eval-last-sexp
+       ";" 'evilnc-comment-operator
+       "=" 'iwb
+       "TAB" 'switch-to-other-buffer
+
+       ;; Quit
+       "q" '(:ignore t :which-key "Quit")
+       "q q" 'save-buffers-kill-terminal
+       "q Q" 'save-buffers-kill-emacs
+
+       ;; Buffers
+       "b" '(:ignore t :which-key "Buffers")
+       "b d" 'kill-current-buffer
+       "b b" 'ivy-switch-buffer
+
+       ;; Files
+       "f" '(:ignore t :which-key "Files")
+       "f f" 'counsel-find-file
+       "f C" 'open-init-el
+       "f c" 'open-config-org
+       "f r" 'reload-config-org
+
+       ;; Projects
+       "p" '(:ignore t :which-key "Projects")
+       "p f" '(counsel-projectile-find-file :which-key "find file")
+       "p /" '(counsel-projectile-ag :which-key "ag")
+       "p p" '(counsel-projectile-switch-project :which-key "switch project")
+
+       ;; Toggles
+       "t" '(:ignore t :which-key "Toggles")
+       "t n" '(toggle-relative-line-numbers :which-key "line number format")
+       "t w" 'whitespace-mode
+
+       ;; Extra Prefixes/Hydras
+       "w" '("H-w" :which-key "window management")
+       )
+    #+END_SRC
+*** Redefine M-x as counsel-M-x
+    #+BEGIN_SRC emacs-lisp
+      (general-define-key "M-x" 'counsel-M-x)
     #+END_SRC
 ** Appearance
 *** Dracula theme

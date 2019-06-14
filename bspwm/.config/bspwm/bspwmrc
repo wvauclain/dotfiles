@@ -1,31 +1,11 @@
 #! /bin/sh
 
-# Launch SXHKD
-sxhkd &
-
 # Launch compton
 compton -b
 
-# Launch dunst
-dunst &
-
-# Launch polybar with the correct configuration
-sh /home/will/.config/polybar/launch.sh
-
-# Launch syncthing
-syncthing -no-browser &
-
-# Mute sound on boot
-ponymix mute
-
-# Disable screen saver blanking
-xset s off -dpms
-
-# Launch emacs in daemon mode
-emacs --daemon &
-
 #
 # Per-machine Configuration
+# (Do this first to avoid the ugly grey screen)
 #
 
 case $(hostname) in
@@ -56,14 +36,32 @@ case $(hostname) in
         sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side 
 
         # Set wallpaper
-        feh --no-fehbg --bg-center ~/.wallpapers/l_ash03_big.1920x1080.jpg ~/.wallpapers/l_ash06_big.1920x1080.jpg
+        feh --no-fehbg --bg-center ~/.wallpapers/l_ash03_big.2560x1080.jpg
 
         # Configure desktops
-        bspc monitor DVI-D-0 -d I II III IV V VI VII
-        bspc monitor HDMI-0 -d VIII IX X
+        bspc monitor -d I II III IV V VI VII VIII IX X
+
         ;;
 esac
 
+#
+# Launch programs
+#
+
+# Launch SXHKD
+sxhkd &
+
+# Launch dunst
+dunst &
+
+# Launch syncthing
+syncthing -no-browser &
+
+# Mute sound on boot
+ponymix mute
+
+# Disable screen saver blanking
+xset s off -dpms
 
 #
 # BSPWM initialization
