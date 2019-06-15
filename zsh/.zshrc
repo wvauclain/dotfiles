@@ -32,9 +32,9 @@ setopt prompt_subst # allow for variable substitution in the prompt
 source ~/.zsh-theme
 
 # setup completion
-autoload -U compinit
-compinit -i -C -d
-
+fpath=(~/.zfunc $fpath)
+autoload -Uz compinit
+compinit -u
 
 ##
 # keybindings
