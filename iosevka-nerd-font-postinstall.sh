@@ -1,3 +1,5 @@
+fc-list | grep "Iosevka Nerd" > /dev/null && exit 0
+
 if [ "$1" = "pacman" ]; then
     trizen -S nerd-fonts-iosevka
 else

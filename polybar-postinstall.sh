@@ -1,3 +1,5 @@
+PATH="$PATH:~/.wspm/bin/" which polybar > /dev/null && exit 0
+
 if [ "$1" = "apt" ]; then
     mkdir -p tmp/polybar
     cd tmp/polybar

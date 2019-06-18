@@ -1,4 +1,4 @@
 {
-    "pacman": ["xorg", "xorg-xinit", "x11-xserver-utils"],
+    "pacman": ["xorg", "xorg-xinit"],
     "apt": ["xorg", "xinit", "x11-xserver-utils"]
 }
