@@ -1,0 +1,4 @@
+{
+    "pacman": ["libinput", "cmake"],
+    "apt": ["libinput-bin", "libinput-dev", "cmake"]
+}

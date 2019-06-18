@@ -1,0 +1,4 @@
+{
+    "pacman": ["sxhkd", "i3lock", "rofi"],
+    "apt": ["sxhkd", "i3lock", "rofi"]
+}

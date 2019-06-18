@@ -1,0 +1,5 @@
+{
+    "pacman": ["ranger"],
+    "apt": ["ranger"],
+    "termux": ["ranger"]
+}

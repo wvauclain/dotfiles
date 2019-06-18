@@ -1,0 +1,5 @@
+{
+    "pacman": ["zsh"],
+    "apt": ["zsh"],
+    "termux": ["zsh"]
+}
