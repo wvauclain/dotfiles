@@ -1,0 +1,4 @@
+{
+    "pacman": ["feh"],
+    "apt": ["feh"]
+}

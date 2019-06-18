@@ -1,0 +1,4 @@
+{
+    "pacman": ["ncmpcpp"],
+    "apt": ["ncmpcpp"]
+}

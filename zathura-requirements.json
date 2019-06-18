@@ -1,0 +1,4 @@
+{
+    "pacman": ["zathura", "zathura-pdf-mupdf"],
+    "apt": ["zathura", "zathura-pdf-poppler"]
+}

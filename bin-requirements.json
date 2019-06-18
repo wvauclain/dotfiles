@@ -1,0 +1,5 @@
+{
+    "pacman": ["nodejs"],
+    "apt": ["nodejs"],
+    "termux": ["nodejs"]
+}

@@ -1,0 +1,4 @@
+{
+    "pacman": ["mpd", "mpc"],
+    "apt": ["mpd", "mpc"]
+}
