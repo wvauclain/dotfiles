@@ -1,4 +1,4 @@
-PATH="$PATH:~/.wspm/bin/" which polybar > /dev/null && exit 0
+( PATH="$PATH:~/.wspm/bin/" which polybar > /dev/null && ! $UPDATE ) && exit 0
 
 if [ "$1" = "apt" ]; then
     mkdir -p tmp/polybar
@@ -25,5 +25,5 @@ EOF
 
     ~/.wspm/bin/wspm --noconfirm install polybar.toml
 elif [ "$1" = "pacman" ]; then
-    trizen -S polybar
+    trizen -S --noconfirm polybar-git
 fi
