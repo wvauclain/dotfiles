@@ -1,5 +1,5 @@
 {
-    "pacman": ["ranger"],
-    "apt": ["ranger"],
+    "pacman": ["ranger", "trash-cli"],
+    "apt": ["ranger", "trash-cli"],
     "termux": ["ranger"]
 }

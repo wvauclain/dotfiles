@@ -1,3 +1,5 @@
+PATH="$PATH:~/.wspm/bin/" which dunstify > /dev/null && exit 0
+
 mkdir -p tmp/dunstify
 cd tmp/dunstify
 cat > dunstify.toml <<EOF

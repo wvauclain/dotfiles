@@ -1,3 +1,5 @@
+PATH="$PATH:~/.wspm/bin/" which st > /dev/null && exit 0
+
 mkdir -p ~/suckless/
 cd ~/suckless/
 [ -e st ] && rm -r st
