@@ -2,13 +2,16 @@
 
 usage() {
     cat <<EOF
-Usage: ./install.sh [-v|--verbose] OPTION
+Usage: ./install.sh [OPTION(s)] COMMAND
 Options:
-  -b, --bootstrap               Install everything required to install configs
-  -f, --from-file [FILE]        Install all of the configs specified in FILE.
-                                Defaults to installing HOSTNAME.conf
   -h, --help                    Print this help message
-  -i, --install <CONFIG>        Install CONFIG
+  -v, --verbose                 Increase the verbosity of error messages
+  -u, --update                  Install the newest version of a dependency,
+                                even if the dependency is already installed
+Commands:
+  b, bootstrap                  Install everything required to install configs
+  f, from-file [FILE]           Install all of the configs specified in FILE.
+  i, install <CONFIG>           Install CONFIG
 EOF
 }
 
@@ -17,44 +20,65 @@ if [ "$1" = "-v" ] || [ "$1" = "--verbose" ]; then
     shift
 fi
 
-case $1 in
-    -b|--bootstrap)
-        BOOTSTRAP=true
-        ;;
-    -f|--from-file)
-        if [ -e "$2" ]; then
-            FILE="$2"
-        elif [ -z "$2" ]; then
-            FILE="$(hostname).conf"
-        else
-            echo "Error: File $2 does not exist"
+while [ "$1" ]; do
+    case $1 in
+        # Options
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -v|--verbose)
+            VERBOSE=true
+            shift
+            ;;
+        -u|--update)
+            UPDATE=true
+            shift
+            ;;
+        # Commands
+        b|bootstrap)
+            BOOTSTRAP=true
+            shift
+            ;;
+        f|from-file)
+            shift
+            if [ -e "$1" ]; then
+                FILE="$1"
+                shift
+            elif [ -z "$1" ]; then
+                FILE="$(hostname).conf"
+            else
+                echo "Error: File $1 does not exist"
+                exit 1
+            fi
+            ;;
+        i|install)
+            shift
+            if [ -n "$1" ]; then
+                CONFIG="$1"
+                shift
+            else
+                echo "Error: Configuration name required"
+            fi
+            ;;
+        "")
+            echo "Error: Option required"
+            echo
+            usage
             exit 1
-        fi
-        ;;
-    -i|--install)
-        if [ -n "$2" ]; then
-            CONFIG="$2"
-        else
-            echo "Error: Configuration name required"
-        fi
-        ;;
-    -h|--help)
-        usage
-        exit 0
-        ;;
-    "")
-        echo "Error: Option required"
-        echo
-        usage
-        exit 1
-        ;;
-    *)
-        echo "Error: Unrecognized option $1"
-        echo
-        usage
-        exit 1
-        ;;
-esac
+            ;;
+        *)
+            echo "Error: Unrecognized option $1"
+            echo
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+if [ -z "$UPDATE" ]; then
+    UPDATE=false
+fi
 
 distro() {
     if [ `uname -o` = "Android" ]; then
@@ -98,9 +122,11 @@ bootstrap() {
         "Arch Linux")
             distro_install base-devel git unzip wget jq
 
-            git clone https://aur.archlinux.org/trizen.git
-            cd trizen
-            makepkg -si
+            if ( ! which trizen > /dev/null || $UPDATE ); then
+                git clone https://aur.archlinux.org/trizen.git
+                cd trizen
+                makepkg -si --noconfirm
+            fi
             ;;
         "Debian"|"Ubuntu")
             distro_install build-essential git unzip wget jq
@@ -112,13 +138,15 @@ bootstrap() {
 
     # Install Rust
     [ -e ~/.cargo/env ] && . ~/.cargo/env
-    which rustup > /dev/null ||\
+    ( which rustup > /dev/null && ! $UPDATE ) ||\
         (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup.sh\
-             && sh rustup.sh -y)
+             && sh rustup.sh -y --no-modify-path)
     . ~/.cargo/env
     rustup toolchain list | grep nightly > /dev/null || rustup toolchain add nightly
     rustup component list | grep rust-src > /dev/null || rustup component add rust-src
-    which racer > /dev/null || cargo +nightly install racer
+    $UPDATE && rustup update
+    ( which racer > /dev/null && ! $UPDATE ) || cargo +nightly install racer $($UPDATE && echo "--force")
+
 
     # Install wspm
     if ! [ -e ~/.wspm/bin/wspm ]; then
@@ -171,10 +199,10 @@ post_install_configuration() {
     PROGRAMS=$([ -e "$1-requirements.json" ] && cat "$1-requirements.json"\
                        | jq ".$(package_manager_str)" 2> /dev/null\
                        | tr -d "[\",]" | awk 'NF' | sed -e 's/^[ \t]*//'\
-                       | tr '\n' ' ')
-    [ -n "$PROGRAMS" ] && distro_install $PROGRAMS
+                       | tr '\n' ' ') 
+    [ -n "$PROGRAMS" ] && [ "$PROGRAMS" != "null " ] && distro_install $PROGRAMS
 
-    [ -e "$1-postinstall.sh" ] && sh "$1-postinstall.sh" "$(package_manager_str)"
+    [ -e "$1-postinstall.sh" ] && UPDATE=$UPDATE sh "$1-postinstall.sh" "$(package_manager_str)"
 }
 
 if [ $BOOTSTRAP ]; then
@@ -193,7 +221,7 @@ elif [ -n "$FILE" ]; then
 else
     # Install the given config
     if [ -d "$CONFIG" ]; then
-        ~/.wspm/bin/wsdm install "$CONFIG"
+        ~/.wspm/bin/wsdm --noconfirm install "$CONFIG"
     fi
     post_install_configuration "$CONFIG"
 fi

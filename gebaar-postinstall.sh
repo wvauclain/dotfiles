@@ -1,3 +1,5 @@
+( PATH="$PATH:~/.wspm/bin/" which gebaard > /dev/null && ! $UPDATE ) && exit 0
+
 mkdir -p tmp/gebaar
 cd tmp/gebaar
 cat > gebaar.toml <<EOF

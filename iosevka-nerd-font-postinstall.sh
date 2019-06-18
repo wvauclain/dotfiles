@@ -1,7 +1,7 @@
-fc-list | grep "Iosevka Nerd" > /dev/null && exit 0
+( fc-list | grep "Iosevka Nerd" > /dev/null && ! $UPDATE ) && exit 0
 
 if [ "$1" = "pacman" ]; then
-    trizen -S nerd-fonts-iosevka
+    trizen -S --noconfirm nerd-fonts-iosevka
 else
     mkdir -p tmp
     cd tmp

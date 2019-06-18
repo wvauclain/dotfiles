@@ -1,5 +1,5 @@
 {
-    "pacman": ["emacs"],
-    "apt": ["emacs"],
-    "termux": ["emacs"]
+    "pacman": ["emacs", "the_silver_searcher"],
+    "apt": ["emacs", "silversearcher-ag"],
+    "termux": ["emacs", "silversearcher-ag"]
 }

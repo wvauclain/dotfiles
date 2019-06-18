@@ -1,8 +1,9 @@
-PATH="$PATH:~/.wspm/bin/" which dunstify > /dev/null && exit 0
+( PATH="$PATH:~/.wspm/bin/" which dunstify > /dev/null && ! $UPDATE ) && exit 0
 
-mkdir -p tmp/dunstify
-cd tmp/dunstify
-cat > dunstify.toml <<EOF
+if [ "$(which dunstify)" = "$HOME/.wspm/bin/dunstify" ]; then
+    mkdir -p tmp/dunstify
+    cd tmp/dunstify
+    cat > dunstify.toml <<EOF
 [metadata]
 package_name = "dunstify"
 version = "git"
@@ -17,4 +18,5 @@ build = """cd dunst
 make dunstify"""
 EOF
 
-~/.wspm/bin/wspm --noconfirm install dunstify.toml
+    ~/.wspm/bin/wspm --noconfirm install dunstify.toml
+fi
