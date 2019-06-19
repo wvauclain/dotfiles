@@ -32,7 +32,7 @@ while [ "$1" ]; do
             shift
             ;;
 	-s|--stow)
-	    STOW-true
+	    STOW=true
 	    shift
 	    ;;
         # Commands
@@ -206,7 +206,7 @@ install_configuration() {
 }
 
 post_install_configuration() {
-    . ~/.cargo/env
+    [ -e ~/.cargo/env] && . ~/.cargo/env
 
     # Install required programs from package manager
     PROGRAMS=$([ -e "$1-requirements.json" ] && cat "$1-requirements.json"\
