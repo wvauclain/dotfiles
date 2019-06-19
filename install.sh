@@ -8,17 +8,13 @@ Options:
   -v, --verbose                 Increase the verbosity of error messages
   -u, --update                  Install the newest version of a dependency,
                                 even if the dependency is already installed
+  -s, --stow			Use stow instead of wsdm
 Commands:
   b, bootstrap                  Install everything required to install configs
   f, from-file [FILE]           Install all of the configs specified in FILE.
   i, install <CONFIG>           Install CONFIG
 EOF
 }
-
-if [ "$1" = "-v" ] || [ "$1" = "--verbose" ]; then
-    VERBOSE=true
-    shift
-fi
 
 while [ "$1" ]; do
     case $1 in
@@ -35,6 +31,10 @@ while [ "$1" ]; do
             UPDATE=true
             shift
             ;;
+	-s|--stow)
+	    STOW-true
+	    shift
+	    ;;
         # Commands
         b|bootstrap)
             BOOTSTRAP=true
@@ -77,6 +77,10 @@ while [ "$1" ]; do
 done
 
 if [ -z "$UPDATE" ]; then
+    UPDATE=false
+fi
+
+if [ -z "$STOW" ]; then
     UPDATE=false
 fi
 
@@ -193,6 +197,14 @@ package_manager_str() {
     esac
 }
 
+install_configuration() {
+    if $STOW; then
+	stow -R $@
+    else
+        ~/.wspm/bin/wsdm --noconfirm install $@
+    fi
+}
+
 post_install_configuration() {
     . ~/.cargo/env
 
@@ -203,7 +215,7 @@ post_install_configuration() {
                        | tr '\n' ' ') 
     [ -n "$PROGRAMS" ] && [ "$PROGRAMS" != "null " ] && distro_install $PROGRAMS
 
-    [ -e "$1-postinstall.sh" ] && UPDATE=$UPDATE sh "$1-postinstall.sh" "$(package_manager_str)"
+    ! $STOW && [ -e "$1-postinstall.sh" ] && UPDATE=$UPDATE sh "$1-postinstall.sh" "$(package_manager_str)"
 }
 
 if [ $BOOTSTRAP ]; then
@@ -213,7 +225,7 @@ elif [ -n "$FILE" ]; then
     if [ -e "$FILE" ]; then
         while read -r line; do
             [ "$VERBOSE" ] && echo "Installing $line..."
-            [ -d "$line" ] && ~/.wspm/bin/wsdm --noconfirm install "$line"
+            [ -d "$line" ] && install_configuration "$line"
             post_install_configuration "$line"
         done < $FILE
     else
@@ -222,7 +234,7 @@ elif [ -n "$FILE" ]; then
 else
     # Install the given config
     if [ -d "$CONFIG" ]; then
-        ~/.wspm/bin/wsdm --noconfirm install "$CONFIG"
+	install_configuration "$CONFIG"
     fi
     post_install_configuration "$CONFIG"
 fi
