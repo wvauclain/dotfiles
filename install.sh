@@ -206,7 +206,7 @@ install_configuration() {
 }
 
 post_install_configuration() {
-    [ -e ~/.cargo/env] && . ~/.cargo/env
+    [ -e ~/.cargo/env ] && . ~/.cargo/env
 
     # Install required programs from package manager
     PROGRAMS=$([ -e "$1-requirements.json" ] && cat "$1-requirements.json"\
