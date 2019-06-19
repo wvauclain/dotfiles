@@ -1,4 +1,5 @@
 {
     "pacman": ["xorg", "xorg-xinit"],
-    "apt": ["xorg", "xinit", "x11-xserver-utils"]
+    "apt": ["xorg", "xinit", "x11-xserver-utils"],
+    "xbps": ["xorg", "xinit"]
 }

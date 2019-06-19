@@ -1,4 +1,5 @@
 {
     "pacman": ["feh"],
-    "apt": ["feh"]
+    "apt": ["feh"],
+    "xbps": ["feh"]
 }

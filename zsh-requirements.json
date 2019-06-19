@@ -1,5 +1,6 @@
 {
-    "pacman": ["zsh"],
+    "pacman": ["zsh", "zsh-completions"],
     "apt": ["zsh"],
+    "xbps": ["zsh", "zsh-completions"],
     "termux": ["zsh"]
 }

@@ -1,4 +1,5 @@
 {
     "pacman": ["ncmpcpp"],
-    "apt": ["ncmpcpp"]
+    "apt": ["ncmpcpp"],
+    "xbps": ["ncmpcpp"]
 }
