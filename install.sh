@@ -120,7 +120,7 @@ bootstrap() {
     DISTRO=$(distro)
     case $DISTRO in
         "Arch Linux")
-            distro_install base-devel git unzip wget jq
+            distro_install base-devel git unzip wget jq curl
 
             if ( ! which trizen > /dev/null || $UPDATE ); then
                 git clone https://aur.archlinux.org/trizen.git
@@ -129,7 +129,7 @@ bootstrap() {
             fi
             ;;
         "Debian"|"Ubuntu")
-            distro_install build-essential git unzip wget jq
+            distro_install build-essential git unzip wget jq curl
             ;;
         *)
             echo "$DISTRO is currently not supported for bootstrapping"
