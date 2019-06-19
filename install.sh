@@ -87,6 +87,10 @@ fi
 distro() {
     if [ `uname -o` = "Android" ]; then
         echo "Termux"
+    elif [ which pacman > /dev/null ]; then
+	echo "Arch Linux"
+    elif [ which xbps > /dev/null ]; then
+	echo "Void Linux"
     elif [ `uname` = "Linux" ]; then
         cat /etc/*-release | grep ^NAME | awk -F '=' '{ print $2 }' | tr -d '"'
     elif [ `uname` == 'Darwin' ]; then # macOS
@@ -104,6 +108,9 @@ distro_install() {
             sudo apt-get update
             sudo apt-get install --assume-yes $@
             ;;
+	"Void Linux")
+	    sudo xbps-install -Syu $@
+	    ;;
         "Termux")
             pkg install $@
             ;;
