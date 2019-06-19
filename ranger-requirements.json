@@ -1,5 +1,6 @@
 {
-    "pacman": ["ranger", "trash-cli"],
-    "apt": ["ranger", "trash-cli"],
+    "pacman": ["ranger", "trash-cli", "w3m"],
+    "apt": ["ranger", "trash-cli", "w3m", "w3m-img"],
+    "xbps": ["ranger", "trash-cli", "w3m", "w3m-img"],
     "termux": ["ranger"]
 }

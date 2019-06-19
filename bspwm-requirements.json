@@ -1,4 +1,5 @@
 {
     "pacman": ["bspwm", "xorg-xset", "pulseaudio", "ponymix"],
-    "apt": ["bspwm", "x11-xserver-utils", "pulseaudio"]
+    "apt": ["bspwm", "x11-xserver-utils", "pulseaudio"],
+    "xbps": ["bspwm", "xset", "pulseaudio", "ponymix"]
 }

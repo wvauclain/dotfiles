@@ -149,7 +149,7 @@ bootstrap() {
 
 
     # Install wspm
-    if ! [ -e ~/.wspm/bin/wspm ]; then
+    if ( ! [ -e ~/.wspm/bin/wspm ] || $UPDATE ) ; then
         wget --tries=10 https://github.com/wvauclain/wspm/archive/master.zip
         unzip master.zip
         rm master.zip
@@ -159,7 +159,7 @@ bootstrap() {
     fi
 
     # Install wsdm
-    if ! [ -e ~/.wspm/bin/wsdm ]; then
+    if ( ! [ -e ~/.wspm/bin/wsdm ] || $UPDATE ); then
         wget --tries=10 https://github.com/wvauclain/wsdm/archive/master.zip
         unzip master.zip
         rm master.zip

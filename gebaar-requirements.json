@@ -1,4 +1,5 @@
 {
     "pacman": ["libinput", "cmake"],
-    "apt": ["libinput-bin", "libinput-dev", "cmake"]
+    "apt": ["libinput-bin", "libinput-dev", "cmake"],
+    "xbps": ["libinput", "libinput-devel", "cmake"]
 }
