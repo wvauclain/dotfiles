@@ -128,11 +128,12 @@ bootstrap() {
                 makepkg -si --noconfirm
             fi
             ;;
-        "Debian"|"Ubuntu")
+        "Debian"|"Ubuntu"|"Termux")
             distro_install build-essential git unzip wget jq curl
             ;;
         *)
             echo "$DISTRO is currently not supported for bootstrapping"
+	    exit 1
             ;;
     esac
 
