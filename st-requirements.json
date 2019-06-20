@@ -1,5 +1,5 @@
 {
     "pacman": ["libxft", "libxext"],
     "apt": ["libxft-dev", "libxext-dev"],
-    "xbps": ["libXft-devel", "libXext-devel"]
+    "xbps": ["libXft-devel", "libXext-devel", "ncurses-term"]
 }
