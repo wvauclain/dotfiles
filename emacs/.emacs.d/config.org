@@ -279,6 +279,13 @@
 	(interactive)
 	(kill-buffer))
     #+END_SRC
+*** My-projectile-ag
+    #+BEGIN_SRC emacs-lisp
+      (defun my-projectile-ag ()
+	"Projectile ag with --hidden"
+	(interactive)
+	(counsel-projectile-ag "--hidden"))
+    #+END_SRC
 ** Keybindings
 *** Make escape abort key
     #+BEGIN_SRC emacs-lisp
@@ -365,7 +372,7 @@
        ;; Projects
        "p" '(:ignore t :which-key "Projects")
        "p f" '(counsel-projectile-find-file :which-key "find file")
-       "p /" '(counsel-projectile-ag :which-key "ag")
+       "p /" '(my-projectile-ag :which-key "ag")
        "p p" '(counsel-projectile-switch-project :which-key "switch project")
 
        ;; Toggles
