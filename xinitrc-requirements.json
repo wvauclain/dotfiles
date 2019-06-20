@@ -1,5 +1,5 @@
 {
-    "pacman": ["xorg", "xorg-xinit"],
+    "pacman": ["xorg", "xorg-xinit", "xorg-xrdb"],
     "apt": ["xorg", "xinit", "x11-xserver-utils"],
     "xbps": ["xorg-minimal", "xorg-fonts", "xinit"]
 }
