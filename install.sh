@@ -81,15 +81,15 @@ if [ -z "$UPDATE" ]; then
 fi
 
 if [ -z "$STOW" ]; then
-    UPDATE=false
+    STOW=false
 fi
 
 distro() {
     if [ `uname -o` = "Android" ]; then
         echo "Termux"
-    elif [ which pacman > /dev/null ]; then
+elif which pacman > /dev/null; then
 	echo "Arch Linux"
-    elif [ which xbps > /dev/null ]; then
+elif which xbps-install > /dev/null; then
 	echo "Void Linux"
     elif [ `uname` = "Linux" ]; then
         cat /etc/*-release | grep ^NAME | awk -F '=' '{ print $2 }' | tr -d '"'
@@ -139,6 +139,9 @@ bootstrap() {
                 makepkg -si --noconfirm
             fi
             ;;
+	"Void Linux")
+	    distro_install base-devel git unzip wget jq curl
+	    ;;
         "Debian"|"Ubuntu"|"Termux")
             distro_install build-essential git unzip wget jq curl
             ;;
@@ -198,6 +201,9 @@ package_manager_str() {
         "Termux")
             printf "termux"
             ;;
+	"Void Linux")
+	    printf "xbps"
+	    ;;
         *)
             printf "none"
             ;;
