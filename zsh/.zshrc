@@ -99,6 +99,11 @@ if (( ${+commands[trizen]} )); then
 fi
 alias mirror='wget -e robots=off -r -nc -np -R "index.html*"'
 alias fixkeyboard='setxkbmap -option caps:escape'
+if (( ${+commands[youtube-dl]} )); then
+    alias youtube-dl='youtube-dl -o "~/youtube/%(title)s.%(ext)s"'
+    alias youtube-dl-playlist='youtube-dl -o "~/youtube/%(uploader)s/%(playlist)s/%(playlist_index)02d - %(title)s.%(ext)s"'
+    alias youtube-dl-channel='youtube-dl -o "~/youtube/%(uploader)s/%(playlist)s/%(upload_date)s - %(title)s.%(ext)s"'
+fi
 
 # exports
 export npm_config_prefix=~/.node_modules
