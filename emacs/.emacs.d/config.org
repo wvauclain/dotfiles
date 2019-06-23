@@ -31,8 +31,8 @@
       ;; the following lines tell emacs where on the internet to look up
       ;; for new packages.
       (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-			       ("gnu"       . "http://elpa.gnu.org/packages/")
-			       ("melpa"     . "https://melpa.org/packages/")))
+                               ("gnu"       . "http://elpa.gnu.org/packages/")
+                               ("melpa"     . "https://melpa.org/packages/")))
       (package-initialize) ; guess what this one does ?
 
 (unless (package-installed-p 'use-package) ; unless it is already installed
@@ -46,40 +46,40 @@
     Useful for hiding unwanted minor modes from the mode line.
     #+BEGIN_SRC emacs-lisp
       (use-package diminish :ensure t
-	:config
-	(diminish 'eldoc-mode))
+        :config
+        (diminish 'eldoc-mode))
     #+END_SRC
 *** Evil
     Vim emulation for emacs.
     #+BEGIN_SRC emacs-lisp
       (use-package evil :ensure t
-	:config (evil-mode)
-	(diminish 'undo-tree-mode))
+        :config (evil-mode)
+        (diminish 'undo-tree-mode))
     #+END_SRC
 *** Evil-numbers
     Increase and decrease numbers at a point in normal mode.
     #+BEGIN_SRC emacs-lisp
       (use-package evil-numbers :ensure t :defer t
-	:init
-	(define-key evil-normal-state-map (kbd "[+") 'evil-numbers/inc-at-pt)
-	(define-key evil-normal-state-map (kbd "[-") 'evil-numbers/dec-at-pt))
+        :init
+        (define-key evil-normal-state-map (kbd "[+") 'evil-numbers/inc-at-pt)
+        (define-key evil-normal-state-map (kbd "[-") 'evil-numbers/dec-at-pt))
     #+END_SRC
 *** Evil-nerd-commenter
     An evil operator for commenting out code
     #+BEGIN_SRC emacs-lisp
       (use-package evil-nerd-commenter :ensure t :defer t
-	:commands (evilnc-comment-operator))
+        :commands (evilnc-comment-operator))
     #+END_SRC
 *** Ivy
     A lightweight completion framework
     #+BEGIN_SRC emacs-lisp
       (use-package ivy :ensure t :defer t
-	:bind (:map ivy-minibuffer-map        ; bind in the ivy buffer
-		    ("RET" . ivy-alt-done)
-		    ("C-0"   . ivy-beginning-of-buffer)
-		    ("C-e"   . ivy-end-of-buffer)
-		    ("C-k"   . ivy-previous-line)
-		    ("C-j"   . ivy-next-line)))
+        :bind (:map ivy-minibuffer-map        ; bind in the ivy buffer
+                    ("RET" . ivy-alt-done)
+                    ("C-0"   . ivy-beginning-of-buffer)
+                    ("C-e"   . ivy-end-of-buffer)
+                    ("C-k"   . ivy-previous-line)
+                    ("C-j"   . ivy-next-line)))
     #+END_SRC
 *** Counsel
     Plugins for Ivy for common features (buffers, files, M-x, etc.)
@@ -90,17 +90,17 @@
     Code completion suggestions.
     #+BEGIN_SRC emacs-lisp
       (use-package company :ensure t
-	:diminish company-mode
-	:bind (:map company-active-map
-		    ("C-k" . company-select-previous)
-		    ("C-j" . company-select-next))
-	:init 
-	(add-hook 'after-init-hook 'global-company-mode)
-	:config
-	(setq company-idle-delay 0.2
-	      company-minimum-prefix-length 2
-	      company-require-match nil)
-	(setq company-backends (delete 'company-dabbrev company-backends)))
+        :diminish company-mode
+        :bind (:map company-active-map
+                    ("C-k" . company-select-previous)
+                    ("C-j" . company-select-next))
+        :init
+        (add-hook 'after-init-hook 'global-company-mode)
+        :config
+        (setq company-idle-delay 0.2
+              company-minimum-prefix-length 2
+              company-require-match nil)
+        (setq company-backends (delete 'company-dabbrev company-backends)))
     #+END_SRC
 *** Projectile
     Project support for emacs.
@@ -111,42 +111,42 @@
     Counsel plugins for projectile (find file in project, search in project, etc.)
     #+BEGIN_SRC emacs-lisp
       (use-package counsel-projectile :ensure t
-	:config
-	(counsel-projectile-mode))
+        :config
+        (counsel-projectile-mode))
     #+END_SRC
 *** Smartparens
     Intelligently match parentheses in ~prog-mode~.
     #+BEGIN_SRC emacs-lisp
       (use-package smartparens :ensure t :defer t
-	:diminish smartparens-mode
-	:init
-	(add-hook 'prog-mode-hook 'smartparens-mode)
-	:config
-	(require 'smartparens-config))
+        :diminish smartparens-mode
+        :init
+        (add-hook 'prog-mode-hook 'smartparens-mode)
+        :config
+        (require 'smartparens-config))
     #+END_SRC
 *** Rainbow-delimeters
     Color matching delimiters in the same color. Useful for visually parsing nested SEXPs.
     #+BEGIN_SRC emacs-lisp
       (use-package rainbow-delimiters
-	:ensure t
-	:defer t
-	:init
-	(add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+        :ensure t
+        :defer t
+        :init
+        (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
     #+END_SRC
 *** Which-key
     "Displays the key bindings following your currently entered incomplete command (a prefix) in a popup."
     #+BEGIN_SRC emacs-lisp
       (use-package which-key :ensure t
-	:diminish which-key-mode
-	:config
-	(which-key-mode)
-	(which-key-setup-side-window-bottom)
-	(setq which-key-sort-order 'which-key-prefix-then-key-order ;; simple then alphabetic order.
-	      which-key-popup-type 'side-window
-	      which-key-side-window-max-height 0.3
-	      which-key-side-window-max-width 0.5
-	      which-key-idle-delay 0.3
-	      which-key-min-display-lines 7))
+        :diminish which-key-mode
+        :config
+        (which-key-mode)
+        (which-key-setup-side-window-bottom)
+        (setq which-key-sort-order 'which-key-prefix-then-key-order ;; simple then alphabetic order.
+              which-key-popup-type 'side-window
+              which-key-side-window-max-height 0.3
+              which-key-side-window-max-width 0.5
+              which-key-idle-delay 0.3
+              which-key-min-display-lines 7))
     #+END_SRC
 *** General
     Simpler prefix keybindings.
@@ -157,18 +157,18 @@
     Syntax-checking framework.
     #+BEGIN_SRC emacs-lisp
       (use-package flycheck :ensure t :defer t
-	:init
-	(add-hook 'prog-mode-hook 'flycheck-mode)
-	:config
-	(customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc emacs-lisp)))
+        :init
+        (add-hook 'prog-mode-hook 'flycheck-mode)
+        :config
+        (customize-set-variable 'flycheck-disabled-checkers '(emacs-lisp-checkdoc emacs-lisp)))
     #+END_SRC
 *** Flycheck-inline
     Display flycheck errors inline.
     #+BEGIN_SRC emacs-lisp
       (use-package flycheck-inline :ensure t :defer t
-	:init
-	(with-eval-after-load 'flycheck
-	  (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)))
+        :init
+        (with-eval-after-load 'flycheck
+          (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)))
     #+END_SRC
 *** Magit
     Manage git repositories inside emacs.
@@ -194,97 +194,97 @@
     Emacs snippet management
     #+BEGIN_SRC emacs-lisp
       (use-package yasnippet :ensure t :defer t
-	:init (add-hook 'prog-mode-hook #'yas-minor-mode))
+        :init (add-hook 'prog-mode-hook #'yas-minor-mode))
     #+END_SRC
 ** Utility functions
 *** Switch-to-other-buffer
     Switch to the other buffer relative to the current buffer.
     #+BEGIN_SRC emacs-lisp
       (defun switch-to-other-buffer ()
-	"Switch to the other buffer relative to the current buffer."
-	(interactive)
-	(switch-to-buffer (other-buffer (current-buffer) t)))
+        "Switch to the other buffer relative to the current buffer."
+        (interactive)
+        (switch-to-buffer (other-buffer (current-buffer) t)))
     #+END_SRC
 *** Toggle-relative-line-numbers
     Toggle between relative and absolute line numbers.
     #+BEGIN_SRC emacs-lisp
       (defun toggle-relative-line-numbers ()
-	"Toggle between relative and absolute line numbers."
-	(interactive)
-	(if (eq display-line-numbers 'relative)
-	    (progn (setq display-line-numbers t)
-		   (message "Absolute line numbers."))
-	  (progn (setq display-line-numbers 'relative)
-		 (message "Relative line numbers."))))
+        "Toggle between relative and absolute line numbers."
+        (interactive)
+        (if (eq display-line-numbers 'relative)
+            (progn (setq display-line-numbers t)
+                   (message "Absolute line numbers."))
+          (progn (setq display-line-numbers 'relative)
+                 (message "Relative line numbers."))))
     #+END_SRC
 *** Open-init-el
     #+BEGIN_SRC emacs-lisp
       (defun open-init-el ()
-	"Open init.el."
-	(interactive)
-	(find-file "~/.emacs.d/init.el"))
+        "Open init.el."
+        (interactive)
+        (find-file "~/.emacs.d/init.el"))
     #+END_SRC
 *** Open-config-org
     #+BEGIN_SRC emacs-lisp
       (defun open-config-org ()
-	"Open init.el."
-	(interactive)
-	(find-file "~/.emacs.d/config.org"))
+        "Open init.el."
+        (interactive)
+        (find-file "~/.emacs.d/config.org"))
     #+END_SRC
 *** Iwb
     Indent whole buffer.
     #+BEGIN_SRC emacs-lisp
       (defun iwb ()
-	"Indent whole buffer."
-	(interactive)
-	(delete-trailing-whitespace)
-	(indent-region (point-min) (point-max) nil)
-	(untabify (point-min) (point-max))
-	(message "Indented whole buffer."))
+        "Indent whole buffer."
+        (interactive)
+        (delete-trailing-whitespace)
+        (indent-region (point-min) (point-max) nil)
+        (untabify (point-min) (point-max))
+        (message "Indented whole buffer."))
     #+END_SRC
 *** Reload-config-org
     #+BEGIN_SRC emacs-lisp
       (defun reload-config-org ()
-	"Reload config.org."
-	(interactive)
-	(let* ((config-file "~/.emacs.d/config.org")
-	       (output-file "~/.emacs.d/config.el")
-	       (buffer (find-buffer-visiting config-file)))
-	  (when buffer (save-excursion (set-buffer buffer) (save-buffer)))
-	  (init-tangle-config-org config-file output-file)
-	  (load-file output-file)
-	  (message "Reloaded config.org.")))
+        "Reload config.org."
+        (interactive)
+        (let* ((config-file "~/.emacs.d/config.org")
+               (output-file "~/.emacs.d/config.el")
+               (buffer (find-buffer-visiting config-file)))
+          (when buffer (save-excursion (set-buffer buffer) (save-buffer)))
+          (init-tangle-config-org config-file output-file)
+          (load-file output-file)
+          (message "Reloaded config.org.")))
     #+END_SRC
 **** TODO Turn this into a generic command that works over =config-files=
 *** Evil-insert-space-above
     Insert PREFIX spaces above current line.
     #+BEGIN_SRC emacs-lisp
       (defun evil-insert-space-above (count)
-	"Insert COUNT spaces above current line."
-	(interactive "p")
-	(save-excursion (end-of-line 0) (newline count)))
+        "Insert COUNT spaces above current line."
+        (interactive "p")
+        (save-excursion (end-of-line 0) (newline count)))
     #+END_SRC
 *** Evil-insert-space-below
     Insert PREFIX spaces below current line.
     #+BEGIN_SRC emacs-lisp
       (defun evil-insert-space-below (count)
-	"Insert COUNT spaces below current line."
-	(interactive "p")
-	(save-excursion (end-of-line) (newline count)))
+        "Insert COUNT spaces below current line."
+        (interactive "p")
+        (save-excursion (end-of-line) (newline count)))
     #+END_SRC
 *** Kill-current-buffer
     #+BEGIN_SRC emacs-lisp
       (defun kill-current-buffer ()
-	"Kill the current buffer"
-	(interactive)
-	(kill-buffer))
+        "Kill the current buffer"
+        (interactive)
+        (kill-buffer))
     #+END_SRC
 *** My-projectile-ag
     #+BEGIN_SRC emacs-lisp
       (defun my-projectile-ag ()
-	"Projectile ag with --hidden"
-	(interactive)
-	(counsel-projectile-ag "--hidden"))
+        "Projectile ag with --hidden"
+        (interactive)
+        (counsel-projectile-ag "--hidden"))
     #+END_SRC
 ** Keybindings
 *** Make escape abort key
@@ -294,20 +294,20 @@
 *** Window management
     #+BEGIN_SRC emacs-lisp
       (defhydra hydra-window-management ()
-	("/" evil-window-vsplit "vsplit")
-	("-" evil-window-split "split")
-	("d" evil-window-delete "delete")
-	("j" evil-window-down "down")
-	("k" evil-window-up "up")
-	("h" evil-window-left "left")
-	("l" evil-window-right "right")
-	("o" delete-other-windows "delete other windows" :color blue)
-	("f" counsel-find-file "file" :color blue)
-	("p" counsel-projectile-find-file "project file" :color blue)
-	("b" counsel-switch-buffer "buffer" :color blue)
-	("D" kill-current-buffer "delete buffer")
-	("ESC" nil "quit" :color blue)
-	("q" nil "quit" :color blue))
+        ("/" evil-window-vsplit "vsplit")
+        ("-" evil-window-split "split")
+        ("d" evil-window-delete "delete")
+        ("j" evil-window-down "down")
+        ("k" evil-window-up "up")
+        ("h" evil-window-left "left")
+        ("l" evil-window-right "right")
+        ("o" delete-other-windows "delete other windows" :color blue)
+        ("f" counsel-find-file "file" :color blue)
+        ("p" counsel-projectile-find-file "project file" :color blue)
+        ("b" counsel-switch-buffer "buffer" :color blue)
+        ("D" kill-current-buffer "delete buffer")
+        ("ESC" nil "quit" :color blue)
+        ("q" nil "quit" :color blue))
 
       (general-define-key "H-w" 'hydra-window-management/body)
     #+END_SRC
@@ -323,19 +323,19 @@
 *** Local prefix
     #+BEGIN_SRC emacs-lisp
       (general-create-definer local-leader-def
-	:prefix ","
-	:non-normal-prefix "H-,")
+        :prefix ","
+        :non-normal-prefix "H-,")
 
       (local-leader-def
-	:states '(normal visual insert emacs)
-	:keymaps 'override
+        :states '(normal visual insert emacs)
+        :keymaps 'override
 
-	;; Flycheck
-	"f" '(:ignore t :which-key "Flycheck")
-	"fn" '(flycheck-next-error :which-key "next error")
-	"fp" '(flycheck-previous-error :which-key "previous error")
-	"fl" '(flycheck-list-errors :which-key "list errors")
-	)
+        ;; Flycheck
+        "f" '(:ignore t :which-key "Flycheck")
+        "fn" '(flycheck-next-error :which-key "next error")
+        "fp" '(flycheck-previous-error :which-key "previous error")
+        "fl" '(flycheck-list-errors :which-key "list errors")
+        )
     #+END_SRC
 *** General keybindings
     #+BEGIN_SRC emacs-lisp
@@ -399,9 +399,11 @@
     #+END_SRC
 *** Hide the window decorations in GUI mode
     #+BEGIN_SRC emacs-lisp
-      (and (functionp 'scroll-bar-mode) (scroll-bar-mode -1))
-      (and (functionp 'menu-bar-mode) (menu-bar-mode -1))
-      (and (functionp 'tool-bar-mode) (tool-bar-mode -1))
+      (add-hook 'emacs-startup-hook (lambda ()
+                                      (and (functionp 'scroll-bar-mode) (scroll-bar-mode -1))
+                                      (and (functionp 'menu-bar-mode) (menu-bar-mode -1))
+                                      (and (functionp 'tool-bar-mode) (tool-bar-mode -1))
+                                      ))
     #+END_SRC
 *** Add information to the mode line
     #+BEGIN_SRC emacs-lisp
@@ -413,104 +415,115 @@
 *** DISABLED LaTeX
     #+BEGIN_SRC emacs-lisp
       (use-package tex
-	:ensure auctex
-	:mode ("\\.tex\\'" . LaTeX-mode)
-	:config
-	(setq TeX-auto-save t)
-	(setq TeX-parse-self t)
-	(setq-default TeX-master nil)
-	(setq LaTeX-indent-level 4)
-	(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-	(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-	(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-	(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-	)
+        :ensure auctex
+        :mode ("\\.tex\\'" . LaTeX-mode)
+        :config
+        (setq TeX-auto-save t)
+        (setq TeX-parse-self t)
+        (setq-default TeX-master nil)
+        (setq LaTeX-indent-level 4)
+        (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+        (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+        (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+        (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+        )
 
       (use-package preview :ensure auctex
-	:init
-	(use-package font-latex :ensure auctex)
-	:config
-	(set-default 'preview-scale-function 1.7)
-	(set-default 'preview-default-option-list
-		     '("displaymath" "floats" "textmath")))
+        :init
+        (use-package font-latex :ensure auctex)
+        :config
+        (set-default 'preview-scale-function 1.7)
+        (set-default 'preview-default-option-list
+                     '("displaymath" "floats" "textmath")))
     #+END_SRC
 *** Rust
 **** Rust-mode
      #+BEGIN_SRC emacs-lisp
        (use-package rust-mode
-	 :defer t
-	 :ensure t
-	 :init
-	 (local-leader-def
-	   :states '(normal visual insert emacs)
-	   :keymaps 'rust-mode-map
-	   "=" 'rust-format-buffer))
+         :defer t
+         :ensure t
+         :init
+         (local-leader-def
+           :states '(normal visual insert emacs)
+           :keymaps 'rust-mode-map
+           "=" 'rust-format-buffer))
      #+END_SRC
 **** Toml-mode
      #+BEGIN_SRC emacs-lisp
        (use-package toml-mode
-	 :ensure t
-	 :defer t
-	 :mode "/\\(Cargo.lock\\|\\.cargo/config\\)\\'")
+         :ensure t
+         :defer t
+         :mode "/\\(Cargo.lock\\|\\.cargo/config\\)\\'")
      #+END_SRC
 **** Racer
      #+BEGIN_SRC emacs-lisp
        (use-package racer
-	 :defer t
-	 :ensure t
-	 :init
-	 (add-hook 'rust-mode-hook 'racer-mode)
-	 (local-leader-def
-	   :states '(normal visual insert emacs)
-	   :keymaps 'rust-mode-map
-	   "h" 'racer-describe))
+         :defer t
+         :ensure t
+         :init
+         (add-hook 'rust-mode-hook 'racer-mode)
+         (local-leader-def
+           :states '(normal visual insert emacs)
+           :keymaps 'rust-mode-map
+           "h" 'racer-describe))
      #+END_SRC
 **** Cargo
      #+BEGIN_SRC emacs-lisp
        (use-package cargo
-	 :defer t
-	 :ensure t
-	 :init
-	 (add-hook 'rust-mode-hook 'cargo-minor-mode)
-	 (local-leader-def
-	   :states '(normal visual insert emacs)
-	   :keymaps 'rust-mode-map
-	   "c" '(:ignore t :which-key "Cargo")
-	   "cb" '(cargo-process-build :which-key "build")
-	   "cr" '(cargo-process-run :which-key "run")
-	   "ct" '(cargo-process-test :which-key "test")
-	   "cC" '(cargo-process-clean :which-key "clean")
-	   "cc" '(cargo-process-clippy :which-key "clippy")))
+         :defer t
+         :ensure t
+         :init
+         (add-hook 'rust-mode-hook 'cargo-minor-mode)
+         (local-leader-def
+           :states '(normal visual insert emacs)
+           :keymaps 'rust-mode-map
+           "c" '(:ignore t :which-key "Cargo")
+           "cb" '(cargo-process-build :which-key "build")
+           "cr" '(cargo-process-run :which-key "run")
+           "ct" '(cargo-process-test :which-key "test")
+           "cC" '(cargo-process-clean :which-key "clean")
+           "cc" '(cargo-process-clippy :which-key "clippy")))
      #+END_SRC
 **** Flycheck-rust
      #+BEGIN_SRC emacs-lisp
        (use-package flycheck-rust
-	 :defer t
-	 :ensure t
-	 :init
-	 (with-eval-after-load 'rust-mode
-	   (add-hook 'rust-mode-hook #'flycheck-rust-setup)))
+         :defer t
+         :ensure t
+         :init
+         (with-eval-after-load 'rust-mode
+           (add-hook 'rust-mode-hook #'flycheck-rust-setup)))
      #+END_SRC
 *** Org
 **** Org-mode
      #+BEGIN_SRC emacs-lisp
        (use-package org
-	 :defer t
-	 :ensure t)
+         :defer t
+         :ensure t)
      #+END_SRC
 **** Evil-org
      #+BEGIN_SRC emacs-lisp
        (use-package evil-org
-	 :ensure t
-	 :after org
-	 :config
-	 (add-hook 'org-mode-hook 'evil-org-mode))
+         :ensure t
+         :after org
+         :config
+         (add-hook 'org-mode-hook 'evil-org-mode))
      #+END_SRC
 **** Org-bullets
      #+BEGIN_SRC emacs-lisp
        (use-package org-bullets
+         :defer t
+         :ensure t
+         :init
+         (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+     #+END_SRC
+*** Python
+**** Company-jedi
+     #+BEGIN_SRC emacs-lisp
+       (use-package company-jedi
 	 :defer t
 	 :ensure t
 	 :init
-	 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+	 (defun my/python-mode-hook ()
+	   (add-to-list 'company-backends 'company-jedi))
+	 (add-hook 'python-mode-hook 'my/python-mode-hook))
      #+END_SRC
