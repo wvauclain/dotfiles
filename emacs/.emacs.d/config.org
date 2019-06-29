@@ -196,6 +196,13 @@
       (use-package yasnippet :ensure t :defer t
         :init (add-hook 'prog-mode-hook #'yas-minor-mode))
     #+END_SRC
+*** Diff-hl-mode
+    Highlights git diffs
+    #+BEGIN_SRC emacs-lisp
+      (use-package diff-hl :ensure t
+	:config
+	(global-diff-hl-mode))
+    #+END_SRC
 ** Utility functions
 *** Switch-to-other-buffer
     Switch to the other buffer relative to the current buffer.
@@ -517,13 +524,10 @@
          (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
      #+END_SRC
 *** Python
-**** Company-jedi
+**** Elpy
      #+BEGIN_SRC emacs-lisp
-       (use-package company-jedi
-	 :defer t
+       (use-package elpy
 	 :ensure t
 	 :init
-	 (defun my/python-mode-hook ()
-	   (add-to-list 'company-backends 'company-jedi))
-	 (add-hook 'python-mode-hook 'my/python-mode-hook))
+	 (elpy-enable))
      #+END_SRC

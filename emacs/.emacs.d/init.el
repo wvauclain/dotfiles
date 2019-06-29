@@ -69,7 +69,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-jedi yasnippet hydra which-key use-package toml-mode smartparens rainbow-delimiters racer org-bullets move-text general flycheck-rust flycheck-inline evil-org evil-numbers evil-nerd-commenter evil-magit dracula-theme diminish counsel-projectile company cargo auctex))))
+    (elpy diff-hl company-jedi yasnippet hydra which-key use-package toml-mode smartparens rainbow-delimiters racer org-bullets move-text general flycheck-rust flycheck-inline evil-org evil-numbers evil-nerd-commenter evil-magit dracula-theme diminish counsel-projectile company cargo auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
