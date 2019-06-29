@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Exit on error
+set -e
+
 usage() {
     cat <<EOF
 Usage: ./install.sh [OPTION(s)] COMMAND
