@@ -87,6 +87,7 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias md='mkdir -p'
 alias l='ls -lAh'
 alias ll='ls -lh'
+alias cd-git-root='cd $(git rev-parse --show-toplevel)'
 if (( ${+commands[pacman]} )); then
     alias pacupg='sudo pacman -Syu'
     alias pacin='sudo pacman -S'
