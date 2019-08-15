@@ -37,7 +37,8 @@
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
     frame_width = 2
-    frame_color = "#F8F8F2"
+    frame_color = "#AD999B"
+
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -114,20 +115,20 @@
     close_all = ctrl+shift+space
 
 [urgency_low]
-    background = "#282A36"
-    foreground = "#F8F8F2"
-    timeout = 10
+    msg_urgency = low
+    background = "#471A1D"
+    foreground = "#C2B3B4"
 
 [urgency_normal]
-    background = "#282A36"
-    foreground = "#F8F8F2"
-    timeout = 0
+    msg_urgency = normal
+    background = "#471A1D"
+    foreground = "#C2B3B4"
 
 [urgency_critical]
-    background = "#282A36"
-    foreground = "#FF5555"
-    frame_color = "#FF5555"
-    timeout = 0
+    msg_urgency = critical
+    background = "#471A1D"
+    foreground = "#FF894F"
+    frame_color = "#FF894F"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
