@@ -396,9 +396,12 @@
       (general-define-key "M-x" 'counsel-M-x)
     #+END_SRC
 ** Appearance
-*** Dracula theme
+*** Theme
     #+BEGIN_SRC emacs-lisp
-      (use-package dracula-theme :ensure t)
+      (use-package base16-theme
+	:ensure t
+	:config
+	(load-file "~/.emacs.d/base16-mars-theme.el"))
     #+END_SRC
 *** Set the font
     #+BEGIN_SRC emacs-lisp

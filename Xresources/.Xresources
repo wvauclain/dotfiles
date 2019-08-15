@@ -1,55 +1,39 @@
 ! ------------------------------------------------------------------------------
-! Dracula color scheme variables
-! ------------------------------------------------------------------------------
-#define foreground #F8F8F2
-#define background #282A36
-#define color0 #000000
-#define color1 #FF5555
-#define color2 #50FA7B
-#define color3 #F1FA8C
-#define color4 #BD93F9
-#define color5 #FF79C6
-#define color6 #8BE9FD
-#define color7 #BFBFBF
-#define color8 #4D4D4D
-#define color9 #FF6E67
-#define color10 #5AF78E
-#define color11 #F4F99D
-#define color12 #CAA9FA
-#define color13 #FF92D0
-#define color14 #9AEDFE
-#define color15 #E6E6E6
-
-! ------------------------------------------------------------------------------
 ! ROFI color theme
 ! ------------------------------------------------------------------------------
+! Base16 Mars
+! Author: Will Vauclain (https://github.com/wvauclain/)
+
+! base00: #330004
+! base01: #471A1D
+! base02: #5C3336
+! base03: #998082
+! base04: #AD999B
+! base05: #C2B3B4
+! base06: #D6CCCD
+! base07: #EBE6E6
+! base08: #53BD98
+! base09: #A9CC76
+! base0A: #E4F038
+! base0B: #E59C00
+! base0C: #BFB472
+! base0D: #D38EFF
+! base0E: #FF894F
+! base0F: #FF849C
+
+! Enable the extended coloring options
 rofi.color-enabled: true
-rofi.color-window: background, background, background
-rofi.color-normal: background, foreground, background, color14, background
-rofi.color-active: background, color5, background, color5, background
-rofi.color-urgent: background, color1, background, color1, background
+
+! Property Name     BG       Border   Separator
+rofi.color-window:  #471A1D, #471A1D, #330004
+
+! Property Name     BG       FG       BG-alt   Head-BG  Head-FG
+rofi.color-normal:  #471A1D, #C2B3B4, #471A1D, #FF894F, #471A1D
+rofi.color-active:  #471A1D, #D38EFF, #471A1D, #D38EFF, #471A1D
+rofi.color-urgent:  #471A1D, #53BD98, #471A1D, #53BD98, #471A1D
+
+! Set the desired separator style
+rofi.separator-style: solid
+
+! Font
 rofi.font: Iosevka 12
-
-! ------------------------------------------------------------------------------
-! st color theme
-! ------------------------------------------------------------------------------
-st.font: Iosevka Term:pixelsize=16:antialias=true:autohint=true
-st.foreground: #F8F8F2
-st.background: #282A36
-st.color0:     #000000
-st.color8:     #4D4D4D
-st.color1:     #FF5555
-st.color9:     #FF6E67
-st.color2:     #50FA7B
-st.color10:    #5AF78E
-st.color3:     #F1FA8C
-st.color11:    #F4F99D
-st.color4:     #BD93F9
-st.color12:    #CAA9FA
-st.color5:     #FF79C6
-st.color13:    #FF92D0
-st.color6:     #8BE9FD
-st.color14:    #9AEDFE
-st.color7:     #BFBFBF
-st.color15:    #E6E6E6
-
