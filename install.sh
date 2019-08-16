@@ -11,7 +11,7 @@ Options:
   -v, --verbose                 Increase the verbosity of error messages
   -u, --update                  Install the newest version of a dependency,
                                 even if the dependency is already installed
-  -s, --stow			Use stow instead of wsdm
+  -s, --stow                    Use stow instead of wsdm
 Commands:
   b, bootstrap                  Install everything required to install configs
   f, from-file [FILE]           Install all of the configs specified in FILE.
@@ -34,10 +34,10 @@ while [ "$1" ]; do
             UPDATE=true
             shift
             ;;
-	-s|--stow)
-	    STOW=true
-	    shift
-	    ;;
+        -s|--stow)
+            STOW=true
+            shift
+            ;;
         # Commands
         b|bootstrap)
             BOOTSTRAP=true
@@ -90,10 +90,10 @@ fi
 distro() {
     if [ `uname -o` = "Android" ]; then
         echo "Termux"
-elif which pacman > /dev/null; then
-	echo "Arch Linux"
-elif which xbps-install > /dev/null; then
-	echo "Void Linux"
+    elif which pacman > /dev/null; then
+        echo "Arch Linux"
+    elif which xbps-install > /dev/null; then
+        echo "Void Linux"
     elif [ `uname` = "Linux" ]; then
         cat /etc/*-release | grep ^NAME | awk -F '=' '{ print $2 }' | tr -d '"'
     elif [ `uname` == 'Darwin' ]; then # macOS
@@ -111,9 +111,9 @@ distro_install() {
             sudo apt-get update
             sudo apt-get install --assume-yes $@
             ;;
-	"Void Linux")
-	    sudo xbps-install -Syu $@
-	    ;;
+        "Void Linux")
+            sudo xbps-install -Syu $@
+            ;;
         "Termux")
             pkg install $@
             ;;
@@ -142,15 +142,15 @@ bootstrap() {
                 makepkg -si --noconfirm
             fi
             ;;
-	"Void Linux")
-	    distro_install base-devel git unzip wget jq curl
-	    ;;
+        "Void Linux")
+            distro_install base-devel git unzip wget jq curl
+            ;;
         "Debian"|"Ubuntu"|"Termux")
             distro_install build-essential git unzip wget jq curl
             ;;
         *)
             echo "$DISTRO is currently not supported for bootstrapping"
-	    exit 1
+            exit 1
             ;;
     esac
 
@@ -163,7 +163,8 @@ bootstrap() {
     rustup toolchain list | grep nightly > /dev/null || rustup toolchain add nightly
     rustup component list | grep rust-src > /dev/null || rustup component add rust-src
     $UPDATE && rustup update
-    ( which racer > /dev/null && ! $UPDATE ) || cargo +nightly install racer $($UPDATE && echo "--force")
+    ( which racer > /dev/null && ! $UPDATE ) || \
+	cargo +nightly install racer $($UPDATE && echo "--force")
 
 
     # Install wspm
@@ -204,9 +205,9 @@ package_manager_str() {
         "Termux")
             printf "termux"
             ;;
-	"Void Linux")
-	    printf "xbps"
-	    ;;
+        "Void Linux")
+            printf "xbps"
+            ;;
         *)
             printf "none"
             ;;
@@ -215,7 +216,7 @@ package_manager_str() {
 
 install_configuration() {
     if $STOW; then
-	stow -R $@
+        stow -R $@
     else
         ~/.wspm/bin/wsdm --noconfirm install $@
     fi
@@ -228,10 +229,13 @@ post_install_configuration() {
     PROGRAMS=$([ -e "$1-requirements.json" ] && cat "$1-requirements.json"\
                        | jq ".$(package_manager_str)" 2> /dev/null\
                        | tr -d "[\",]" | awk 'NF' | sed -e 's/^[ \t]*//'\
-                       | tr '\n' ' ') 
-    [ -n "$PROGRAMS" ] && [ "$PROGRAMS" != "null " ] && distro_install $PROGRAMS
+                       | tr '\n' ' ' || true)
 
-    ! $STOW && [ -e "$1-postinstall.sh" ] && UPDATE=$UPDATE sh "$1-postinstall.sh" "$(package_manager_str)"
+    [ -n "$PROGRAMS" ] && [ "$PROGRAMS" != "null " ] && distro_install $PROGRAMS || true
+
+
+    ! $STOW && [ -e "$1-postinstall.sh" ] && \
+	UPDATE=$UPDATE sh "$1-postinstall.sh" "$(package_manager_str)" || true
 }
 
 if [ $BOOTSTRAP ]; then
@@ -250,7 +254,7 @@ elif [ -n "$FILE" ]; then
 else
     # Install the given config
     if [ -d "$CONFIG" ]; then
-	install_configuration "$CONFIG"
+        install_configuration "$CONFIG"
     fi
     post_install_configuration "$CONFIG"
 fi

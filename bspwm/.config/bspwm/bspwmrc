@@ -9,7 +9,8 @@ compton -b
 #
 
 case $(hostname) in
-    goldenarches|vacuousvoid)
+
+    howlback)
         # Launch gebaar
         sh /home/will/.config/gebaar/launch.sh
 
