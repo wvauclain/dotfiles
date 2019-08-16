@@ -12,7 +12,7 @@
 
 # terminal emulator
 super + Return
-	st
+	alacritty
 
 # program launcher
 super + space
@@ -29,14 +29,6 @@ super + Escape
 # lock screen
 super + l
 	~/bin/lock
-
-# suspend
-super + s
-	systemctl suspend
-
-# hibernate
-super + h
-	systemctl hibernate
 
 # keyboard switching program
 super + grave

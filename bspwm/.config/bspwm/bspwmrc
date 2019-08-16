@@ -3,6 +3,9 @@
 # Launch compton
 compton -b
 
+# Launch mpd
+mpd &
+
 #
 # Per-machine Configuration
 # (Do this first to avoid the ugly grey screen)
@@ -13,9 +16,6 @@ case $(hostname) in
     howlback)
         # Launch gebaar
         sh /home/will/.config/gebaar/launch.sh
-
-        # Launch mpd
-        mpd &
 
         # Launch batt
         batt &
@@ -37,7 +37,7 @@ case $(hostname) in
         sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side 
 
         # Set wallpaper
-        feh --no-fehbg --bg-center ~/.wallpapers/l_ash03_big.2560x1080.jpg
+        feh --no-fehbg --bg-center ~/.wallpapers/doom.2560x1080.jpg
 
         # Configure desktops
         bspc monitor -d I II III IV V VI VII VIII IX X
