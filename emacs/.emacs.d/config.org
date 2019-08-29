@@ -75,11 +75,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package ivy :ensure t :defer t
         :bind (:map ivy-minibuffer-map        ; bind in the ivy buffer
-                    ("RET" . ivy-alt-done)
-                    ("C-0"   . ivy-beginning-of-buffer)
-                    ("C-e"   . ivy-end-of-buffer)
-                    ("C-k"   . ivy-previous-line)
-                    ("C-j"   . ivy-next-line)))
+                    ("RET" . ivy-alt-done)))
     #+END_SRC
 *** Counsel
     Plugins for Ivy for common features (buffers, files, M-x, etc.)
@@ -293,6 +289,18 @@
         (interactive)
         (counsel-projectile-ag "--hidden"))
     #+END_SRC
+*** Toggle-colorscheme
+    Toggle between gruvbox dark and gruvbox light
+    #+BEGIN_SRC emacs-lisp
+      (defun toggle-colorscheme ()
+	"Toggle between gruvbox dark and light"
+	(interactive)
+	(if (eq colorscheme 'dark)
+	    (progn (load-theme 'base16-gruvbox-light-hard)
+		   (setq colorscheme 'light))
+	  (load-theme 'base16-gruvbox-dark-medium)
+	  (setq colorscheme 'dark)))
+    #+END_SRC
 ** Keybindings
 *** Make escape abort key
     #+BEGIN_SRC emacs-lisp
@@ -386,6 +394,7 @@
        "t" '(:ignore t :which-key "Toggles")
        "t n" '(toggle-relative-line-numbers :which-key "line number format")
        "t w" 'whitespace-mode
+       "t c" '(toggle-colorscheme :which-key "toggle colorscheme")
 
        ;; Extra Prefixes/Hydras
        "w" '("H-w" :which-key "window management")
@@ -401,7 +410,9 @@
       (use-package base16-theme
 	:ensure t
 	:config
-	(load-file "~/.emacs.d/base16-mars-theme.el"))
+	(progn (setq base16-distinct-fringe-background ())
+	  (load-theme 'base16-gruvbox-dark-medium t)
+	  (setq colorscheme 'dark)))
     #+END_SRC
 *** Set the font
     #+BEGIN_SRC emacs-lisp

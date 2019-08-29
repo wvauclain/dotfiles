@@ -37,7 +37,7 @@
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
     frame_width = 2
-    frame_color = "#AD999B"
+    frame_color = "#d5c4a1"
 
 
     # Draw a line of "separator_height" pixel height between two
@@ -116,19 +116,19 @@
 
 [urgency_low]
     msg_urgency = low
-    background = "#471A1D"
-    foreground = "#C2B3B4"
+    background = "#282828"
+    foreground = "#d5c4a1"
 
 [urgency_normal]
     msg_urgency = normal
-    background = "#471A1D"
-    foreground = "#C2B3B4"
+    background = "#282828"
+    foreground = "#d5c4a1"
 
 [urgency_critical]
     msg_urgency = critical
-    background = "#471A1D"
-    foreground = "#FF894F"
-    frame_color = "#FF894F"
+    background = "#282828"
+    foreground = "#fb4934"
+    frame_color = "#fb4934"
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

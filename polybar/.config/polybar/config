@@ -3,25 +3,29 @@
 ;;;;;
 
 [colors]
-foreground = #C2B3B4
-background = #330004
+foreground = #d5c4a1
+background = #282828
 
-color0 = #330004
-color1 = #471A1D
-color2 = #5C3336
-color3 = #998082
-color4 = #AD999B
-color5 = #C2B3B4
-color6 = #D6CCCD
-color7 = #EBE6E6
-color8 = #53BD98
-color9 = #A9CC76
-color10 = #E4F038
-color11 = #E59C00
-color12 = #BFB472
-color13 = #D38EFF
-color14 = #FF894F
-color15 = #FF849C
+color0 = #282828
+color1 = #3c3836
+color2 = #504945
+color3 = #665c54
+color4 = #bdae93
+color5 = #d5c4a1
+color6 = #ebdbb2
+color7 = #fbf1c7
+color8 = #fb4934
+color9 = #fe8019
+color10 = #fabd2f
+color11 = #b8bb26
+color12 = #8ec07c
+color13 = #83a598
+color14 = #d3869b
+color15 = #d65d0e
+
+green = #b8bb26
+yellow = #fabd2f
+red = #fb4934
 
 [module/network-goldenarches]
 type = internal/network
@@ -107,15 +111,15 @@ label-full = C %percentage%%
 
 ; Only applies if <ramp-capacity> is used
 ramp-capacity-0 = 
-ramp-capacity-0-foreground = ${colors.color14}
+ramp-capacity-0-foreground = ${colors.red}
 ramp-capacity-1 = 
-ramp-capacity-1-foreground = ${colors.color10}
+ramp-capacity-1-foreground = ${colors.yellow}
 ramp-capacity-2 = 
-ramp-capacity-2-foreground = ${colors.color10}
+ramp-capacity-2-foreground = ${colors.yellow}
 ramp-capacity-3 = 
-ramp-capacity-3-foreground = ${colors.color9}
+ramp-capacity-3-foreground = ${colors.green}
 ramp-capacity-4 = 
-ramp-capacity-4-foreground = ${colors.color9}
+ramp-capacity-4-foreground = ${colors.green}
 
 ; Only applies if <bar-capacity> is used
 bar-capacity-width = 10
@@ -193,15 +197,15 @@ label-full = C %percentage%%
 
 ; Only applies if <ramp-capacity> is used
 ramp-capacity-0 = 
-ramp-capacity-0-foreground = ${colors.color14}
+ramp-capacity-0-foreground = ${colors.red}
 ramp-capacity-1 = 
-ramp-capacity-1-foreground = ${colors.color10}
+ramp-capacity-1-foreground = ${colors.yellow}
 ramp-capacity-2 = 
-ramp-capacity-2-foreground = ${colors.color10}
+ramp-capacity-2-foreground = ${colors.yellow}
 ramp-capacity-3 = 
-ramp-capacity-3-foreground = ${colors.color9}
+ramp-capacity-3-foreground = ${colors.green}
 ramp-capacity-4 = 
-ramp-capacity-4-foreground = ${colors.color9}
+ramp-capacity-4-foreground = ${colors.green}
 
 ; Only applies if <bar-capacity> is used
 bar-capacity-width = 10
@@ -233,7 +237,7 @@ label-empty-padding = 1
 label-empty-foreground = ${colors.color3}
 
 label-urgent = %name%
-label-urgent-underline = ${colors.color14}
+label-urgent-underline = ${colors.red}
 
 [module/date]
 type = internal/date
@@ -333,7 +337,7 @@ label-volume = %percentage%%
 ; Available tokens:
 ;   %percentage% (default)
 label-muted = muted (%percentage%%)
-label-muted-foreground = ${colors.color14}
+label-muted-foreground = ${colors.red}
 
 ; Only applies if <bar> is used
 bar-volume-width = 10
