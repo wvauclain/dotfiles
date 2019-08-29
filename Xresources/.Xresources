@@ -21,16 +21,33 @@
 ! base0E: #FF894F
 ! base0F: #FF849C
 
+#define base00 #282828
+#define base01 #3c3836
+#define base02 #504945
+#define base03 #665c54
+#define base04 #bdae93
+#define base05 #d5c4a1
+#define base06 #ebdbb2
+#define base07 #fbf1c7
+#define base08 #fb4934
+#define base09 #fe8019
+#define base0A #fabd2f
+#define base0B #b8bb26
+#define base0C #8ec07c
+#define base0D #83a598
+#define base0E #d3869b
+#define base0F #d65d0e
+
 ! Enable the extended coloring options
 rofi.color-enabled: true
 
 ! Property Name     BG       Border   Separator
-rofi.color-window:  #471A1D, #471A1D, #330004
+rofi.color-window:  base00,  base00,  base00
 
 ! Property Name     BG       FG       BG-alt   Head-BG  Head-FG
-rofi.color-normal:  #471A1D, #C2B3B4, #471A1D, #FF894F, #471A1D
-rofi.color-active:  #471A1D, #D38EFF, #471A1D, #D38EFF, #471A1D
-rofi.color-urgent:  #471A1D, #53BD98, #471A1D, #53BD98, #471A1D
+rofi.color-normal:  base00,  base05,  base00,  base05,  base00
+rofi.color-active:  base00,  base0E,  base00,  base0E,  base00
+rofi.color-urgent:  base00,  base08,  base00,  base08,  base00
 
 ! Set the desired separator style
 rofi.separator-style: solid

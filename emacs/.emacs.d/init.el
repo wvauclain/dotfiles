@@ -67,6 +67,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("d83e34e28680f2ed99fe50fea79f441ca3fddd90167a72b796455e791c90dc49" "4feee83c4fbbe8b827650d0f9af4ba7da903a5d117d849a3ccee88262805f40d" "100eeb65d336e3d8f419c0f09170f9fd30f688849c5e60a801a1e6addd8216cb" default)))
+ '(display-line-numbers-type (quote relative))
+ '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc emacs-lisp)))
  '(package-selected-packages
    (quote
     (elpy diff-hl company-jedi yasnippet hydra which-key use-package toml-mode smartparens rainbow-delimiters racer org-bullets move-text general flycheck-rust flycheck-inline evil-org evil-numbers evil-nerd-commenter evil-magit dracula-theme diminish counsel-projectile company cargo auctex))))
@@ -75,4 +80,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((type graphic)) (:foreground "#C2B3B4" :background "#330004")) (((min-colors 256)) (:foreground "white" :background "black")) (t (:foreground "white" :background "black")))))
+ )
