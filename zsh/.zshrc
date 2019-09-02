@@ -115,6 +115,7 @@ fi
 export npm_config_prefix=~/.node_modules
 export BROWSER="firefox"
 export EDITOR="vim"
+export READER="zathura"
 if which rustc > /dev/null; then
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
