@@ -19,6 +19,10 @@ set mouse=a
 set nohlsearch
 set clipboard=unnamedplus
 
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'hard'
 colorscheme gruvbox
@@ -60,7 +64,7 @@ set background=dark
 	map <C-l> <C-w>l
 
 " Check file in shellcheck:
-	map <leader>s :!clear && shellcheck %<CR>
+	autocmd FileType sh,bash map <leader>s :!clear && shellcheck %<CR>
 
 " Open my bibliography file in split
 	map <leader>b :vsp<space>$BIB<CR>
@@ -98,20 +102,21 @@ set background=dark
 	map <leader><leader> <Esc>/<++><Enter>"_c4l
 
 """LATEX
+	" Disable automatic indenting
+	" let g:tex_indent_items=0
+	" let g:tex_indent_and=0
+	" let g:tex_indent_brace=0
+        " Special symbols:
+        autocmd FileType tex inoremap ,\| {\textbar}
 	" Word count:
 	autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
 	" Code snippets
-	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
-	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
-	autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
+        " Text formatting
 	autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
-	autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
 	autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,cp \parencite{}<++><Esc>T{i
-	autocmd FileType tex inoremap ,glos {\gll<Space><++><Space>\\<Enter><++><Space>\\<Enter>\trans{``<++>''}}<Esc>2k2bcw
-	autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
 	autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
 	autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
 	autocmd FileType tex inoremap ,li <Enter>\item<Space>
