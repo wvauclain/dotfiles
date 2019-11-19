@@ -16,6 +16,7 @@
       (setq coding-system-for-write 'utf-8 )
       (setq sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
       (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
+      (setq-default indent-tabs-mode nil)
     #+END_SRC
 *** Relative line numbers
     Useful for evil-mode
@@ -31,15 +32,14 @@
       ;; the following lines tell emacs where on the internet to look up
       ;; for new packages.
       (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-                               ("gnu"       . "http://elpa.gnu.org/packages/")
-                               ("melpa"     . "https://melpa.org/packages/")))
+			       ("gnu"       . "http://elpa.gnu.org/packages/")
+			       ("melpa"     . "https://melpa.org/packages/")))
       (package-initialize) ; guess what this one does ?
 
-(unless (package-installed-p 'use-package) ; unless it is already installed
-  (package-refresh-contents) ; updage packages archive
-  (package-install 'use-package)) ; and install the most recent version of use-package
-(require 'use-package) ; guess what this one does too ?
-
+      (unless (package-installed-p 'use-package) ; unless it is already installed
+	(package-refresh-contents) ; updage packages archive
+	(package-install 'use-package)) ; and install the most recent version of use-package
+      (require 'use-package) ; guess what this one does too ?
     #+END_SRC
 ** General packages
 *** Diminish
@@ -86,17 +86,18 @@
     Code completion suggestions.
     #+BEGIN_SRC emacs-lisp
       (use-package company :ensure t
-        :diminish company-mode
-        :bind (:map company-active-map
-                    ("C-k" . company-select-previous)
-                    ("C-j" . company-select-next))
-        :init
-        (add-hook 'after-init-hook 'global-company-mode)
-        :config
-        (setq company-idle-delay 0.2
-              company-minimum-prefix-length 2
-              company-require-match nil)
-        (setq company-backends (delete 'company-dabbrev company-backends)))
+	:diminish company-mode
+	:bind (:map company-active-map
+		    ("C-p" . company-select-previous)
+		    ("C-n" . company-select-next))
+	:init
+	(add-hook 'after-init-hook 'global-company-mode)
+	:config
+	(setq company-idle-delay 0.2
+	      company-minimum-prefix-length 1
+	      company-require-match nil)
+	(delete 'company-dabbrev company-backends)
+	(delete 'company-semantic company-backends))
     #+END_SRC
 *** Projectile
     Project support for emacs.
@@ -544,4 +545,51 @@
 	 :ensure t
 	 :init
 	 (elpy-enable))
+     #+END_SRC
+*** C/C++
+**** Indentation
+     #+BEGIN_SRC emacs-lisp
+       (setq c-basic-offset 4)
+       (c-set-offset 'inlambda 0)
+     #+END_SRC
+**** Flycheck customization
+     #+BEGIN_SRC emacs-lisp
+       (customize-set-variable 'flycheck-cppcheck-standards "c++17")
+     #+END_SRC
+**** Irony
+     #+BEGIN_SRC emacs-lisp
+       (use-package irony
+	   :ensure t
+	   :config
+	   (add-hook 'c++-mode-hook  'irony-mode)
+	   (add-hook 'c-mode-hook    'irony-mode)
+	   (add-hook 'objc-mode-hook 'irony-mode)
+
+	   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+	   )
+     #+END_SRC
+**** Company-irony
+     #+BEGIN_SRC emacs-lisp
+       (use-package company-irony
+	 :ensure t
+	 :config
+	 (eval-after-load 'company
+	   '(add-to-list 'company-backends 'company-irony))
+	 )
+     #+END_SRC
+**** Flycheck-irony
+     #+BEGIN_SRC emacs-lisp
+       (use-package flycheck-irony
+	   :ensure t
+	   :config
+	   (eval-after-load 'flycheck
+	   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+	   )
+     #+END_SRC
+**** Key bindings
+     #+BEGIN_SRC emacs-lisp
+       (local-leader-def
+         :states '(normal visual insert emacs)
+         :keymaps 'irony-mode-map
+         "o" 'ff-find-other-file)
      #+END_SRC

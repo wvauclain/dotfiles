@@ -74,7 +74,10 @@
  '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc emacs-lisp)))
  '(package-selected-packages
    (quote
-    (elpy diff-hl company-jedi yasnippet hydra which-key use-package toml-mode smartparens rainbow-delimiters racer org-bullets move-text general flycheck-rust flycheck-inline evil-org evil-numbers evil-nerd-commenter evil-magit dracula-theme diminish counsel-projectile company cargo auctex))))
+    (bazel-mode elpy diff-hl company-jedi yasnippet hydra which-key use-package toml-mode smartparens rainbow-delimiters racer org-bullets move-text general flycheck-rust flycheck-inline evil-org evil-numbers evil-nerd-commenter evil-magit dracula-theme diminish counsel-projectile company cargo auctex)))
+ '(safe-local-variable-values
+   (quote
+    ((company-clang-arguments "-I/home/will/git/telegraph/bazel-telegraph/external/json/include/" "-I/home/will/git/telegraph/bazel-telegraph/external/hocon/include/" "-I/home/will/git/telegraph/bazel-telegraph/external/com_google_grpc_grpc/include/")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
