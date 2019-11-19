@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Launch compton
-compton -b
+# Launch picom
+picom -b
 
 # Launch mpd
 mpd &
@@ -34,7 +34,7 @@ case $(hostname) in
 
     shadowboxpc)
         # Launch polybar
-        sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side 
+        sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side
 
         # Set wallpaper
         feh --no-fehbg --bg-center ~/.wallpapers/doom.2560x1080.jpg
