@@ -1,5 +1,0 @@
-{
-    "pacman": ["compton"],
-    "apt": ["compton"],
-    "xbps": ["compton"]
-}
