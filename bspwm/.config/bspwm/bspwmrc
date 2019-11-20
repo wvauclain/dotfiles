@@ -32,7 +32,7 @@ case $(hostname) in
         ;;
 
 
-    shadowboxpc)
+    novastorm)
         # Launch polybar
         sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side 
 
