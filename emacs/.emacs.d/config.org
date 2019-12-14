@@ -67,8 +67,7 @@
 *** Evil-nerd-commenter
     An evil operator for commenting out code
     #+BEGIN_SRC emacs-lisp
-      (use-package evil-nerd-commenter :ensure t :defer t
-        :commands (evilnc-comment-operator))
+      (use-package evil-nerd-commenter :ensure t :defer t)
     #+END_SRC
 *** Ivy
     A lightweight completion framework
@@ -330,11 +329,13 @@
 *** Extra evil operators
     #+BEGIN_SRC emacs-lisp
       (general-define-key
-       :states '(normal)
-       "[ SPC" 'evil-insert-space-above
-       "] SPC" 'evil-insert-space-below
-       "[e" 'move-text-up
-       "]e" 'move-text-down)
+        :states '(normal)
+        "[ SPC" 'evil-insert-space-above
+        "] SPC" 'evil-insert-space-below
+        "[e" 'move-text-up
+        "]e" 'move-text-down
+        "gc" 'evilnc-comment-operator
+       )
     #+END_SRC
 *** Local prefix
     #+BEGIN_SRC emacs-lisp
@@ -364,7 +365,6 @@
        ;; General Functions
        "g" 'magit-status
        "e" 'eval-last-sexp
-       ";" 'evilnc-comment-operator
        "=" 'iwb
        "TAB" 'switch-to-other-buffer
 
@@ -592,4 +592,9 @@
          :states '(normal visual insert emacs)
          :keymaps 'irony-mode-map
          "o" 'ff-find-other-file)
+     #+END_SRC
+*** Javascript
+**** Indentation
+     #+BEGIN_SRC emacs-lisp
+       (setq js-indent-level 2)
      #+END_SRC
