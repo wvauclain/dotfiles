@@ -593,3 +593,8 @@
          :keymaps 'irony-mode-map
          "o" 'ff-find-other-file)
      #+END_SRC
+*** Javascript
+**** Indentation
+     #+BEGIN_SRC emacs-lisp
+       (setq js-indent-level 2)
+     #+END_SRC
