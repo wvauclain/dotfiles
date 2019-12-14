@@ -40,6 +40,9 @@ set number relativenumber
 " Enable autocompletion:
 set wildmode=longest,list,full
 
+" Disables automatic commenting on newline:
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " Allow toggling light and dark theme
 map <leader>cl :set background=light<CR>
 map <leader>cd :set background=dark<CR>
