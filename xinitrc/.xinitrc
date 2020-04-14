@@ -28,5 +28,10 @@ fi
 export AWT_TOOLKIT=MToolkit
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# Fix font scaling on alacritty
+if [ "$(hostname)" = howlback ]; then
+    export WINIT_X11_SCALE_FACTOR=1.25
+fi
+
 # Launch the window manager
-exec bspwm
+exec bspwm 2>&1
