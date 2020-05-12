@@ -199,6 +199,21 @@
 	:config
 	(global-diff-hl-mode))
     #+END_SRC
+*** Lsp-mode
+    #+BEGIN_SRC emacs-lisp
+      (use-package lsp-mode
+        :ensure t
+        :commands (lsp lsp-deferred)
+        :hook (go-mode . lsp-deferred))
+    #+END_SRC
+*** Company-lsp
+    #+BEGIN_SRC emacs-lisp
+      ;; company-lsp integrates company mode completion with lsp-mode.
+      ;; completion-at-point also works out of the box but doesn't support snippets.
+      (use-package company-lsp
+        :ensure t
+        :commands company-lsp)
+    #+END_SRC
 ** Utility functions
 *** Switch-to-other-buffer
     Switch to the other buffer relative to the current buffer.
@@ -597,4 +612,22 @@
 **** Indentation
      #+BEGIN_SRC emacs-lisp
        (setq js-indent-level 2)
+     #+END_SRC
+*** Go
+**** Go-mode
+     #+BEGIN_SRC emacs-lisp
+       (use-package go-mode :ensure t :defer t)
+     #+END_SRC
+**** Before-save hooks
+     #+BEGIN_SRC emacs-lisp
+       ;; Set up before-save hooks to format buffer and add/delete imports.
+       ;; Make sure you don't have other gofmt/goimports hooks enabled.
+       (defun lsp-go-install-save-hooks ()
+         (add-hook 'before-save-hook #'lsp-format-buffer t t)
+         (add-hook 'before-save-hook #'lsp-organize-imports t t))
+       (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+     #+END_SRC
+**** Override tab width
+     #+BEGIN_SRC emacs-lisp
+       (add-hook 'go-mode-hook (lambda () (setq tab-width 4)))
      #+END_SRC
