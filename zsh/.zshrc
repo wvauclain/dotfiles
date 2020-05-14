@@ -77,7 +77,7 @@ if (( ${+commands[youtube-dl]} )); then
     alias youtube-dl-channel='youtube-dl -o "~/youtube/%(uploader)s/%(playlist)s/%(upload_date)s - %(title)s.%(ext)s"'
 fi
 
-# exports
+# Exports
 export npm_config_prefix=~/.node_modules
 export BROWSER="firefox"
 export EDITOR="vim"
@@ -85,6 +85,14 @@ export READER="zathura"
 if which rustc > /dev/null; then
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
+
+# Clean up home directory
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export GOPATH="$XDG_DATA_HOME"/go
 
 # startx if we are running on the 1st tty
 if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then exec startx; fi
