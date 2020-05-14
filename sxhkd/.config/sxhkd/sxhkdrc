@@ -84,9 +84,9 @@ super + p
 shift + super + p
 	scrot -u ~/scrots/%Y-%m-%d-%T-screenshot.png
 
-# bookmarks manager
-super + {_,shift + }b
-	~/bin/bookmark{s,_}
+# bookmarks page
+super + b
+	firefox ~/git/homepage/public/index.html
 
 #
 # bspwm hotkeys
