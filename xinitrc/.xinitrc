@@ -33,9 +33,5 @@ if [ "$(hostname)" = howlback ]; then
     export WINIT_X11_SCALE_FACTOR=1.25
 fi
 
-# Start the gnome keyring daemon
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
-
 # Launch the window manager
 exec bspwm 2>&1
