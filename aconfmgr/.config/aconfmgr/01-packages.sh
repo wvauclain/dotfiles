@@ -150,6 +150,7 @@ AddPackage youtube-dl # A small command-line program to download videos from You
 AddPackage zsh # A very advanced and programmable command interpreter (shell) for UNIX
 AddPackage zsh-completions # Additional completion definitions for Zsh
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
+AddPackage --foreign navi # An interactive cheatsheet tool for the command-line
 AddPackage --foreign trizen # Trizen AUR Package Manager
 
 # Fonts

@@ -1,0 +1,9 @@
+% pacman
+
+# Clear the package cache from uninstalled packages
+sudo pacman -Sc
+
+% git
+
+# cd to git root
+cd $(git rev-parse --show-toplevel)
