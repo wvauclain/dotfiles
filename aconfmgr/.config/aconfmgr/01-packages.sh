@@ -153,6 +153,7 @@ AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign trizen # Trizen AUR Package Manager
 
 # Fonts
+AddPackage noto-fonts-cjk # Google Noto CJK fonts
 AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage ttf-dejavu # Font family based on the Bitstream Vera Fonts with a wider range of characters
 AddPackage --foreign nerd-fonts-iosevka # Patched Iosevka font from the nerd-fonts library
