@@ -1,6 +1,0 @@
-{
-    "pacman": ["emacs", "the_silver_searcher"],
-    "apt": ["emacs", "silversearcher-ag"],
-    "xbps": ["emacs-x11", "zlib-devel", "pcre-devel", "liblzma-devel"],
-    "termux": ["emacs", "silversearcher-ag"]
-}

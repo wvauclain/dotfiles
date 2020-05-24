@@ -1,6 +1,0 @@
-{
-    "pacman": ["nodejs"],
-    "apt": ["nodejs"],
-    "xbps": ["nodejs"],
-    "termux": ["nodejs"]
-}

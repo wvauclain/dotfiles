@@ -1,5 +1,0 @@
-{
-    "pacman": ["mpd", "mpc"],
-    "apt": ["mpd", "mpc"],
-    "xbps": ["mpd", "mpc"]
-}

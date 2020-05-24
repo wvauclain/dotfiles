@@ -1,5 +1,0 @@
-{
-    "pacman": ["sxhkd", "i3lock", "rofi", "xorg-xbacklight"],
-    "apt": ["sxhkd", "i3lock", "rofi", "xbacklight"],
-    "xbps": ["sxhkd", "i3lock", "rofi", "xbacklight"]
-} 

@@ -1,5 +1,0 @@
-{
-    "pacman": ["xorg", "xorg-xinit", "xorg-xrdb", "ttf-dejavu"],
-    "apt": ["xorg", "xinit", "x11-xserver-utils", "fonts-dejavu"],
-    "xbps": ["xorg-minimal", "dejavu-fonts-ttf", "xinit", "xrdb", "setxkbmap"]
-}

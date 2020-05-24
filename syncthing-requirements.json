@@ -1,5 +1,0 @@
-{
-    "pacman": ["syncthing"],
-    "apt": ["syncthing"],
-    "xbps": ["syncthing"]
-}
