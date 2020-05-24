@@ -50,10 +50,10 @@ AddPackage shellcheck # Shell script analysis tool
 AddPackage yarn # Fast, reliable, and secure dependency management
 
 # Editors
-AddPackage code # The Open Source build of Visual Studio Code (vscode) editor
 AddPackage emacs # The extensible, customizable, self-documenting real-time display editor
 AddPackage neovim # Fork of Vim aiming to improve user experience, plugins, and GUIs
 AddPackage vim # Vi Improved, a highly configurable, improved version of the vi text editor
+AddPackage --foreign visual-studio-code-insiders # Editor for building and debugging modern web and cloud applications (insiders version)
 
 # PER
 AddPackage bazel # Correct, reproducible, and fast builds for everyone
@@ -161,6 +161,9 @@ AddPackage --foreign nerd-fonts-iosevka # Patched Iosevka font from the nerd-fon
 
 # Optional dependencies for added features
 AddPackage highlight # Syntax highlighting for ranger and trizen
+AddPackage gnome-keyring # Stores passwords and encryption keys
+AddPackage seahorse # GNOME application for managing PGP keys.
+AddPackage x11-ssh-askpass # Lightweight passphrase dialog for SSH
 
 # System-specific apps and utilities
 if [ "$HOSTNAME" = howlback ]; then
