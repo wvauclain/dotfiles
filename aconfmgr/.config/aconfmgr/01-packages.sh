@@ -161,9 +161,6 @@ AddPackage --foreign nerd-fonts-iosevka # Patched Iosevka font from the nerd-fon
 
 # Optional dependencies for added features
 AddPackage highlight # Syntax highlighting for ranger and trizen
-AddPackage gnome-keyring # Stores passwords and encryption keys
-AddPackage seahorse # GNOME application for managing PGP keys.
-AddPackage x11-ssh-askpass # Lightweight passphrase dialog for SSH
 
 # System-specific apps and utilities
 if [ "$HOSTNAME" = howlback ]; then
