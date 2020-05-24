@@ -141,9 +141,12 @@ AddPackage ttf-dejavu # Font family based on the Bitstream Vera Fonts with a wid
 AddPackage --foreign nerd-fonts-iosevka # Patched Iosevka font from the nerd-fonts library
 
 # Install batt
-which batt > /dev/null 2>&1 || (
-cd $(mktemp -d batt.XXX)
-wget "https://raw.githubusercontent.com/wvauclain/batt/master/PKGBUILD"
-makepkg -si PKGBUILD
-)
-IgnorePackage --foreign batt
+if [ "$HOSTNAME" = howlback ]; then
+    which batt > /dev/null 2>&1 || (
+        cd $(mktemp -d batt.XXX)
+        wget "https://raw.githubusercontent.com/wvauclain/batt/master/PKGBUILD"
+        makepkg -si PKGBUILD
+    )
+
+    IgnorePackage --foreign batt
+fi
