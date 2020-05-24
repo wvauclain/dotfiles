@@ -1,5 +1,0 @@
-{
-    "pacman": ["beets"],
-    "apt": ["beets"],
-    "xbps": ["beets"]
-}
