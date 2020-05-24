@@ -86,7 +86,11 @@ shift + super + p
 
 # bookmarks page
 super + b
-	firefox ~/git/homepage/public/index.html
+	zsh -ci 'firefox "$HOMEPAGE"'
+
+# edit dotfiles
+super + d
+    code ~/.local/share/dotfiles
 
 #
 # bspwm hotkeys
