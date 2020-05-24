@@ -76,6 +76,7 @@ if (( ${+commands[youtube-dl]} )); then
     alias youtube-dl-playlist='youtube-dl -o "~/youtube/%(playlist)s/%(playlist_index)02d - %(title)s.%(ext)s"'
     alias youtube-dl-channel='youtube-dl -o "~/youtube/%(uploader)s/%(playlist)s/%(upload_date)s - %(title)s.%(ext)s"'
 fi
+alias code='code-insiders'
 
 # Exports
 export npm_config_prefix=~/.node_modules
@@ -85,6 +86,7 @@ export READER="zathura"
 if which rustc > /dev/null; then
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
+export DOTFILES="$HOME/.local/share/dotfiles"
 
 # Navi widget (press ctrl-g)
 source <(navi widget zsh)

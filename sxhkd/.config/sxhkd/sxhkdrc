@@ -90,7 +90,7 @@ super + b
 
 # edit dotfiles
 super + d
-    code ~/.local/share/dotfiles
+	zsh -ci 'code $DOTFILES'
 
 #
 # bspwm hotkeys
