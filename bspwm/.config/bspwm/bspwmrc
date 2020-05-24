@@ -3,9 +3,6 @@
 # Launch picom
 picom -b
 
-# Launch mpd
-mpd &
-
 #
 # Per-machine Configuration
 # (Do this first to avoid the ugly grey screen)
@@ -14,9 +11,6 @@ mpd &
 case $(hostname) in
 
     howlback)
-        # Launch gebaar
-        sh /home/will/.config/gebaar/launch.sh
-
         # Launch batt
         batt &
 
@@ -24,7 +18,7 @@ case $(hostname) in
         sh .config/polybar/launch.sh goldenarches
 
         # Set wallpaper
-        feh --no-fehbg --bg-fill ~/.wallpapers/mandalorian.png
+        feh -Z --scale-down --no-fehbg --bg-fill ~/.wallpapers/mandalorian.png &
 
         # Configure desktops
         bspc monitor -d I II III IV V VI VII VIII IX X
@@ -37,7 +31,7 @@ case $(hostname) in
         sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side
 
         # Set wallpaper
-        feh --no-fehbg --bg-center ~/.wallpapers/doom.2560x1080.jpg
+        feh -Z --scale-down --no-fehbg --bg-center ~/.wallpapers/doom.2560x1080.jpg &
 
         # Configure desktops
         bspc monitor -d I II III IV V VI VII VIII IX X
