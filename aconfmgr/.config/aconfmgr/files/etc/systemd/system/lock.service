@@ -1,13 +1,14 @@
 [Unit]
 Description=Local system resume actions
-Before=sleep.target
+Before=suspend.target
+Before=hibernate.target
 
 [Service]
 Type=forking
 User=will
 Environment=DISPLAY=:0
 ExecStart=/home/will/bin/lock
-ExecStartPost=/usr/bin/sleep 1
 
 [Install]
-WantedBy=sleep.target
+WantedBy=suspend.target
+WantedBy=hibernate.target

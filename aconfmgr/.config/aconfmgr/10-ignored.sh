@@ -63,3 +63,6 @@ IgnorePath /etc/group
 IgnorePath /etc/group-
 IgnorePath /etc/gshadow
 IgnorePath /etc/gshadow-
+
+# Ignore paths that don't actually have system config
+IgnorePath '/bulk/*'
