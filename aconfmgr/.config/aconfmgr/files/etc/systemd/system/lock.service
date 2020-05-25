@@ -8,6 +8,7 @@ Type=forking
 User=will
 Environment=DISPLAY=:0
 ExecStart=/home/will/bin/lock
+ExecStartPost=/usr/bin/sleep 1
 
 [Install]
 WantedBy=suspend.target
