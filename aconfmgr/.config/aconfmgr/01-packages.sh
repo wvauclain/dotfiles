@@ -92,12 +92,12 @@ AddPackage picom # X compositor that may fix tearing issues
 AddPackage rofi # A window switcher, application launcher and dmenu replacement
 AddPackage scrot # Simple command-line screenshot utility for X
 AddPackage sxhkd # Simple X hotkey daemon
+AddPackage xdg-user-dirs # Manage user directories like ~/Desktop and ~/Music
 AddPackage --foreign polybar # A fast and easy-to-use status bar
 
 # GUI Apps
 AddPackage alacritty # A cross-platform, GPU-accelerated terminal emulator
 AddPackage arandr # Provide a simple visual front end for XRandR 1.2.
-AddPackage caja # File manager for the MATE desktop
 AddPackage calibre # Ebook management application (python2 build)
 AddPackage chromium # A web browser built for speed, simplicity, and security
 AddPackage firefox # Standalone web browser from mozilla.org
@@ -105,6 +105,7 @@ AddPackage gimp # GNU Image Manipulation Program
 AddPackage gvfs-afc # Virtual filesystem implementation for GIO (AFC backend; Apple mobile devices)
 AddPackage gvfs-mtp # Virtual filesystem implementation for GIO (MTP backend; Android, media player)
 AddPackage gvfs-smb # Virtual filesystem implementation for GIO (SMB/CIFS backend; Windows client)
+AddPackage jre8-openjdk # OpenJDK Java 8 full runtime environment
 AddPackage keepassxc # Cross-platform community-driven port of Keepass password manager
 AddPackage libreoffice-fresh # LibreOffice branch which contains new features and program enhancements
 AddPackage mate-system-monitor # A system monitor for MATE
@@ -150,6 +151,7 @@ AddPackage youtube-dl # A small command-line program to download videos from You
 AddPackage zsh # A very advanced and programmable command interpreter (shell) for UNIX
 AddPackage zsh-completions # Additional completion definitions for Zsh
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
+AddPackage --foreign bottom # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features.
 AddPackage --foreign navi # An interactive cheatsheet tool for the command-line
 AddPackage --foreign trizen # Trizen AUR Package Manager
 
@@ -186,6 +188,5 @@ elif [ "$HOSTNAME" = novastorm ]; then
     AddPackage handbrake # Multithreaded video transcoder
     AddPackage libdvdcss # Portable abstraction library for DVD decryption
     AddPackage sound-juicer # A lean and friendly audio CD extractor for GNOME
-    AddPackage steam # Valve's digital software delivery system
     AddPackage --foreign makemkv # DVD and Blu-ray to MKV converter and network streamer
 fi

@@ -8,3 +8,6 @@ CreateLink /etc/systemd/system/multi-user.target.wants/NetworkManager.service /u
 
 # NTP
 CreateLink /etc/systemd/system/multi-user.target.wants/ntpd.service /usr/lib/systemd/system/ntpd.service
+
+# XDG user directories
+CreateLink /etc/systemd/user/default.target.wants/xdg-user-dirs-update.service /usr/lib/systemd/user/xdg-user-dirs-update.service
