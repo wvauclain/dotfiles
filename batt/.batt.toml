@@ -1,6 +1,0 @@
-batteries = ["BAT0","BAT1",]
-delay_seconds = 60
-warning = 25
-critical = 10
-danger = 3
-dangercmd = "notify-send -u critical 'Critical' 'Hibernated system due to low battery' && systemctl hibernate"
