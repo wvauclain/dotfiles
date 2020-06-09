@@ -31,7 +31,7 @@ case $(hostname) in
         sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side
 
         # Set wallpaper
-        feh -Z --scale-down --no-fehbg --bg-center ~/.wallpapers/doom.2560x1080.jpg &
+        feh -Z --scale-down --no-fehbg --bg-center ~/documents/pictures/wallpapers/stormtroopers.2560x1080.jpg &
 
         # Configure desktops
         bspc monitor -d I II III IV V VI VII VIII IX X
