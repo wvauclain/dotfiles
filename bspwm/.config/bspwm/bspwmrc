@@ -28,7 +28,7 @@ case $(hostname) in
 
     novastorm)
         # Launch polybar
-        sh .config/polybar/launch.sh shadowboxpc-main shadowboxpc-side
+        sh .config/polybar/launch.sh novastorm
 
         # Set wallpaper
         feh -Z --scale-down --no-fehbg --bg-center ~/documents/pictures/wallpapers/stormtroopers.2560x1080.jpg &
