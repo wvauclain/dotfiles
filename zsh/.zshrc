@@ -35,13 +35,14 @@ compinit -u
 # Complete . and .. special directories
 zstyle ':completion:*' special-dirs true
 
-# use vim keybindings
-bindkey -v
-
 ##
 # keybindings
 ##
 
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^E' edit-command-line
 
 ##
 # personal config
@@ -79,25 +80,10 @@ fi
 alias code='code-insiders'
 
 # Exports
-export npm_config_prefix=~/.node_modules
-export BROWSER="firefox"
-export EDITOR="vim"
-export READER="zathura"
-if which rustc > /dev/null; then
-    export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-fi
-export DOTFILES="$HOME/.local/share/dotfiles"
 
 # Navi widget (press ctrl-g)
 source <(navi widget zsh)
 
-# Clean up home directory
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export GOPATH="$XDG_DATA_HOME"/go
 
 # startx if we are running on the 1st tty
 if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then exec startx; fi
