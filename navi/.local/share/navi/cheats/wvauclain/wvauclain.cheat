@@ -1,3 +1,8 @@
+% misc
+
+# Edit wvauclain.cheat
+nvim ~/.local/share/dotfiles/navi/.local/share/navi/cheats/wvauclain/wvauclain.cheat
+
 % pacman
 
 # Clear the package cache from uninstalled packages
@@ -7,3 +12,22 @@ sudo pacman -Sc
 
 # cd to git root
 cd $(git rev-parse --show-toplevel)
+
+% alexs
+
+# run refinebio-frontend proxied to localhost backend
+REACT_APP_API_HOST=http://localhost:8000 yarn run dev
+
+# run psql shell against the local database
+source ~/git/alexs/refinebio/scripts/common.sh && PGPASSWORD=mysecretpassword psql -h $(get_docker_db_ip_address) -U postgres -d data_refinery
+
+% perms
+
+# recursively set permissions on files
+find <base_dir> -type f -exec chmod <perm> {} +
+
+# recursively set permissions on directories
+find <base_dir> -type d -exec chmod <perm> {} +
+
+# set directories to 755, files to 644
+chmod -R u+rwX,go+rX,go-w <base_dir>
