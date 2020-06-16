@@ -3,7 +3,7 @@ export PATH="$HOME/.node_modules/bin:$HOME/.local/share/cargo/bin:$HOME/.local/s
 
 # Default programs
 export BROWSER="firefox"
-export EDITOR="vim"
+export EDITOR="nvim"
 export READER="zathura"
 export PAGER="less"
 
