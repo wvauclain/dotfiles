@@ -79,11 +79,16 @@ if (( ${+commands[youtube-dl]} )); then
 fi
 alias code='code-insiders'
 
-# Exports
-
 # Navi widget (press ctrl-g)
 source <(navi widget zsh)
 
+# Start ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
 
 # startx if we are running on the 1st tty
 if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then exec startx; fi
