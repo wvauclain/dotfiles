@@ -18,7 +18,7 @@ case $(hostname) in
         sh .config/polybar/launch.sh goldenarches
 
         # Set wallpaper
-        feh -Z --scale-down --no-fehbg --bg-fill ~/.wallpapers/mandalorian.png &
+        feh -Z --scale-down --no-fehbg --bg-fill ~/documents/pictures/wallpapers/mandalorian.png &
 
         # Configure desktops
         bspc monitor -d I II III IV V VI VII VIII IX X
