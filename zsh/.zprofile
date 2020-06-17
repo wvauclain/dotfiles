@@ -26,3 +26,12 @@ export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export DVDCSS_CACHE="$XDG_DATA_HOME"/dvdcss
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+
+# FZF config
+export FZF_DEFAULT_COMMAND="fd ."
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND $HOME"
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export FZF_DEFAULT_OPTS='--exact'
+
+# Only use my rc.conf for ranger
+export RANGER_LOAD_DEFAULT_RC=false
