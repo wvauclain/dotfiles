@@ -22,6 +22,8 @@ setopt share_history          # share command history data
 for file (~/.zsh/*.zsh); do
     source $file
 done
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 
 # setup the prompt
 setopt prompt_subst # allow for variable substitution in the prompt
