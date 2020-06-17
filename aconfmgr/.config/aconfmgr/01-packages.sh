@@ -19,7 +19,6 @@ if [ "$HOSTNAME" = howlback ]; then
     AddPackage intel-ucode # Microcode update files for Intel CPUs
     AddPackage mesa # An open-source implementation of the OpenGL specification
     AddPackage vulkan-intel # Intel's Vulkan mesa driver
-    AddPackage xf86-video-vesa # X.org vesa video driver
 elif [ "$HOSTNAME" = novastorm ]; then
     AddPackage amd-ucode # Microcode update files for AMD CPUs
     AddPackage lib32-nvidia-utils # NVIDIA drivers utilities (32-bit)
@@ -42,16 +41,17 @@ AddPackage go-tools # Developer tools for the Go programming language
 AddPackage llvm # Collection of modular and reusable compiler and toolchain technologies
 AddPackage nodejs # Evented I/O for V8 javascript
 AddPackage npm # A package manager for javascript
-AddPackage pandoc # Conversion between markup formats
 AddPackage python-dbus # Python bindings for DBUS
 AddPackage python-pip # The PyPA recommended tool for installing Python packages
 AddPackage rust # Systems programming language focused on safety, speed and concurrency
-AddPackage shellcheck # Shell script analysis tool
 AddPackage yarn # Fast, reliable, and secure dependency management
+AddPackage --foreign pandoc-bin # Pandoc - executable only, without 750MB Haskell depends/makedepends
+AddPackage --foreign shellcheck-bin # Shell script analysis tool (binary release)
 
 # Editors
-AddPackage emacs # The extensible, customizable, self-documenting real-time display editor
 AddPackage neovim # Fork of Vim aiming to improve user experience, plugins, and GUIs
+AddPackage python-pynvim # Python client for Neovim
+AddPackage tmux # A terminal multiplexer
 AddPackage vim # Vi Improved, a highly configurable, improved version of the vi text editor
 AddPackage --foreign visual-studio-code-insiders # Editor for building and debugging modern web and cloud applications (insiders version)
 
@@ -71,6 +71,15 @@ AddPackage avr-libc # The C runtime library for the AVR family of microcontrolle
 AddPackage avrdude # Download/upload/manipulate the ROM and EEPROM contents of AVR microcontrollers
 AddPackage dfu-programmer # Programmer for Atmel chips with a USB bootloader
 AddPackage dfu-util # Tool intended to download and upload firmware using DFU protocol to devices connected over USB
+
+# Flutter
+AddPackage android-udev # Udev rules to connect Android devices to your linux box
+AddPackage --foreign android-platform # Android SDK Platform, latest API
+AddPackage --foreign android-sdk # Google Android SDK
+AddPackage --foreign android-sdk-build-tools # Build-Tools for Google Android SDK (aapt, aidl, dexdump, dx, llvm-rs-cc)
+AddPackage --foreign android-sdk-platform-tools # Platform-Tools for Google Android SDK (adb and fastboot)
+AddPackage --foreign android-studio # The official Android IDE (Stable branch)
+AddPackage --foreign flutter # A new mobile app SDK to help developers and designers build modern mobile apps for iOS and Android.
 
 # X.org
 AddPackage xorg-server # Xorg X server
@@ -102,9 +111,6 @@ AddPackage calibre # Ebook management application (python2 build)
 AddPackage chromium # A web browser built for speed, simplicity, and security
 AddPackage firefox # Standalone web browser from mozilla.org
 AddPackage gimp # GNU Image Manipulation Program
-AddPackage gvfs-afc # Virtual filesystem implementation for GIO (AFC backend; Apple mobile devices)
-AddPackage gvfs-mtp # Virtual filesystem implementation for GIO (MTP backend; Android, media player)
-AddPackage gvfs-smb # Virtual filesystem implementation for GIO (SMB/CIFS backend; Windows client)
 AddPackage jre8-openjdk # OpenJDK Java 8 full runtime environment
 AddPackage keepassxc # Cross-platform community-driven port of Keepass password manager
 AddPackage libreoffice-fresh # LibreOffice branch which contains new features and program enhancements
@@ -133,6 +139,7 @@ AddPackage pulsemixer # CLI and curses mixer for pulseaudio
 # CLI Utilities
 AddPackage aria2 # Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink
 AddPackage bat # Cat clone with syntax highlighting and git integration
+AddPackage fd # Simple, fast and user-friendly alternative to find
 AddPackage fzf # Command-line fuzzy finder
 AddPackage htop # Interactive process viewer
 AddPackage pdftk # Command-line tool for working with PDFs
@@ -166,6 +173,7 @@ AddPackage highlight # Syntax highlighting for ranger and trizen
 AddPackage gnome-keyring # Stores passwords and encryption keys
 AddPackage seahorse # GNOME application for managing PGP keys.
 AddPackage x11-ssh-askpass # Lightweight passphrase dialog for SSH
+AddPackage --foreign python-ueberzug # ueberzug is an python script which aims to replace w3mimgdisplay
 
 # System-specific apps and utilities
 if [ "$HOSTNAME" = howlback ]; then
