@@ -2,3 +2,4 @@ zsh/.zsh/secrets.zsh
 
 nvim/.config/nvim/autoload/
 nvim/.config/nvim/plugged/
+nvim/.config/nvim/.netrwhist
