@@ -115,6 +115,7 @@ AddPackage jre8-openjdk # OpenJDK Java 8 full runtime environment
 AddPackage keepassxc # Cross-platform community-driven port of Keepass password manager
 AddPackage libreoffice-fresh # LibreOffice branch which contains new features and program enhancements
 AddPackage mate-system-monitor # A system monitor for MATE
+AddPackage mpv # a free, open source, and cross-platform media player
 AddPackage sxiv # Simple X Image Viewer
 AddPackage syncthing # Open Source Continuous Replication / Cluster Synchronization Thing
 AddPackage vlc # Multi-platform MPEG, VCD/DVD, and DivX player
