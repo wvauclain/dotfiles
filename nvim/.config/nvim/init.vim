@@ -22,7 +22,6 @@ Plug 'tpope/vim-surround'
 call plug#end()
 
 " Basic key bindings
-map <C-p> :Files<CR>
 map <leader>o :setlocal spell! spelllang=en_us<CR>
 map <localleader>c :w! \| !compiler <c-r>%<CR>
 map <localleader>p :!opout <c-r>%<CR><CR>
