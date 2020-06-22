@@ -1,8 +1,5 @@
 #! /bin/sh
 
-# Launch picom
-picom -b
-
 #
 # Per-machine Configuration
 # (Do this first to avoid the ugly grey screen)
@@ -11,30 +8,36 @@ picom -b
 case $(hostname) in
 
     howlback)
-        # Launch batt
-        batt &
-
-        # Launch polybar
-        sh .config/polybar/launch.sh goldenarches
-
         # Set wallpaper
         feh -Z --scale-down --no-fehbg --bg-fill ~/documents/pictures/wallpapers/mandalorian.jpg &
 
+        # Launch polybar
+        sh .config/polybar/launch.sh goldenarches &
+
+        # Launch batt
+        batt &
+
         # Configure desktops
         bspc monitor -d I II III IV V VI VII VIII IX X
+
+        # Launch picom
+        picom -b --backend glx
 
         ;;
 
 
     novastorm)
-        # Launch polybar
-        sh .config/polybar/launch.sh novastorm
-
         # Set wallpaper
         feh -Z --scale-down --no-fehbg --bg-center ~/documents/pictures/wallpapers/stormtroopers.2560x1080.jpg &
 
+        # Launch polybar
+        sh .config/polybar/launch.sh novastorm &
+
         # Configure desktops
         bspc monitor -d I II III IV V VI VII VIII IX X
+
+        # Launch picom
+        picom -b --backend xrender
 
         ;;
 esac
@@ -70,10 +73,8 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 bspc config focus_follows_pointer true
-bspc config pointer_follows_focus true
 bspc config initial_polarity second_child
 
 bspc rule -a '*:libreofficedev' state=tiled
 bspc rule -a '*:soffice' state=tiled
 bspc rule -a Zathura state=tiled
-bspc rule -a '*:emacs' state=tiled
