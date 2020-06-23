@@ -148,9 +148,7 @@ AddPackage ranger # Simple, vim-like file manager
 AddPackage rclone # Sync files to and from Google Drive, S3, Swift, Cloudfiles, Dropbox and Google Cloud Storage
 AddPackage ripgrep # A search tool that combines the usability of ag with the raw speed of grep
 AddPackage rsync # A file transfer program to keep remote files in sync
-AddPackage screen # Full-screen window manager that multiplexes a physical terminal
 AddPackage stow # Manage installation of multiple softwares in the same directory tree
-AddPackage the_silver_searcher # Code searching tool similar to Ack, but faster
 AddPackage trash-cli # Command line trashcan (recycle bin) interface
 AddPackage unzip # For extracting and viewing files in .zip archives
 AddPackage wget # Network utility to retrieve files from the Web
