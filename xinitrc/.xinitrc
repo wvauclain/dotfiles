@@ -30,7 +30,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Fix font scaling on alacritty
 if [ "$(hostname)" = howlback ]; then
-    export WINIT_X11_SCALE_FACTOR=1.25
+    export WINIT_X11_SCALE_FACTOR=1
 fi
 
 source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
