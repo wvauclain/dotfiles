@@ -9,6 +9,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 Plug 'bling/vim-airline' " Status bar for vim
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'fatih/vim-go'
 Plug 'gruvbox-community/gruvbox' " The best colorscheme ever
 Plug 'junegunn/fzf.vim'
 Plug 'luochen1990/rainbow'
