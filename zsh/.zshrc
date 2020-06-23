@@ -80,6 +80,11 @@ if (( ${+commands[youtube-dl]} )); then
     alias youtube-dl-channel='youtube-dl -o "~/youtube/%(uploader)s/%(playlist)s/%(upload_date)s - %(title)s.%(ext)s"'
 fi
 alias code='code-insiders'
+alias rs='rg --fixed-strings'
+function rge() { nvim -c "Rg ${*:-}" }
+function grge() { nvim -c "GRg ${*:-}" }
+function rse() { nvim -c "Rs ${*:-}" }
+function grse() { nvim -c "GRs ${*:-}" }
 
 # Navi widget (press ctrl-g)
 source <(navi widget zsh)
