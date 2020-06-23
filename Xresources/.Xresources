@@ -1,26 +1,6 @@
 ! ------------------------------------------------------------------------------
 ! ROFI color theme
 ! ------------------------------------------------------------------------------
-! Base16 Mars
-! Author: Will Vauclain (https://github.com/wvauclain/)
-
-! base00: #330004
-! base01: #471A1D
-! base02: #5C3336
-! base03: #998082
-! base04: #AD999B
-! base05: #C2B3B4
-! base06: #D6CCCD
-! base07: #EBE6E6
-! base08: #53BD98
-! base09: #A9CC76
-! base0A: #E4F038
-! base0B: #E59C00
-! base0C: #BFB472
-! base0D: #D38EFF
-! base0E: #FF894F
-! base0F: #FF849C
-
 #define base00 #282828
 #define base01 #3c3836
 #define base02 #504945
