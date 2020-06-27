@@ -22,11 +22,7 @@ Plug 'tpope/vim-surround'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
-" Basic key bindings
-map <leader>o :setlocal spell! spelllang=en_us<CR>
-map <localleader>c :w! \| !compiler <c-r>%<CR>
-map <localleader>p :!opout <c-r>%<CR><CR>
-nnoremap S :%s//g<Left><Left>
+source /etc/vimrc
 
 " Neovim settings
 filetype plugin on " Enable my individual filetype plugins
@@ -41,7 +37,13 @@ set nohlsearch " Don't highlight after searching
 set number relativenumber " Use relative line numbering
 set splitbelow splitright " Splits open at the bottom and right
 set updatetime=100 " Time until swap file is written to disk
-syntax on " Allow syntax highlighting
+set wildmode=longest:full,full " Make ex-mode tab completion work more predictably
+
+" Basic key bindings
+map <leader>o :setlocal spell! spelllang=en_us<CR>
+map <localleader>c :w! \| !compiler <c-r>%<CR>
+map <localleader>p :!opout <c-r>%<CR><CR>
+nnoremap S :%s//g<Left><Left>
 
 " Don't copy to the clipboard when using 'c'
 nnoremap c "_c
