@@ -54,3 +54,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
 
+" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
