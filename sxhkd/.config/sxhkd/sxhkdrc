@@ -88,14 +88,10 @@ shift + super + p
 super + b
 	zsh -ci 'firefox "$HOMEPAGE"'
 
-# edit dotfiles
-super + d
-	zsh -ci 'code $DOTFILES'
-
 # file manager
 super + f
 	alacritty -e zsh -ci ranger
-	
+
 #
 # bspwm hotkeys
 #
