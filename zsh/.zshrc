@@ -85,6 +85,7 @@ function rge() { nvim -c "Rg ${*:-}" }
 function grge() { nvim -c "GRg ${*:-}" }
 function rse() { nvim -c "Rs ${*:-}" }
 function grse() { nvim -c "GRs ${*:-}" }
+function refinebio() { cd ~/git/alexs/refinebio && tmux new -A -s refinebio }
 
 # Navi widget (press ctrl-g)
 source <(navi widget zsh)
