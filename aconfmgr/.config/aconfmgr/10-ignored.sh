@@ -32,6 +32,8 @@ IgnorePath /etc/arch-release
 IgnorePath /etc/xml/catalog
 IgnorePath /usr/bin/newgidmap
 IgnorePath /usr/bin/newuidmap
+IgnorePath /usr/bin/nomad
+IgnorePath /usr/bin/terraform
 
 # Ignore configs I don't care about
 IgnorePath /etc/fuse.conf
