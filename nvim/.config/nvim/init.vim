@@ -19,7 +19,14 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'rust-lang/rust.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'cespare/vim-toml'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'sirver/ultisnips'
 call plug#end()
 
 source /etc/vimrc
