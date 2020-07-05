@@ -95,7 +95,11 @@ super + d
 # file manager
 super + f
 	alacritty -e zsh -ci ranger
-	
+
+# file manager
+super + f
+	alacritty -e zsh -ci ranger
+
 #
 # bspwm hotkeys
 #
