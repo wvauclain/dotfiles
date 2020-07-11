@@ -33,6 +33,9 @@ if [ "$(hostname)" = howlback ]; then
     export WINIT_X11_SCALE_FACTOR=1
 fi
 
+# Fix QT scaling issues; their DPI measurements do not work
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+
 source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
 # Launch the window manager
