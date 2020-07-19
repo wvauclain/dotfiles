@@ -4,11 +4,7 @@ let g:gruvbox_italic=1
 let g:gruvbox_invert_selection=0
 
 colorscheme gruvbox
-if $USER == "root"
-  set background=light
-else
-  set background=dark
-endif
+set background=dark
 set termguicolors
 
 let g:rainbow_active = 1
