@@ -14,7 +14,7 @@ endfunction
 
 " Define the user highlights
 
-hi __root__ cterm=bold,italic ctermfg=167 ctermbg=239 gui=bold,italic guifg=#fb4934 guibg=#504945
+hi __root__ cterm=bold,italic ctermfg=239 ctermbg=167 gui=bold,italic guifg=#504945 guibg=#fb4934
 hi __mode__ cterm=bold ctermfg=109 ctermbg=239 gui=bold guifg=#83a598 guibg=#504945
 hi __file__ cterm=italic ctermfg=175 ctermbg=237 gui=italic guifg=#d3869b guibg=#3c3836
 hi __modified__ cterm=bold ctermfg=142 ctermbg=237 gui=bold guifg=#b8bb26 guibg=#3c3836
