@@ -7,7 +7,7 @@ endif
 
 " Install plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'bling/vim-airline' " Status bar for vim
+" Plug 'bling/vim-airline' " Status bar for vim
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'fatih/vim-go'
 Plug 'gruvbox-community/gruvbox' " The best colorscheme ever
