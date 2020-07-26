@@ -28,8 +28,6 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'sirver/ultisnips'
 call plug#end()
 
-source /etc/vimrc
-
 " Neovim settings
 filetype plugin on " Enable my individual filetype plugins
 let mapleader = " "
