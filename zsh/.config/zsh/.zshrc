@@ -55,6 +55,7 @@ alias ll='ls -lh'
 alias cd-git-root='cd $(git rev-parse --show-toplevel)'
 if (( ${+commands[wget]} )); then
     alias wget='wget --hsts-file=/dev/null'
+    alias mirror='wget -e robots=off -r -nc -np -R "index.html*"'
 fi
 if (( ${+commands[pacman]} )); then
     alias pacupg='sudo pacman -Syu'
@@ -66,12 +67,6 @@ if (( ${+commands[trizen]} )); then
     alias trin='trizen -S'
     alias trrem='trizen -Rns'
 fi
-if (( ${+commands[xbps-install]} )); then
-    alias xbin='sudo xbps-install'
-    alias xbupg='sudo xbps-install -Su'
-    alias xbrm='sudo xbps-remove -R'
-fi
-alias mirror='wget -e robots=off -r -nc -np -R "index.html*"'
 alias fixkeyboard='setxkbmap -option caps:escape'
 if (( ${+commands[youtube-dl]} )); then
     export YOUTUBE_DL_ARGS="--embed-thumbnail --add-metadata -f best"
@@ -79,7 +74,6 @@ if (( ${+commands[youtube-dl]} )); then
     alias youtube-dl-playlist='youtube-dl $YOUTUBE_DL_ARGS -o "~/youtube/%(playlist)s/%(playlist_index)02d - %(title)s.%(ext)s"'
     alias youtube-dl-channel='youtube-dl $YOUTUBE_DL_ARGS -o "~/youtube/%(uploader)s/%(playlist)s/%(upload_date)s - %(title)s.%(ext)s"'
 fi
-alias code='code-insiders'
 alias rs='rg --fixed-strings'
 function rge() { nvim -c "Rg ${*:-}" }
 function grge() { nvim -c "GRg ${*:-}" }
