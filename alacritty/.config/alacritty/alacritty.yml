@@ -185,12 +185,43 @@ colors:
     white:   '0xfbf1c7'
 
   indexed_colors:
-    - { index: 16, color: '0xfe8019' }
-    - { index: 17, color: '0xd65d0e' }
-    - { index: 18, color: '0x3c3836' }
-    - { index: 19, color: '0x504945' }
-    - { index: 20, color: '0xbdae93' }
-    - { index: 21, color: '0xebdbb2' }
+      # GruvboxFg0
+    - { index: 229, color: '0xfbf1c7' }
+      # GruvboxFg1
+    - { index: 223, color: '0xebdbb2' }
+      # GruvboxFg2
+    - { index: 250, color: '0xd5c4a1' }
+      # GruvboxFg3
+    - { index: 248, color: '0xbdae93' }
+      # GruvboxFg4
+    - { index: 246, color: '0xa89984' }
+      # GruvboxGray
+    - { index: 245, color: '0x928374' }
+      # GruvboxBg0
+    - { index: 235, color: '0x282828' }
+      # GruvboxBg1
+    - { index: 237, color: '0x3c3836' }
+      # GruvboxBg2
+    - { index: 239, color: '0x504945' }
+      # GruvboxBg3
+    - { index: 241, color: '0x665c54' }
+      # GruvboxBg4
+    - { index: 243, color: '0x7c6f64' }
+      # GruvboxRed
+    - { index: 167, color: '0xfb4934' }
+      # GruvboxGreen
+    - { index: 142, color: '0xb8bb26' }
+      # GruvboxYellow
+    - { index: 214, color: '0xfabd2f' }
+      # GruvboxBlue
+    - { index: 109, color: '0x83a598' }
+      # GruvboxPurple
+    - { index: 175, color: '0xd3869b' }
+      # GruvboxAqua
+    - { index: 108, color: '0x8ec07c' }
+      # GruvboxOrange
+    - { index: 208, color: '0xfe8019' }
+
 
 # Visual Bell
 #
