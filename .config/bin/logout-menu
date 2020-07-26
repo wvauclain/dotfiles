@@ -1,12 +1,27 @@
-#!/usr/bin/env node
-const { Option, Command, selectOptionAndRun } = require("./js/rofi");
+#!/bin/sh
+action=$(rofi -dmenu <<EOF
+Shut Down
+Restart
+Hibernate
+Log Out
+Sleep
+EOF
+)
 
-const options = [
-  new Option("Shut Down", new Command("shutdown", ["now"])),
-  new Option("Restart", new Command("reboot", [])),
-  new Option("Hibernate", new Command("systemctl", ["hibernate"])),
-  new Option("Log Out", new Command("bspc", ["quit"])),
-  new Option("Sleep", new Command("systemctl", ["suspend"]))
-];
-
-selectOptionAndRun(options);
+case "$action" in
+  "Shut Down")
+    shutdown now
+    ;;
+  "Restart")
+    reboot
+    ;;
+  "Hibernate")
+    systemctl hibernate
+    ;;
+  "Log Out")
+    bspc quit
+    ;;
+  "Sleep")
+    systemctl suspend
+    ;;
+esac
