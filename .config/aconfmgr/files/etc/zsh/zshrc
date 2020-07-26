@@ -1,0 +1,9 @@
+# Source all of the plugins I installed
+for file (/etc/zsh/plugin/*.zsh); do
+    source $file
+done
+
+# Edit the current command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^E' edit-command-line

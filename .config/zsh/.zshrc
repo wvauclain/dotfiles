@@ -2,8 +2,7 @@
 # zsh settings
 ##
 
-# colors
-autoload -U colors && colors
+# ls colors
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # history
@@ -19,7 +18,6 @@ setopt inc_append_history     # add commands to HISTFILE in order of execution
 # setopt share_history          # share command history data
 
 # setup functions
-setopt prompt_subst # allow for variable substitution in the prompt
 for file ("$XDG_CONFIG_HOME"/zsh/*.zsh); do
     source $file
 done
