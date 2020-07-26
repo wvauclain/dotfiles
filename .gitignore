@@ -17,7 +17,8 @@ documents/*
 .ssh/known_hosts
 
 # Ignore xdg directories that don't hold config
-.local/share/
+.local/share/*
+!.local/share/navi/
 .local/lib/
 .cache/
 # Random programs put their executables in here; we use .config/bin
