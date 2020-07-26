@@ -24,19 +24,19 @@ super + Tab
 
 # exit program
 super + Escape
-	~/bin/logout-menu
+	~/.config/bin/logout-menu
 
 # lock screen
 super + l
-	~/bin/lock
+	~/.config/bin/lock
 
 # keyboard switching program
 super + grave
-	~/bin/switch-keymap
+	~/.config/bin/switch-keymap
 
 # emoji selector
 super + e
-	~/bin/emoji
+	~/.config/bin/emoji
 
 # make sxhkd reload its configuration files:
 super + r
@@ -79,18 +79,14 @@ super + XF86AudioMute
 
 # print screen key
 super + p
-	scrot ~/scrots/%Y-%m-%d-%T-screenshot.png
+	scrot ~/documents/screenshots/%Y-%m-%d-%T-screenshot.png
 
 shift + super + p
-	scrot -u ~/scrots/%Y-%m-%d-%T-screenshot.png
+	scrot -u ~/documents/screenshots/%Y-%m-%d-%T-screenshot.png
 
 # bookmarks page
 super + b
 	zsh -ci 'firefox "$HOMEPAGE"'
-
-# edit dotfiles
-super + d
-	zsh -ci 'code $DOTFILES'
 
 # file manager
 super + f

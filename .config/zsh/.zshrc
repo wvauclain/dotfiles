@@ -82,7 +82,7 @@ function grse() { nvim -c "GRs ${*:-}" }
 function refinebio() { cd ~/git/alexs/refinebio && tmux new -A -s refinebio }
 
 # dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
 
 # Navi widget (press ctrl-g)
 source <(navi widget zsh)

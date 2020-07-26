@@ -1,5 +1,5 @@
 # Set the path
-export PATH="$HOME/.node_modules/bin:$HOME/.local/share/cargo/bin:$HOME/.local/share/go/bin:$HOME/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/share/cargo/bin:$HOME/.local/share/go/bin:$HOME/.config/bin:$HOME/.local/bin:$PATH"
 
 # Default programs
 export BROWSER="firefox"
@@ -24,7 +24,7 @@ export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export DVDCSS_CACHE="$XDG_DATA_HOME"/dvdcss
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export LESSHISTFILE=/dev/null
-# export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 

@@ -1,3 +1,43 @@
+# Ignore user directories
+downloads/
+games/
+git/
+school/
+
+# Ignore everything in documents except for the wallapers
+documents/*
+!documents/wallpapers/
+
+# Don't keep track of neovim plugin stuff and the netrw history
 .config/nvim/autoload/
 .config/nvim/plugged/
 .config/nvim/.netrwhist
+
+# Don't keep track of our known hosts
+.ssh/known_hosts
+
+# Ignore xdg directories that don't hold config
+.local/share/
+.local/lib/
+.cache/
+# Random programs put their executables in here; we use .config/bin
+.local/bin/
+
+# Ignore config we don't care about (usually machine-generated)
+
+.config/GIMP/
+.config/QtProject.conf
+.config/Slack/
+.config/calibre/
+.config/chromium/
+.config/dconf/
+.config/keepassxc/
+.config/libreoffice/
+.config/pulse/
+.config/retroarch/
+.config/syncthing/
+.config/vlc/
+.config/zoomus.conf
+.mozilla/
+.pki/
+.zoom/

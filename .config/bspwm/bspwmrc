@@ -9,7 +9,7 @@ case $(hostname) in
 
     howlback)
         # Set wallpaper
-        feh -Z --scale-down --no-fehbg --bg-fill ~/documents/pictures/wallpapers/mandalorian.jpg &
+        feh -Z --scale-down --no-fehbg --bg-fill ~/documents/wallpapers/mandalorian.jpg &
 
         # Launch polybar
         sh .config/polybar/launch.sh goldenarches &
@@ -28,7 +28,7 @@ case $(hostname) in
 
     novastorm)
         # Set wallpaper
-        feh -Z --scale-down --no-fehbg --bg-center ~/documents/pictures/wallpapers/stormtroopers.2560x1080.jpg &
+        feh -Z --scale-down --no-fehbg --bg-center ~/documents/wallpapers/stormtroopers.2560x1080.jpg &
 
         # Launch polybar
         sh .config/polybar/launch.sh novastorm &
