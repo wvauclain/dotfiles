@@ -1,8 +1,8 @@
 #!/bin/sh
 setxkbmap -option caps:escape -option compose:ralt
 
-userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
+userresources="$XDG_CONFIG_HOME/X11/xresources"
+usermodmap="$XDG_CONFIG_HOME/X11/xmodmap"
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
