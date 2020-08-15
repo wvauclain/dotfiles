@@ -1,8 +1,11 @@
 # Set up my local repo
-CreateLink /etc/localrepo.db localrepo.db.tar.gz
-CopyFile /etc/localrepo.db.tar.gz
-CreateLink /etc/localrepo.files localrepo.files.tar.gz
-CopyFile /etc/localrepo.files.tar.gz
+CopyFile /opt/localrepo/batt-1.1.0-1-x86_64.pkg.tar '' will will
+CreateLink /opt/localrepo/custom.db custom.db.tar.gz will will
+CopyFile /opt/localrepo/custom.db.tar.gz '' will will
+CopyFile /opt/localrepo/custom.db.tar.gz.old '' will will
+CreateLink /opt/localrepo/custom.files custom.files.tar.gz will will
+CopyFile /opt/localrepo/custom.files.tar.gz '' will will
+CopyFile /opt/localrepo/custom.files.tar.gz.old '' will will
 
 # Core packages
 AddPackage base # Minimal package set to define a basic Arch Linux installation
