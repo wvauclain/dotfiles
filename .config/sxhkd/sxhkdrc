@@ -79,10 +79,10 @@ super + XF86AudioMute
 
 # print screen key
 super + p
-	scrot ~/documents/screenshots/%Y-%m-%d-%T-screenshot.png
+	scrot ~/documents/pictures/screenshots/%Y-%m-%d-%T-screenshot.png
 
 shift + super + p
-	scrot -u ~/documents/screenshots/%Y-%m-%d-%T-screenshot.png
+	scrot -u ~/documents/pictures/screenshots/%Y-%m-%d-%T-screenshot.png
 
 # bookmarks page
 super + b
