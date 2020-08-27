@@ -2,7 +2,8 @@
 downloads/
 games/
 git/
-school/
+sync/
+
 
 # Ignore everything in documents except for the wallapers
 documents/*
@@ -13,12 +14,13 @@ documents/*
 .config/nvim/plugged/
 .config/nvim/.netrwhist
 
-# Don't keep track of our known hosts
+# Don't keep track of our ssh stuff
 .ssh/known_hosts
+.ssh/id_rsa
+.ssh/id_rsa.pub
 
 # Ignore xdg directories that don't hold config
-.local/share/*
-!.local/share/navi/
+.local/share/
 .local/lib/
 .cache/
 # Random programs put their executables in here; we use .config/bin
@@ -39,6 +41,16 @@ documents/*
 .config/syncthing/
 .config/vlc/
 .config/zoomus.conf
+.config/Nextcloud/
+.config/Unknown\ Organization/
+.config/lutris/
+.config/gtk-2.0/
 .mozilla/
 .pki/
 .zoom/
+.filetags
+.filetags_tagfilter/
+.steam/
+.steampath
+.steampid
+.pulse-cookie
