@@ -34,6 +34,7 @@ IgnorePath /usr/bin/newgidmap
 IgnorePath /usr/bin/newuidmap
 IgnorePath /usr/bin/nomad
 IgnorePath /usr/bin/terraform
+IgnorePath '/etc/cni/*'
 
 # Ignore configs I don't care about
 IgnorePath /etc/fuse.conf
@@ -65,6 +66,8 @@ IgnorePath /etc/group
 IgnorePath /etc/group-
 IgnorePath /etc/gshadow
 IgnorePath /etc/gshadow-
+IgnorePath '/etc/docker/*'
 
 # Ignore paths that don't actually have system config
-IgnorePath '/opt/*'
+IgnorePath '/opt/zoom/*'
+IgnorePath '/opt/containerd/*'

@@ -1,6 +1,7 @@
 # Based on the oh-my-zsh theme gentoo
 # (https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/gentoo.zsh-theme)
 
+autoload -U colors && colors # set up the colors arrays
 setopt prompt_subst # allow for variable substitution in the prompt
 
 # Print the user and hostname (e.g. user@hostname)
