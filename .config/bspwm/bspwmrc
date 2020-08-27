@@ -52,8 +52,8 @@ sxhkd &
 # Launch dunst
 dunst &
 
-# Launch syncthing
-syncthing -no-browser &
+# Launch nextcloud
+nextcloud &
 
 # Mute sound on boot
 ponymix mute
