@@ -1,0 +1,16 @@
+#!/bin/sh
+
+usage() {
+    echo 'take-pages <PAGE/RANGE> <INFILE.pdf> <OUTFILE.pdf>'
+}
+
+if [ "$1" = '-h' ] || [ "$1" = "--help" ]; then
+    usage
+    exit 0
+elif [ "$#" != 3 ]; then
+    printf "\033[31merror:\033[0m you need to provide exactly 3 arguments\n" >&2
+    usage >&2
+    exit 1
+fi
+
+qpdf --empty --pages "$2" "$1" -- "$3"
