@@ -1,0 +1,71 @@
+#!/bin/sh
+
+wait_for_input() {
+    printf "\033[32mPress ENTER to continue\033[0m\n"
+    read -r line
+}
+
+handle_extension() {
+    case "$f" in
+        *.tar.bz | *.tar.bz2 | *.tbz | *.tbz2)
+            tar xjvf $f
+            wait_for_input
+            ;;
+
+        *.tar.gz | *.tgz)
+            tar xzvf $f
+            wait_for_input
+            ;;
+
+        *.tar.xz | *.txz)
+            tar xJvf $f
+            wait_for_input
+            ;;
+
+        *.zip)
+            unzip $f
+            wait_for_input
+            ;;
+
+        *) return 1 ;;
+    esac
+}
+
+handle_filename() {
+    case "$(file --mime-type $f -b)" in
+        application/pdf)
+            setsid -f zathura $f >/dev/null 2>&1
+            ;;
+
+        text/*)
+            $EDITOR $fx
+            ;;
+
+        image/x-xcf | image/svg+xml)
+            setsid -f gimp $f >/dev/null 2>&1
+            ;;
+
+        image/gif)
+            setsid -f sxiv -a $f >/dev/null 2>&1
+            ;;
+
+        image/*)
+            setsid -f sxiv $f >/dev/null 2>&1
+            # rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select
+            ;;
+
+        audio/*)
+            mpv --audio-display=no $f
+            ;;
+
+        video/*)
+            setsid -f mpv $f -quiet >/dev/null 2>&1
+            ;;
+
+        *)
+            for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done
+            ;;
+    esac
+}
+
+handle_extension || handle_filename
