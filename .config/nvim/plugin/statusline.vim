@@ -10,7 +10,7 @@ let g:statusline_mode_map = {
       \ }
 
 function! statusline#current_mode()
-  return g:statusline_mode_map[mode(1)] . " "
+  return g:statusline_mode_map[mode(1)[0]] . " "
 endfunction
 
 " Define the user highlights

@@ -8,7 +8,7 @@ case $n_monitors in
         bspc monitor "$monitors" -d I II III IV V VI VII VIII IX X
         ;;
     2)
-        p_monitor=$(echo "$monitors" | rofi -dmenu)
+        p_monitor=$(echo "$monitors" | rofi -dmenu -p 'primary:')
         [ -z "$p_monitor" ] && exit 1
         s_monitor=$(echo "$monitors" | grep -v "$p_monitor")
 

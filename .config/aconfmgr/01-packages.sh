@@ -1,8 +1,7 @@
-# Set up my local repo
-CreateLink /etc/localrepo.db localrepo.db.tar.gz
-CopyFile /etc/localrepo.db.tar.gz
-CreateLink /etc/localrepo.files localrepo.files.tar.gz
-CopyFile /etc/localrepo.files.tar.gz
+CopyFile /opt/pkgbuilds/batt/PKGBUILD '' will will
+CopyFile /opt/pkgbuilds/filetags/PKGBUILD '' will will
+CopyFile /opt/pkgbuilds/lf/PKGBUILD '' will will
+source ./pkgbuilds.sh
 
 # Core packages
 AddPackage base # Minimal package set to define a basic Arch Linux installation
@@ -15,6 +14,10 @@ AddPackage man-db # A utility for reading man pages
 AddPackage man-pages # Linux man pages
 AddPackage networkmanager # Network connection manager and user applications
 AddPackage openssh # Premier connectivity tool for remote login with the SSH protocol
+AddPackage unzip # For extracting and viewing files in .zip archives
+AddPackage wget # Network utility to retrieve files from the Web
+AddPackage zsh # A very advanced and programmable command interpreter (shell) for UNIX
+AddPackage zsh-completions # Additional completion definitions for Zsh
 AddPackageGroup base-devel
 
 # System-specific drivers
@@ -78,6 +81,7 @@ AddPackage xorg-xinit # X.Org initialisation program
 AddPackage bspwm # Tiling window manager based on binary space partitioning
 AddPackage dunst # Customizable and lightweight notification-daemon
 AddPackage feh # Fast and light imlib2-based image viewer
+AddPackage gnome-keyring # Stores passwords and encryption keys
 AddPackage i3lock # Improved screenlocker based upon XCB and PAM
 AddPackage picom # X compositor that may fix tearing issues
 AddPackage rofi # A window switcher, application launcher and dmenu replacement
@@ -94,14 +98,14 @@ AddPackage firefox # Standalone web browser from mozilla.org
 AddPackage gimp # GNU Image Manipulation Program
 AddPackage keepassxc # Cross-platform community-driven port of Keepass password manager
 AddPackage libreoffice-fresh # LibreOffice branch which contains new features and program enhancements
+AddPackage mpv # a free, open source, and cross-platform media player
+AddPackage nextcloud-client # Nextcloud desktop client
+AddPackage steam # Valve's digital software delivery system
 AddPackage sxiv # Simple X Image Viewer
-AddPackage syncthing # Open Source Continuous Replication / Cluster Synchronization Thing
-AddPackage vlc # Multi-platform MPEG, VCD/DVD, and DivX player
 AddPackage zathura # Minimalistic document viewer
 AddPackage zathura-pdf-mupdf # PDF support for Zathura (MuPDF backend) (Supports PDF, ePub, and OpenXPS)
-AddPackage --foreign qdirstat # Qt-based directory statistics (KDirStat/K4DirStat without any KDE - from the original KDirStat author)
 AddPackage --foreign slack-desktop # Slack Desktop (Beta) for Linux
-# AddPackage --foreign zoom # Zoom, #1 Video Conferencing and Web Conferencing Service
+AddPackage --foreign zoom # Zoom, #1 Video Conferencing and Web Conferencing Service
 
 
 # LaTeX
@@ -117,26 +121,29 @@ AddPackage pulsemixer # CLI and curses mixer for pulseaudio
 # CLI Utilities
 AddPackage aria2 # Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink
 AddPackage bat # Cat clone with syntax highlighting and git integration
+AddPackage docker # Pack, ship and run any application as a lightweight container
 AddPackage fd # Simple, fast and user-friendly alternative to find
 AddPackage fzf # Command-line fuzzy finder
 AddPackage jq # Command-line JSON processor
-AddPackage newsboat # An RSS/Atom feed reader for text terminals
-AddPackage ranger # Simple, vim-like file manager
+AddPackage ncdu # Disk usage analyzer with an ncurses interface
+AddPackage pacman-contrib # Contributed scripts and tools for pacman systems
+AddPackage plan9port # Ports of applications from Plan 9
+AddPackage python-eyed3 # A Python module and program for processing information about mp3 files
+AddPackage qpdf # QPDF
 AddPackage ripgrep # A search tool that combines the usability of ag with the raw speed of grep
-AddPackage rsync # A file transfer program to keep remote files in sync
-AddPackage sshfs # FUSE client based on the SSH File Transfer Protocol
-AddPackage stow # Manage installation of multiple softwares in the same directory tree
+AddPackage shfmt # Format shell programs
 AddPackage trash-cli # Command line trashcan (recycle bin) interface
-AddPackage unzip # For extracting and viewing files in .zip archives
-AddPackage wget # Network utility to retrieve files from the Web
+AddPackage ueberzug # Command line util which allows to display images in combination with X11
 AddPackage xclip # Command line interface to the X11 clipboard
 AddPackage youtube-dl # A small command-line program to download videos from YouTube.com and a few more sites
-AddPackage zsh # A very advanced and programmable command interpreter (shell) for UNIX
-AddPackage zsh-completions # Additional completion definitions for Zsh
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign bottom # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features.
-AddPackage --foreign navi # An interactive cheatsheet tool for the command-line
 AddPackage --foreign trizen # Trizen AUR Package Manager
+
+# Ranger
+AddPackage ranger # Simple, vim-like file manager
+AddPackage mediainfo # Supplies technical and tag information about a video or audio file (CLI interface)
+AddPackage ghostscript # An interpreter for the PostScript language
 
 # Fonts
 AddPackage noto-fonts # Google Noto TTF fonts
@@ -145,13 +152,11 @@ AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage ttf-dejavu # Font family based on the Bitstream Vera Fonts with a wider range of characters
 AddPackage --foreign nerd-fonts-iosevka # Patched Iosevka font from the nerd-fonts library
 
-
-# Optional dependencies for added features
-# AddPackage highlight # Syntax highlighting for ranger and trizen
-# AddPackage ueberzug # Command line util which allows to display images in combination with X11
+# Filetags
+AddPKGBUILD filetags
 
 # Needed to connect to the Penn wifi
-AddPackage python-dbus # Python bindings for DBUS
+# AddPackage python-dbus # Python bindings for DBUS
 
 # System-specific apps and utilities
 if [ "$HOSTNAME" = howlback ]; then
@@ -167,7 +172,7 @@ if [ "$HOSTNAME" = howlback ]; then
     CopyFile /etc/systemd/system/powertop.service
 
     # Install batt
-    AddPackage batt
+    AddPKGBUILD batt
 
 elif [ "$HOSTNAME" = novastorm ]; then
     AddPackage cura # A software solution for 3D printing aimed at RepRaps and the Ultimaker.

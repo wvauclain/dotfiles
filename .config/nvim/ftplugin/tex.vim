@@ -6,6 +6,21 @@ set softtabstop=4
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 autocmd VimLeave *.tex !texclear %
 
+" Pick from snippets
+command! Templates call fzf#run({
+            \    'source': 'ls $HOME/.config/templates/latex',
+            \    'options': [
+            \        '--reverse',
+            \        '--prompt', 'Template: ',
+            \        '--preview', 'bat --style=numbers --color=always --line-range :500 $HOME/.config/templates/latex/{}'
+            \    ],
+            \    'sink': '%!cd $HOME/.config/templates/latex/ && cat'
+            \})
+
+if ! filereadable(expand('%'))
+    :Templates
+endif
+
 " Special symbols:
 inoremap <localleader>\| {\textbar}
 " Word count:

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EMOJIFILE=~/.local/share/dotfiles/emoji
+EMOJIFILE=~/.local/share/emoji
 
 SELECTION=$(grep -v "#" $EMOJIFILE | awk -F ";" '{print $1}' | rofi -dmenu -i -p "emoji")
 if [ -n "$SELECTION" ]; then

@@ -1,0 +1,14 @@
+pkgname=filetags
+pkgver=2020.06.07T17.24.55
+pkgrel=1
+pkgdesc="Management of simple tags within file names"
+arch=(any)
+url="https://github.com/novoid/filetags"
+license=('GPL')
+depends=('python' 'python-clint' 'python-colorama')
+source=('git+https://github.com/novoid/filetags.git')
+sha256sums=('SKIP')
+
+package() {
+    install -Dm755 filetags/filetags/__init__.py "${pkgdir}"/usr/bin/filetags
+}

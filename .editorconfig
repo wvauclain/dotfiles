@@ -1,0 +1,10 @@
+root = true
+
+# These have to be global options because shell files could have no extension
+[*]
+indent_style = space
+indent_size = 4
+
+shell_variant      = posix
+switch_case_indent = true
+keep_padding       = true

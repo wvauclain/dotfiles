@@ -1,0 +1,57 @@
+#!/bin/sh
+
+TIMESTAMP_REGEX='^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}'
+
+IF="$(readlink -f "$1")"
+file="$(basename "$IF")"
+dir="$(basename "$(dirname "$IF")")"
+
+exif() {
+    # Exif datetime formats are a little weird (like 2020:07:22 13:21:44), so
+    # use sed to translate it into something `date` can understand
+    identify -format "%[exif:$1]\n" -- "${file}" 2>/dev/null | sed 's/\([[:digit:]]\{4\}\):\([[:digit:]]\{2\}\):\([[:digit:]]\{2\}\)/\1-\2-\3/'
+}
+
+# If we are already timestamped
+if echo "$file" | grep -Eq "$TIMESTAMP_REGEX"; then
+    echo "doing nothing, '$file' is already timestamped"
+    exit 0
+fi
+
+# If the filename already has a timestamp but it's in a different format, use that
+# e.g. 2020-06-24 08:45:38 AM for photos from my iPhone
+IPHONE_TIMESTAMP='^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} (AM|PM)'
+[ -z "$date" ] && date="$(echo "$file" | grep -Eo "$IPHONE_TIMESTAMP")"
+
+# Otherwise maybe the directory has a timestamp
+# e.g. 19990328-210438 from iPhoto
+if [ -z "$date" ] && expr "$dir" : '^[0-9]\{8\}-[0-9]\{6\}$' >/dev/null; then
+    date="$(echo "$dir" | sed 's/\([[:digit:]]\{4\}\)\([[:digit:]]\{2\}\)\([[:digit:]]\{2\}\)-\([[:digit:]]\{2\}\)\([[:digit:]]\{2\}\)\([[:digit:]]\{2\}\)/\1-\2-\3T\4:\5:\6/')"
+fi
+
+# If the input file is an image, try to get its date from the EXfile data
+if [ -z "$date" ] && expr "$(file --dereference --brief --mime-type -- "${file}")" : 'image/.*' >/dev/null; then
+    date="$(exif DateTime)"
+    [ -z "$date" ] && date="$(exif DateTimeOriginal)"
+fi
+
+# Otherwise, just ask us to make a guess
+if [ -z "$date" ]; then
+    echo "We can't detect a timestamp for this file. What year was it taken?"
+    while [ -z "$timestamp" ]; do
+        read -r year
+        if expr "$year" : '^[0-9]\{4\}$' >/dev/null; then
+            timestamp="${year}-00-00T00:00:00"
+        elif [ -z "$year" ]; then
+            exit 1
+        else
+            echo "Invalid year format. Try again"
+        fi
+    done
+else
+    timestamp="$(TZ=UTC date -d "$date" +%Y-%m-%dT%H:%M:%S)"
+fi
+
+OF="$timestamp $(echo "$file" | sed "s/$date\\s*//")"
+
+echo "output filename: $OF"

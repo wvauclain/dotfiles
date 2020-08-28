@@ -1,0 +1,111 @@
+#!/bin/sh
+
+set -C -f -u
+
+# Set IFS to a newline in a POSIX-compliant way
+IFS="$(printf '%b_' '\n')"
+IFS="${IFS%_}"
+
+# Script arguments
+FILE_PATH="${1}"         # Full path of the highlighted file
+HEIGHT="${2}"
+
+header() {
+    printf "\033[32m%s\033[0m\n\n" "$*"
+}
+
+error() {
+    printf "\033[31m%s\033[0m\n" "$*"
+}
+
+fail_if_large() {
+    # If the file is at least 256KiB, don't try to render it
+    if [ "$( stat --printf='%s' -- "${FILE_PATH}")"  -ge "262144" ]; then
+        error "File ${FILE_PATH} too large to display"
+        exit 1
+    fi
+}
+
+preview_text() {
+    bat --line-range ":${HEIGHT}" -p --color always "$@"
+}
+
+# Preview an image using `chafa`. Since `chafa` can take a second or two on
+# larger images, we cache the results in ~/.cache/lf
+preview_image() {
+    sha="$(sha1sum "${FILE_PATH}" | cut -d' ' -f 1)"
+    if [ -e "$HOME/.cache/lf/$sha" ]; then
+        cat "$HOME/.cache/lf/$sha"
+    else
+        mkdir -p "$HOME/.cache/lf"
+        chafa --fill=block --symbols=block -c 256 -s 80x"${HEIGHT}" "${FILE_PATH}" | tee "$HOME/.cache/lf/$sha"
+    fi
+}
+
+handle_mime() {
+    case "$1" in
+        text/troff)
+            header "Contents of ${FILE_PATH}:"
+            fail_if_large
+            man ./ "${FILE_PATH}" | col -bx | preview_text --language man
+            ;;
+
+        text/* | */xml)
+            header "Contents of ${FILE_PATH}:"
+            fail_if_large
+            preview_text -- "${FILE_PATH}"
+            ;;
+
+        application/json)
+            header "Contents of ${FILE_PATH}:"
+            fail_if_large
+            jq --color-output . "${FILE_PATH}"
+            ;;
+
+        # Render INI files using TOML syntax highlighting since bat understands TOML
+        application/x-wine-extension-ini)
+            header "Contents of ${FILE_PATH}:"
+            preview_text --language toml -- "${FILE_PATH}"
+            ;;
+
+        application/zip | application/gzip | application/zstd | application/x-tar)
+            header "Contents of ${FILE_PATH}:"
+            bsdtar --list --file "${FILE_PATH}"
+            ;;
+
+        image/*)
+            header "Contents of ${FILE_PATH}:"
+            preview_image
+            ;;
+
+        video/* | audio/*)
+            header "Info for ${FILE_PATH}:"
+            mediainfo "${FILE_PATH}"
+            ;;
+
+        */pdf)
+            text=$(pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" -)
+            if [ -z "$text" ]; then
+                header "Info for ${FILE_PATH}:"
+                pdfinfo "${FILE_PATH}"
+            else
+                header "${FILE_PATH}:"
+                echo "$text"
+            fi
+            ;;
+
+        inode/directory)
+            header "Contents of ${FILE_PATH}:"
+            ls -1 "${FILE_PATH}"
+            ;;
+
+        *)
+            error "Unable to preview mime type $1. Printing generic info:"
+            file --dereference "${FILE_PATH}" | fold -s
+            echo
+            stat "${FILE_PATH}"
+            ;;
+    esac
+}
+
+handle_mime "$( file --dereference --brief --mime-type -- "${FILE_PATH}")"

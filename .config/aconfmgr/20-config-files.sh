@@ -5,18 +5,11 @@ CopyFile /etc/bash.bashrc
 CopyFile /etc/issue
 CopyFile /etc/makepkg.conf
 CopyFile /etc/pacman.conf
+CopyFile /etc/pam.d/login
 CopyFile /etc/pacman.d/mirrorlist
 CopyFile /etc/sudoers
 CopyFile /etc/xdg/user-dirs.defaults
 CopyFile /etc/zsh/zshenv
-
-# Neovim
-InstallNVimPlugin() {
-	CopyFileTo "/nvim/plugin/$1" "/usr/share/nvim/runtime/plugin/$1"
-}
-InstallNVimPlugin colorscheme.vim
-InstallNVimPlugin statusline.vim
-InstallNVimPlugin settings.vim
 
 # Zsh
 CopyFile /etc/zsh/zshrc

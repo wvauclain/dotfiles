@@ -1,0 +1,65 @@
+# Adapted from https://github.com/LukeSmithxyz/voidrice/blob/master/.config/lf/lfrc
+# and lfrc.example
+
+# Set custom options
+set shell zsh
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set color256
+set icons
+
+# Use my `scope` script for previews. We then reload to refresh the first preview.
+$lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
+$lf -remote "send $id reload"
+
+#
+# Define new commands
+#
+
+# Vim muscle memory
+cmd q quit
+
+# define a custom 'open' command
+cmd open $~/.config/lf/opener
+
+# move current file or selected files to trash folder
+cmd trash %set -f; trash-put $fx
+
+# compress current file or selected files with tar and gzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+# Rename a bunch of files at once in vim
+cmd bulkrename $echo "$fs" | vidir -
+
+#
+# Bind keys
+#
+
+# Bind keys to my new commands
+map D trash
+map B bulkrename
+
+# Use fzf to jump around
+map <c-f> $lf -remote "send $id select '$(fzf)'"
+map J $lf -remote "send $id cd '$(cut -d',' -f2 $HOME/.config/directories | fzf)'"
+
+# Lots of ways to rename
+map A rename # at the very end
+map C push A<c-u> # new rename
+map I push A<c-a> # at the very beginning

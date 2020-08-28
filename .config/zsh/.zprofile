@@ -39,3 +39,9 @@ export FZF_DEFAULT_OPTS='--exact'
 
 # Only use my rc.conf for ranger
 export RANGER_LOAD_DEFAULT_RC=false
+
+# Use my terminal colors for bat
+export BAT_THEME=ansi-dark
+
+# Use bat as the man pager
+export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"

@@ -68,9 +68,9 @@ fi
 alias fixkeyboard='setxkbmap -option caps:escape'
 if (( ${+commands[youtube-dl]} )); then
     export YOUTUBE_DL_ARGS="--embed-thumbnail --add-metadata -f best"
-    alias youtube-dl='youtube-dl $YOUTUBE_DL_ARGS -o "~/youtube/%(title)s.%(ext)s"'
-    alias youtube-dl-playlist='youtube-dl $YOUTUBE_DL_ARGS -o "~/youtube/%(playlist)s/%(playlist_index)02d - %(title)s.%(ext)s"'
-    alias youtube-dl-channel='youtube-dl $YOUTUBE_DL_ARGS -o "~/youtube/%(uploader)s/%(playlist)s/%(upload_date)s - %(title)s.%(ext)s"'
+    alias youtube-dl="youtube-dl $YOUTUBE_DL_ARGS"
+    alias youtube-dl-playlist="youtube-dl $YOUTUBE_DL_ARGS -o '~/youtube/%(playlist)s/%(playlist_index)02d - %(title)s.%(ext)s'"
+    alias youtube-dl-channel="youtube-dl $YOUTUBE_DL_ARGS -o '~/youtube/%(uploader)s/%(playlist)s/%(upload_date)s - %(title)s.%(ext)s'"
 fi
 alias rs='rg --fixed-strings'
 function rge() { nvim -c "Rg ${*:-}" }
@@ -81,9 +81,6 @@ function refinebio() { cd ~/git/alexs/refinebio && tmux new -A -s refinebio }
 
 # dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
-
-# Navi widget (press ctrl-g)
-source <(navi widget zsh)
 
 # Start ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
