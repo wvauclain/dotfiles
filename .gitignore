@@ -27,30 +27,35 @@ documents/*
 .local/bin/
 
 # Ignore config we don't care about (usually machine-generated)
-
+.MakeMKV/
+.Xauthority
+.atlauncher/
 .config/GIMP/
+.config/Nextcloud/
 .config/QtProject.conf
 .config/Slack/
+.config/Unknown\ Organization/
 .config/calibre/
 .config/chromium/
+.config/cura/
 .config/dconf/
+.config/ghb/
+.config/gtk-2.0/
 .config/keepassxc/
 .config/libreoffice/
+.config/lutris/
 .config/pulse/
 .config/retroarch/
 .config/syncthing/
 .config/vlc/
 .config/zoomus.conf
-.config/Nextcloud/
-.config/Unknown\ Organization/
-.config/lutris/
-.config/gtk-2.0/
-.mozilla/
-.pki/
-.zoom/
 .filetags
 .filetags_tagfilter/
+.minecraft/
+.mozilla/
+.pki/
 .steam/
 .steampath
+.zoom/
 .steampid
 .pulse-cookie
