@@ -1,2 +1,3 @@
 #!/bin/sh
-i3lock -c 000000
+echo "Locking now... $(date)"
+i3lock -c 000000 "$@"
