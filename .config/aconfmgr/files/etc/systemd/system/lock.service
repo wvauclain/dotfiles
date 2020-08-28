@@ -1,11 +1,12 @@
 [Unit]
-Description=Auto-lock service
+Description=Local system resume actions
 Before=suspend.target
 Before=hibernate.target
 
 [Service]
 Type=forking
-Environment="DISPLAY=:0" "XAUTHORITY=/home/will/.local/share/xauthority"
+User=will
+Environment=DISPLAY=:0
 ExecStart=/home/will/.config/bin/lock
 ExecStartPost=/usr/bin/sleep 1
 

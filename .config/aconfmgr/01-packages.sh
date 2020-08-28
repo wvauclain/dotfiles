@@ -1,8 +1,3 @@
-CopyFile /opt/pkgbuilds/batt/PKGBUILD '' will will
-CopyFile /opt/pkgbuilds/filetags/PKGBUILD '' will will
-CopyFile /opt/pkgbuilds/lf/PKGBUILD '' will will
-source ./pkgbuilds.sh
-
 # Core packages
 AddPackage base # Minimal package set to define a basic Arch Linux installation
 AddPackage efibootmgr # Linux user-space application to modify the EFI Boot Manager
@@ -142,8 +137,9 @@ AddPackage --foreign trizen # Trizen AUR Package Manager
 
 # Ranger
 AddPackage ranger # Simple, vim-like file manager
-AddPackage mediainfo # Supplies technical and tag information about a video or audio file (CLI interface)
 AddPackage ghostscript # An interpreter for the PostScript language
+AddPackage imagemagick # An image viewing/manipulation program
+AddPackage mediainfo # Supplies technical and tag information about a video or audio file (CLI interface)
 
 # Fonts
 AddPackage noto-fonts # Google Noto TTF fonts
@@ -181,5 +177,6 @@ elif [ "$HOSTNAME" = novastorm ]; then
     AddPackage libdvdcss # Portable abstraction library for DVD decryption
     AddPackage jre8-openjdk # OpenJDK Java 8 full runtime environment (needed for minecraft)
     AddPackage sound-juicer # A lean and friendly audio CD extractor for GNOME
+    AddPackage --foreign chocolate-doom # Historically-accurate Doom, Heretic, Hexen, and Strife ports.
     AddPackage --foreign makemkv # DVD and Blu-ray to MKV converter and network streamer
 fi

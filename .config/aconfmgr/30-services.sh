@@ -16,3 +16,8 @@ CreateLink /etc/systemd/user/default.target.wants/xdg-user-dirs-update.service /
 # Docker
 CreateLink /etc/systemd/system/multi-user.target.wants/docker.service /usr/lib/systemd/system/docker.service
 CopyFile /etc/pacman.conf
+
+# SSHD
+if [ "$(hostname)" = novastorm ]; then
+    CreateLink /etc/systemd/system/multi-user.target.wants/sshd.service /usr/lib/systemd/system/sshd.service
+fi
