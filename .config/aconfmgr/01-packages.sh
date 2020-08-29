@@ -83,6 +83,7 @@ AddPackage rofi # A window switcher, application launcher and dmenu replacement
 AddPackage scrot # Simple command-line screenshot utility for X
 AddPackage sxhkd # Simple X hotkey daemon
 AddPackage xdg-user-dirs # Manage user directories like ~/Desktop and ~/Music
+AddPackage xdo # Utility for performing actions on windows in X
 AddPackage --foreign polybar # A fast and easy-to-use status bar
 
 # GUI Apps

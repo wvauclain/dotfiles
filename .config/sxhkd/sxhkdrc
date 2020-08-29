@@ -88,14 +88,6 @@ shift + super + p
 super + b
 	zsh -ci 'firefox "$HOMEPAGE"'
 
-# file manager
-super + f
-	alacritty -e zsh -ci ranger
-
-# file manager
-super + f
-	alacritty -e zsh -ci ranger
-
 #
 # bspwm hotkeys
 #
@@ -115,6 +107,10 @@ super + m
 # set the window state
 super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# put the current window into the lower-left corner
+super + c
+	bspc node -t floating; xdo resize -w 400 -h 400; xdo move -x 10 -y $(( 1080 - 400 - 10 - 5))
 
 # focus the node in the given direction
 super + shift + {h,j,k,l}
