@@ -51,10 +51,11 @@ AddPackage --foreign vim-gruvbox-community # gruvbox color scheme for vim
 AddPackage tmux # A terminal multiplexer
 
 # PER
-# AddPackage bazel # Correct, reproducible, and fast builds for everyone
-# AddPackage moserial # Clean, friendly GTK+-based serial terminal for the GNOME desktop
-# AddPackage python-protobuf # Python 3 bindings for Google Protocol Buffers
-# AddPackage python-pyserial # Multiplatform Serial Port Module for Python
+AddPackage bazel # Correct, reproducible, and fast builds for everyone
+AddPackage doxygen # Documentation system for C++, C, Java, IDL and PHP
+AddPackage moserial # Clean, friendly GTK+-based serial terminal for the GNOME desktop
+AddPackage python-protobuf # Python 3 bindings for Google Protocol Buffers
+AddPackage python-pyserial # Multiplatform Serial Port Module for Python
 
 # QMK
 # AddPackage arm-none-eabi-binutils # A set of programs to assemble and manipulate binary and object files for the ARM EABI (bare-metal) target
