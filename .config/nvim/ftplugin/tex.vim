@@ -33,6 +33,7 @@ inoremap <localleader>te \emph{}<++><Esc>T{i
 " Environments
 inoremap <localleader>be \begin{enumerate}[]<Enter>\item <++><Enter>\end{enumerate}<Enter><Enter><++><Esc>4k$i
 inoremap <localleader>bi \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
+inoremap <localleader>bf \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter>\end{frame}<Enter><Enter><++><Esc>5kf{a
 inoremap <localleader>ba \begin{align*}<Enter><Enter>\end{align*}<Enter><++><Esc>2kia<Esc>==$xA
 inoremap <localleader>bd \begin{definition}<Enter><Enter>\end{definition}<Enter><++><Esc>2kia<Esc>==$xA
 inoremap <localleader>bt \begin{theorem}<Enter><Enter>\end{theorem}<Enter><++><Esc>2kia<Esc>==$xA
