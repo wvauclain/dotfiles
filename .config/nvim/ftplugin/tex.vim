@@ -17,10 +17,6 @@ command! Templates call fzf#run({
             \    'sink': '%!cd $HOME/.config/templates/latex/ && cat'
             \})
 
-if ! filereadable(expand('%'))
-    :Templates
-endif
-
 " Special symbols:
 inoremap <localleader>\| {\textbar}
 " Word count:
@@ -53,6 +49,8 @@ inoremap <localleader>mc \mathbb{C}
 inoremap <localleader>mz \mathbb{Z}
 inoremap <localleader>mn \mathbb{N}
 inoremap <localleader>m+ \mathbb{Z^+}
+inoremap <localleader>mp \partial
+inoremap <localleader>md \nabla
 " Sections
 inoremap <localleader>s1 \section{}<++><Esc>F{a
 inoremap <localleader>s2 \subsection{}<++><Esc>F{a
