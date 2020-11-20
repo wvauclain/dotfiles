@@ -47,6 +47,18 @@ cmd zip ${{
 # Rename a bunch of files at once in vim
 cmd bulkrename $echo "$fs" | vidir -
 
+# Combine pdfs
+cmd combine ${{
+    if (( $# != 1)); then
+        lf -remote 'send echo No filename provided'
+        exit 1
+    fi
+    set -f
+    echo "$fs" | while read -r line; do
+        echo "$line" 1-z
+    done | vipe | xargs sh -c 'qpdf --empty --pages $@ -- "'"$1"'"' --
+}}
+
 #
 # Bind keys
 #
