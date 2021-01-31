@@ -17,7 +17,16 @@ CreateLink /etc/systemd/user/default.target.wants/xdg-user-dirs-update.service /
 CreateLink /etc/systemd/system/multi-user.target.wants/docker.service /usr/lib/systemd/system/docker.service
 CopyFile /etc/pacman.conf
 
-# SSHD
-if [ "$(hostname)" = novastorm ]; then
+# Avahi
+CreateLink /etc/systemd/system/dbus-org.freedesktop.Avahi.service /usr/lib/systemd/system/avahi-daemon.service
+CreateLink /etc/systemd/system/multi-user.target.wants/avahi-daemon.service /usr/lib/systemd/system/avahi-daemon.service
+CreateLink /etc/systemd/system/sockets.target.wants/avahi-daemon.socket /usr/lib/systemd/system/avahi-daemon.socket
+
+if [ "$HOSTNAME" = novastorm ]; then
+    # SSHD
     CreateLink /etc/systemd/system/multi-user.target.wants/sshd.service /usr/lib/systemd/system/sshd.service
+
+    # Vmware
+    CreateLink /etc/systemd/system/multi-user.target.wants/vmware-networks.service /usr/lib/systemd/system/vmware-networks.service
+    CreateLink /etc/systemd/system/multi-user.target.wants/vmware-usbarbitrator.service /usr/lib/systemd/system/vmware-usbarbitrator.service
 fi

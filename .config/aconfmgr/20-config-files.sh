@@ -10,6 +10,7 @@ CopyFile /etc/pacman.d/mirrorlist
 CopyFile /etc/sudoers
 CopyFile /etc/xdg/user-dirs.defaults
 CopyFile /etc/zsh/zshenv
+CopyFile /etc/nsswitch.conf
 
 # Zsh
 CopyFile /etc/zsh/zshrc
