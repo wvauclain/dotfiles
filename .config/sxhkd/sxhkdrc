@@ -12,6 +12,9 @@
 
 # terminal emulator
 super + Return
+	alacritty -e "tmux"
+
+super + shift + Return
 	alacritty
 
 # program launcher
@@ -75,7 +78,7 @@ shift + XF86AudioMute
 	ponymix set-volume 0
 
 super + XF86AudioMute
-	mpc toggle
+	alacritty --class floating --dimensions 80 25 -e "pulsemixer"
 
 # print screen key
 super + p
