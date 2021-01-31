@@ -49,8 +49,7 @@ inoremap <localleader>mc \mathbb{C}
 inoremap <localleader>mz \mathbb{Z}
 inoremap <localleader>mn \mathbb{N}
 inoremap <localleader>m+ \mathbb{Z^+}
-inoremap <localleader>mp \partial
-inoremap <localleader>md \nabla
+inoremap <localleader>mp \mathcal{P}
 " Sections
 inoremap <localleader>s1 \section{}<++><Esc>F{a
 inoremap <localleader>s2 \subsection{}<++><Esc>F{a
