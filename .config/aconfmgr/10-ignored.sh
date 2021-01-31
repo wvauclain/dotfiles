@@ -35,6 +35,8 @@ IgnorePath /usr/bin/newuidmap
 IgnorePath /usr/bin/nomad
 IgnorePath /usr/bin/terraform
 IgnorePath '/etc/cni/*'
+IgnorePath '/etc/vmware/*'
+IgnorePath /etc/dconf/db/ibus
 
 # Ignore configs I don't care about
 IgnorePath /etc/fuse.conf
@@ -42,6 +44,7 @@ IgnorePath /etc/security/limits.d/10-gcr.conf
 IgnorePath /etc/mkinitcpio.conf
 IgnorePath /etc/mkinitcpio.d/linux.preset
 IgnorePath '/etc/udev/rules.d/*'
+IgnorePath /etc/systemd/homed.conf
 
 # Automatically installed services
 IgnorePath /etc/systemd/system/multi-user.target.wants/remote-fs.target

@@ -54,7 +54,6 @@ inoremap <localleader>mz \mathbb{Z}
 inoremap <localleader>mn \mathbb{N}
 inoremap <localleader>m+ \mathbb{Z^+}
 inoremap <localleader>mp \mathcal{P}
-inoremap <localleader>md \nabla
 " Sections
 inoremap <localleader>s1 \section{}<++><Esc>F{a
 inoremap <localleader>s2 \subsection{}<++><Esc>F{a

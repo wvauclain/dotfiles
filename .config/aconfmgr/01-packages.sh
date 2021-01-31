@@ -5,9 +5,11 @@ AddPackage fwupd # Simple daemon to allow session software to update firmware
 AddPackage grub # GNU GRand Unified Bootloader (2)
 AddPackage linux # The Linux kernel and modules
 AddPackage linux-firmware # Firmware files for Linux
+AddPackage linux-headers # Headers and scripts for building modules for the Linux kernel
 AddPackage man-db # A utility for reading man pages
 AddPackage man-pages # Linux man pages
 AddPackage networkmanager # Network connection manager and user applications
+AddPackage nss-mdns # glibc plugin providing host name resolution via mDNS
 AddPackage openssh # Premier connectivity tool for remote login with the SSH protocol
 AddPackage unzip # For extracting and viewing files in .zip archives
 AddPackage wget # Network utility to retrieve files from the Web
@@ -35,17 +37,23 @@ else
 fi
 
 # Development
+AddPackage clang # C language family frontend for LLVM
+AddPackage gdb # The GNU Debugger
 AddPackage git # the fast distributed version control system
 AddPackage go # Core compiler tools for the Go programming language
 AddPackage go-tools # Developer tools for the Go programming language
 AddPackage nodejs # Evented I/O for V8 javascript
+AddPackage npm # A package manager for javascript
 AddPackage rust # Systems programming language focused on safety, speed and concurrency
+AddPackage valgrind # Tool to help find memory-management problems in programs
+AddPackage yarn # Fast, reliable, and secure dependency management
 AddPackage --foreign pandoc-bin # Pandoc - executable only, without 750MB Haskell depends/makedepends
 AddPackage --foreign shellcheck-bin # Shell script analysis tool (binary release)
 
 # Vim
 AddPackage neovim # Fork of Vim aiming to improve user experience, plugins, and GUIs
 AddPackage python-pynvim # Python client for Neovim
+AddPackage python-black # Uncompromising Python code formatter
 AddPackage --foreign neovim-symlinks # Runs neovim if vi or vim is called
 AddPackage --foreign vim-gruvbox-community # gruvbox color scheme for vim
 AddPackage tmux # A terminal multiplexer
@@ -56,6 +64,8 @@ AddPackage doxygen # Documentation system for C++, C, Java, IDL and PHP
 AddPackage moserial # Clean, friendly GTK+-based serial terminal for the GNOME desktop
 AddPackage python-protobuf # Python 3 bindings for Google Protocol Buffers
 AddPackage python-pyserial # Multiplatform Serial Port Module for Python
+AddPackage arm-none-eabi-gdb # The GNU Debugger for the ARM EABI (bare-metal) target
+AddPackage --foreign jlink-software-and-documentation # Segger JLink software & documentation pack for Linux
 
 # QMK
 # AddPackage arm-none-eabi-binutils # A set of programs to assemble and manipulate binary and object files for the ARM EABI (bare-metal) target
@@ -104,9 +114,10 @@ AddPackage zathura-pdf-mupdf # PDF support for Zathura (MuPDF backend) (Supports
 AddPackage --foreign slack-desktop # Slack Desktop (Beta) for Linux
 AddPackage --foreign zoom # Zoom, #1 Video Conferencing and Web Conferencing Service
 
-
 # LaTeX
+AddPackage biber # A Unicode-capable BibTeX replacement for biblatex users
 AddPackage texlive-core # TeX Live core distribution
+AddPackage texlive-fontsextra # TeX Live - all sorts of extra fonts
 AddPackage texlive-latexextra # TeX Live - Large collection of add-on packages for LaTeX
 AddPackage texlive-science # TeX Live - Typesetting for mathematics, natural and computer sciences
 
@@ -122,12 +133,15 @@ AddPackage docker # Pack, ship and run any application as a lightweight containe
 AddPackage fd # Simple, fast and user-friendly alternative to find
 AddPackage fzf # Command-line fuzzy finder
 AddPackage jq # Command-line JSON processor
+AddPackage moreutils # A growing collection of the unix tools that nobody thought to write thirty years ago
 AddPackage ncdu # Disk usage analyzer with an ncurses interface
+AddPackage nmap # Utility for network discovery and security auditing
 AddPackage pacman-contrib # Contributed scripts and tools for pacman systems
 AddPackage plan9port # Ports of applications from Plan 9
 AddPackage python-eyed3 # A Python module and program for processing information about mp3 files
 AddPackage qpdf # QPDF
 AddPackage ripgrep # A search tool that combines the usability of ag with the raw speed of grep
+AddPackage rsync # A fast and versatile file copying tool for remote and local files
 AddPackage shfmt # Format shell programs
 AddPackage trash-cli # Command line trashcan (recycle bin) interface
 AddPackage ueberzug # Command line util which allows to display images in combination with X11
@@ -135,6 +149,8 @@ AddPackage xclip # Command line interface to the X11 clipboard
 AddPackage youtube-dl # A small command-line program to download videos from YouTube.com and a few more sites
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign bottom # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features.
+AddPackage --foreign lf # A terminal file manager inspred by ranger written in Go
+AddPackage --foreign ripgrep-all # rga
 AddPackage --foreign trizen # Trizen AUR Package Manager
 
 # Ranger
@@ -149,9 +165,6 @@ AddPackage noto-fonts-cjk # Google Noto CJK fonts
 AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage ttf-dejavu # Font family based on the Bitstream Vera Fonts with a wider range of characters
 AddPackage --foreign nerd-fonts-iosevka # Patched Iosevka font from the nerd-fonts library
-
-# Filetags
-AddPKGBUILD filetags
 
 # Needed to connect to the Penn wifi
 # AddPackage python-dbus # Python bindings for DBUS
@@ -181,4 +194,12 @@ elif [ "$HOSTNAME" = novastorm ]; then
     AddPackage sound-juicer # A lean and friendly audio CD extractor for GNOME
     AddPackage --foreign chocolate-doom # Historically-accurate Doom, Heretic, Hexen, and Strife ports.
     AddPackage --foreign makemkv # DVD and Blu-ray to MKV converter and network streamer
+    AddPackage --foreign vmware-workstation # The industry standard for running multiple operating systems as virtual machines on a single Linux PC.
+
+
+    AddPackage inkscape # Professional vector graphics editor
+    AddPackage virtualbox # Powerful x86 virtualization for enterprise as well as home use
+    AddPackage virtualbox-guest-iso # The official VirtualBox Guest Additions ISO image
+    AddPackage virtualbox-host-modules-arch # Virtualbox host kernel modules for Arch Kernel
+    AddPackage --foreign v4l2ucp # A universal control panel for Video for Linux Two (V4L2) devices
 fi

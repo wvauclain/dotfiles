@@ -1,2 +1,0 @@
-#!/bin/sh
-env QT_SCALE_FACTOR=0.5 /usr/bin/zoom
