@@ -1,7 +1,11 @@
 " Set how I like my indents
-set expandtab
-set shiftwidth=4
-set softtabstop=4
+setlocal expandtab
+setlocal shiftwidth=4
+setlocal softtabstop=4
+let b:sleuth_automatic = 0
+
+" Turn on spellcheck
+setlocal spell! spelllang=en_us
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 autocmd VimLeave *.tex !texclear %
@@ -49,14 +53,13 @@ inoremap <localleader>mc \mathbb{C}
 inoremap <localleader>mz \mathbb{Z}
 inoremap <localleader>mn \mathbb{N}
 inoremap <localleader>m+ \mathbb{Z^+}
-inoremap <localleader>mp \partial
+inoremap <localleader>mp \mathcal{P}
 inoremap <localleader>md \nabla
 " Sections
 inoremap <localleader>s1 \section{}<++><Esc>F{a
 inoremap <localleader>s2 \subsection{}<++><Esc>F{a
 " Other common tex macros
 inoremap <localleader>li <Enter>\item<Space>
-
 
 
 " autocmd FileType tex inoremap <localleader>ref \ref{}<Space><++><Esc>T{i
