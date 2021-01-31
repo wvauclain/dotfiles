@@ -116,6 +116,10 @@ super + c
 super + shift + {h,j,k,l}
 	bspc node -f {west,south,north,east}
 
+# swap the node in the given direction
+super + shift + {y,u,i,o}
+	bspc node -s {west,south,north,east}
+
 # focus the next/previous desktop in the current monitor
 super + {Left,Right}
 	bspc desktop -f {prev,next}.local
