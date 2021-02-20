@@ -8,22 +8,22 @@ wait_for_input() {
 handle_extension() {
     case "$f" in
         *.tar.bz | *.tar.bz2 | *.tbz | *.tbz2)
-            tar xjvf $f
+            tar xjvf "$f"
             wait_for_input
             ;;
 
         *.tar.gz | *.tgz)
-            tar xzvf $f
+            tar xzvf "$f"
             wait_for_input
             ;;
 
         *.tar.xz | *.txz)
-            tar xJvf $f
+            tar xJvf "$f"
             wait_for_input
             ;;
 
         *.zip)
-            unzip $f
+            unzip "$f"
             wait_for_input
             ;;
 
@@ -32,9 +32,9 @@ handle_extension() {
 }
 
 handle_filename() {
-    case "$(file --mime-type $f -b)" in
+    case "$(file --mime-type -b -- "$f")" in
         application/pdf)
-            setsid -f zathura $f >/dev/null 2>&1
+            setsid -f zathura "$f" >/dev/null 2>&1
             ;;
 
         text/*)
@@ -42,28 +42,28 @@ handle_filename() {
             ;;
 
         image/x-xcf | image/svg+xml)
-            setsid -f gimp $f >/dev/null 2>&1
+            setsid -f gimp "$f" >/dev/null 2>&1
             ;;
 
         image/gif)
-            setsid -f sxiv -a $f >/dev/null 2>&1
+            setsid -f sxiv -a "$f" >/dev/null 2>&1
             ;;
 
         image/*)
-            setsid -f sxiv $f >/dev/null 2>&1
+            setsid -f sxiv "$f" >/dev/null 2>&1
             # rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\)\(_large\)*$" | sxiv -aio 2>/dev/null | lf-select
             ;;
 
         audio/*)
-            mpv --audio-display=no $f
+            mpv --audio-display=no "$f"
             ;;
 
         video/*)
-            setsid -f mpv $f -quiet >/dev/null 2>&1
+            setsid -f mpv "$f" -quiet >/dev/null 2>&1
             ;;
 
         *)
-            for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done
+            for f in $fx; do setsid -f $OPENER "$f" >/dev/null 2>&1; done
             ;;
     esac
 }

@@ -3,11 +3,11 @@
 
 # Set custom options
 set shell zsh
-set shellopts '-eu'
+set shellopts '-eu:--shwordsplit' # Fix issues with word splitting in zsh
 set ifs "\n"
 set scrolloff 10
-set color256
 set icons
+set period 1
 
 # Use my `scope` script for previews. We then reload to refresh the first preview.
 $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
@@ -24,7 +24,9 @@ cmd q quit
 cmd open $~/.config/lf/opener
 
 # move current file or selected files to trash folder
-cmd trash %set -f; trash-put $fx
+cmd trash %trash $fx
+
+cmd mkdir %mkdir $@
 
 # compress current file or selected files with tar and gzip
 cmd tar ${{
@@ -49,14 +51,35 @@ cmd bulkrename $echo "$fs" | vidir -
 
 # Combine pdfs
 cmd combine ${{
-    if (( $# != 1)); then
-        lf -remote 'send echo No filename provided'
-        exit 1
+    if (( $# >= 1)); then
+        filename="$1"
+    else
+        local tmp="$(mktemp)"
+        whiptail --inputbox 'Filename:' 8 25 2> "$tmp"
+        filename="$(cat $tmp)"
+        rm "$tmp"
     fi
+
     set -f
     echo "$fs" | while read -r line; do
-        echo "$line" 1-z
-    done | vipe | xargs sh -c 'qpdf --empty --pages $@ -- "'"$1"'"' --
+        # Usually we are combining files downloaded from my scanner, which
+        # names them document.pdf. Firefox then renames duplicates
+        # document(n).pdf. This orchestration puts the files in the proper
+        # order so that I don't have to re-order them when I just want to
+        # combine a bunch of pages I just scanned.
+        if [[ "$line" =~ '.*document\(([0-9]+)\).pdf\s*$' ]]; then
+            num=$match[1]
+        elif [[ "$line" =~ '.*document.pdf\s*$' ]]; then
+            num=0
+        else
+            num=1000 # We want these at the end
+        fi
+        echo "$num	'$line'	1-z"
+    done \
+    | sort -n \
+    | awk '{ $1 = ""; print $0 }' \
+    | vipe \
+    | xargs -t sh -c 'qpdf --empty --pages "$@" -- "'"$filename"'"' --
 }}
 
 #
@@ -73,5 +96,32 @@ map J $lf -remote "send $id cd '$(cut -d',' -f2 $HOME/.config/directories | fzf)
 
 # Lots of ways to rename
 map A rename # at the very end
-map C push A<c-u> # new rename
+map a push A<a-b><c-b> # before the extension
+map C push A<a-b><c-b><c-u> # new rename
 map I push A<c-a> # at the very beginning
+
+# ZLE
+cmd zle-cd %printf 'cd %q && zle reset-prompt\n' "$PWD" >&$ZLE_FIFO
+
+cmd zle-tmux-cwd %printf 'tmux-cwd %q\n' "$PWD" >&$ZLE_FIFO
+
+cmd zle-insert-relative %{{
+    for f in $fx; do
+        printf 'LBUFFER+="${LBUFFER:+ }${(q)$(realpath %q --relative-to=$PWD)}"\n' "$f" >&$ZLE_FIFO
+    done
+}}
+
+cmd zle-insert-absolute %{{
+    for f in $fx; do
+        printf 'LBUFFER+="${LBUFFER:+ }%q"\n' "$f" >&$ZLE_FIFO
+    done
+}}
+
+cmd zle-init :{{
+    map . zle-cd
+    map t zle-tmux-cwd
+    map a zle-insert-relative
+    map A zle-insert-absolute
+}}
+
+&[[ -n "$ZLE_FIFO" ]] && lf -remote "send $id zle-init"
