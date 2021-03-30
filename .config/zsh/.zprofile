@@ -7,7 +7,6 @@ export EDITOR="nvim"
 export READER="zathura"
 export PAGER="less"
 
-
 export DOTFILES="$HOME/.local/share/dotfiles"
 
 # Clean up home directory
@@ -41,7 +40,7 @@ export FZF_DEFAULT_OPTS='--exact'
 export RANGER_LOAD_DEFAULT_RC=false
 
 # Use my terminal colors for bat
-export BAT_THEME=ansi-dark
+export BAT_THEME=gruvbox-dark
 
 # Use bat as the man pager
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"

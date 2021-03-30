@@ -107,6 +107,7 @@ function rge() { nvim -c "Rg ${*:-}" }
 function grge() { nvim -c "GRg ${*:-}" }
 function rse() { nvim -c "Rs ${*:-}" }
 function grse() { nvim -c "GRs ${*:-}" }
+alias synccals='vdirsyncer sync'
 
 function tmux-cwd() {
     local dir="$1"
@@ -128,4 +129,17 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
 fi
 
 # startx if we are running on the 1st tty
-if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then exec startx "$XINITRC"; fi
+if [[ "$(tty)" = "/dev/tty1"  && ! $DISPLAY ]]; then
+    wm="$(echo -n "bspwm\ndwm" | fzf --reverse --height 5 --no-sort --prompt="wm: ")"
+    case "$wm" in
+        bspwm)
+            exec startx "$XINITRC" bspwm 2>&1
+            ;;
+        dwm)
+            exec startx "$XINITRC" dwm 2>&1
+            ;;
+        *)
+            printf "\033[31merror:\033[0m invalid wm selection: '$wm'\n"
+    esac
+    # exec startx "$XINITRC" bspwm 2>&1
+fi
