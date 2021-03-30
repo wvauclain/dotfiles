@@ -29,6 +29,8 @@ Plug 'cespare/vim-toml'
 Plug 'weakish/rcshell.vim'
 " Has some issues loading that I need to sort out
 " Plug 'dcjones/vim-mk'
+" Plug 'othree/html5.vim'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 filetype plugin on " Enable my individual filetype plugins
@@ -45,6 +47,10 @@ set splitbelow splitright " Splits open at the bottom and right
 set updatetime=100 " Time until swap file is written to disk
 set wildmode=longest:full,full " Make ex-mode tab completion work more predictably
 
+" let g:LanguageClient_serverCommands = {
+" \ 'rust': ['rust-analyzer'],
+" \ }
+
 " Basic key bindings
 map <leader>o :setlocal spell! spelllang=en_us<CR>
 map <localleader>c :w! \| !compiler <c-r>%<CR>
@@ -56,6 +62,7 @@ nnoremap c "_c
 
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufRead,BufNewFile *.h set filetype=c
 
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e

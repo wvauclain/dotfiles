@@ -30,6 +30,8 @@ inoremap <localleader>tb \textbf{}<++><Esc>T{i
 inoremap <localleader>ti \textit{}<++><Esc>T{i
 inoremap <localleader>tt \texttt{}<++><Esc>T{i
 inoremap <localleader>te \emph{}<++><Esc>T{i
+inoremap <localleader>ts \textsc{}<++><Esc>T{i
+inoremap <localleader>tu \underline{}<++><Esc>T{i
 " Environments
 inoremap <localleader>be \begin{enumerate}[]<Enter>\item <++><Enter>\end{enumerate}<Enter><Enter><++><Esc>4k$i
 inoremap <localleader>bi \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>

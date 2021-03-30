@@ -2,11 +2,16 @@ let g:statusline_mode_map = {
       \ 'c'  : 'COMMAND',
       \ 'i'  : 'INSERT',
       \ 'n'  : 'NORMAL',
+      \ 'r'  : 'HIT-ENTER',
       \ 'R'  : 'REPLACE',
       \ 't'  : 'TERMINAL',
       \ 'v'  : 'VISUAL',
       \ 'V'  : 'V-LINE',
       \ '' : 'V-BLOCK',
+      \ 's'  : 'SELECT',
+      \ 'S'  : 'S-LINE',
+      \ '' : 'S-BLOCK',
+      \ '!'  : 'SHELL',
       \ }
 
 function! statusline#current_mode()
