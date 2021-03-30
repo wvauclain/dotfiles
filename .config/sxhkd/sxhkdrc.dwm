@@ -1,0 +1,88 @@
+#
+# wm independent hotkeys
+#
+
+# Paste fix wizardry
+~button2
+	echo -n | xsel -n -i
+~control + c
+	echo -n | xsel -n -i
+~control + x
+	echo -n | xsel -n -i
+
+# terminal emulator
+super + Return
+	alacritty -e "tmux"
+
+super + shift + Return
+	alacritty
+
+# program launcher
+super + space
+	zsh -ci "dmenu_run"
+
+# exit program
+super + Escape
+	~/.config/bin/logout-menu
+
+# lock screen
+super + l
+	~/.config/bin/lock
+
+# keyboard switching program
+super + grave
+	~/.config/bin/switch-keymap
+
+# emoji selector
+super + e
+	~/.config/bin/emoji
+
+# make sxhkd reload its configuration files:
+super + r
+	pkill -USR1 -x sxhkd
+
+# brightness keys
+XF86MonBrightnessUp
+	xbacklight -inc 10
+
+shift + XF86MonBrightnessUp
+	xbacklight -inc 5
+
+XF86MonBrightnessDown
+	xbacklight -dec 10
+
+shift + XF86MonBrightnessDown
+	xbacklight -dec 5
+
+# volume keys
+XF86AudioRaiseVolume
+	ponymix increase 10
+
+shift + XF86AudioRaiseVolume
+	ponymix increase 5
+
+XF86AudioLowerVolume
+	ponymix decrease 10
+
+shift + XF86AudioLowerVolume
+	ponymix decrease 5
+
+XF86AudioMute
+	ponymix toggle
+
+shift + XF86AudioMute
+	ponymix set-volume 0
+
+super + XF86AudioMute
+	alacritty --class floating --dimensions 80 25 -e "pulsemixer"
+
+# print screen key
+super + p
+	scrot ~/documents/pictures/screenshots/%Y-%m-%d-%T-screenshot.png
+
+shift + super + p
+	scrot -u ~/documents/pictures/screenshots/%Y-%m-%d-%T-screenshot.png
+
+# bookmarks page
+super + b
+	zsh -ci 'firefox "$HOMEPAGE"'

@@ -1,0 +1,62 @@
+#! /bin/sh
+
+#
+# Per-machine Configuration
+# (Do this first to avoid the ugly grey screen)
+#
+
+case $(hostname) in
+
+    howlback)
+        # Set wallpaper
+        feh -Z --scale-down --no-fehbg --bg-fill ~/documents/wallpapers/mandalorian.jpg &
+
+        # # Launch polybar
+        # sh .config/polybar/launch.sh goldenarches &
+
+        # Launch batt
+        batt &
+
+        # Launch picom
+        picom -b --backend glx
+
+        ;;
+
+
+    novastorm)
+        # Set wallpaper
+        feh -Z --scale-down --no-fehbg --bg-center ~/documents/wallpapers/stormtroopers.2560x1080.jpg &
+
+        # # Launch polybar
+        # sh .config/polybar/launch.sh novastorm &
+
+        # Launch picom
+        picom -b --backend xrender
+
+        ;;
+esac
+
+#
+# Launch programs
+#
+
+# Launch SXHKD
+sxhkd -c ~/.config/sxhkd/sxhkdrc.dwm &
+
+# Launch dwmstatus
+dwmstatus &
+
+# Launch dunst
+dunst &
+
+# Launch nextcloud
+nextcloud &
+
+# Launch syncthing
+syncthing &
+
+# Mute sound on boot
+ponymix mute
+
+# Disable screen saver blanking
+xset s off -dpms
