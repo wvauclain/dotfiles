@@ -19,7 +19,7 @@ super + shift + Return
 
 # program launcher
 super + space
-	zsh -ci "rofi -show run"
+	zsh -ci "dmenu_run"
 
 # program switcher
 super + Tab
@@ -28,10 +28,6 @@ super + Tab
 # exit program
 super + Escape
 	~/.config/bin/logout-menu
-
-# lock screen
-super + l
-	~/.config/bin/lock
 
 # keyboard switching program
 super + grave
