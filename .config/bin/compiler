@@ -13,7 +13,7 @@ base="${file%.*}"
 cd "$dir" || exit
 
 textype() { \
-	command="pdflatex"
+	command="latexmk -pdf"
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
 	grep -i addbibresource "$file" >/dev/null &&
@@ -27,7 +27,8 @@ case "$file" in
 	*\.mom) refer -PS -e "$file" | groff -mom -kept -T pdf > "$base".pdf ;;
 	*\.[0-9]) refer -PS -e "$file" | groff -mandoc -T pdf > "$base".pdf ;;
 	*\.rmd) echo "require(rmarkdown); render('$file')" | R -q --vanilla ;;
-	*\.tex) textype "$file" ;;
+	# *\.tex) textype "$file" ;;
+	*\.tex) latexmk -pdf "$file" ;;
 	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
 	*config.h) sudo make install ;;
         *\.c) cc "$file" -o "$base" && "$base" ;;
