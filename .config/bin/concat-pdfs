@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# TODO: make this accept an arbitrary number of PDFs
+
+usage() {
+    echo 'take-pages <INFILE1.pdf> <INFILE2.pdf> <OUTFILE.pdf>'
+}
+
+if [ "$1" = '-h' ] || [ "$1" = "--help" ]; then
+    usage
+    exit 0
+elif [ "$#" != 3 ]; then
+    printf "\033[31merror:\033[0m you need to provide exactly 3 arguments\n" >&2
+    usage >&2
+    exit 1
+fi
+
+qpdf --empty --pages "$1" 1-z "$2" 1-z -- "$3"
