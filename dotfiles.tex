@@ -1,0 +1,45 @@
+%% FIXME: remove nobib
+\documentclass[a4paper,nobib,titlepage]{tufte-book}
+\input{preamble}
+\title{dotfiles}
+\date{%
+  January 30, 2020
+  \thanks{Last updated \today}
+}
+\setcounter{tocdepth}{2}
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\mainmatter
+
+\newpage
+
+\chapter{Neovim}
+\include*{neovim}
+
+
+\backmatter
+
+%% \newpage
+%% %% \chapter*{Chunks}
+%% \begin{multicols}{2}[\chapter*{Chunks}]
+%%   \nowebchunks
+%% \end{multicols}
+
+%% \chapter*{Index}
+%% \begin{multicols}{2}[\chapter*{Index}]
+%%   \nowebindex
+%% \end{multicols}
+
+\phantomsection
+\printglossaries
+
+%% FIXME
+%% \nocite{*}
+%% \bibliographystyle{plainnat}
+%% \bibliography{dotfiles.bib}
+
+\newpage
+\listoftodos[To-Do]
+\end{document}
