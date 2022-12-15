@@ -1,0 +1,3 @@
+#!/bin/sh
+# Causes running instances of dd to output their current progress
+sudo pkill -USR1 -n -x dd

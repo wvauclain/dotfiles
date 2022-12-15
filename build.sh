@@ -3,21 +3,28 @@
 set -e
 
 if [ -z "$1" ]; then
-	echo "error: need to supply a project to build" >&2
-	exit 1
+    echo "error: need to supply a project to build" >&2
+    exit 1
 fi
 
-rm -r outputs/"$1"
-mkdir outputs/"$1"
-notangle -Routputs "$1" | while read -r file; do
-	mkdir -p outputs/"$1"/"$(dirname "$file")"
-	notangle -R"$file" "$1" > outputs/"$1"/"$file"
-done
+MODULE_DIR="modules/$1"
 
-notangle -Rpostinstall "$1" > outputs/"$1"/postinstall
+if ! [ -d "$MODULE_DIR" ]; then
+    echo "error: module $1 does not exist" >&2
+    exit 1
+fi
 
-pushd outputs/"$1"
-sh postinstall
-popd
+cd "$MODULE_DIR" || exit 1
 
-stow -doutputs -t"$HOME" "$1"
+stow -t"$HOME" stow
+
+
+if [ -e packages.brew ]; then
+    echo "Installing packages from homebrew..."
+    arch -arm64 brew bundle --no-lock --file packages.brew
+fi
+
+if [ -x postinstall ]; then
+    echo "Executing postinstall..."
+    ./postinstall
+fi

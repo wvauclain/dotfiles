@@ -1,0 +1,3 @@
+brew "nvim"
+brew "fzf"
+brew "shellcheck"

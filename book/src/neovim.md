@@ -1,0 +1,476 @@
+# Neovim
+
+## Configuration
+
+The first thing that we need to do is declare which packages this file depends
+on:
+
+```ruby
+brew "nvim"
+brew "fzf"
+```
+
+and which variables we want to export into the ZSH environment:
+
+```zsh
+export EDITOR=nvim
+alias view='nvim -R'
+alias vimdiff='nvim -d'
+alias vim='nvim'
+```
+
+and finally any post-install hooks:
+
+```sh
+#!/bin/sh
+
+if ! python3 -c "import neovim" >/dev/null 2>&1; then
+    pip3 install neovim
+fi
+
+ln -s "$(canonicalize ../../neovim/spell)" .config/nvim/spell
+```
+
+## Remote Package Management
+
+The first step of installing remote vim packages is installing a plugin
+manager. For historical reasons, I use `vim-plug`. I haven\'t looked at
+the offerings recently enough to know if this is still good advice, but
+it works for me.
+
+```vim file="stow/.config/nvim/init.vim"
+if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+    echo "Downloading junegunn/vim-plug to manage plugins..."
+    silent !mkdir -p ~/.config/nvim/autoload/
+    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+endif
+```
+
+Next, to install packages, you insert a bunch of calls to the
+`Plug` function in between the following two special functions:
+
+```vim
+call plug#begin('~/.config/nvim/plugged')
+" <<Package List>>
+call plug#end()
+```
+
+## Tmux
+
+`vim-tmux-navigator` is a plugin that allows the user to easily navigate
+between vim splits and tmux panes using the same keybindings, at the
+same time!
+
+```vim file="stow/.config/nvim/init.vim"
+Plug 'christoomey/vim-tmux-navigator'
+```
+
+I don\'t really like the default keybindings, so I set my own:
+
+```vim file="stow/.config/nvim/plugin/tmux.vim
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-/> :TmuxNavigatePrevious<cr>
+```
+
+Another thing that annoyed me about using neovim in tmux is that I
+wanted to see [which]{.underline} file I was working on, but the only
+thing displayed in the tmux status bar was `1 nvim*`. To fix this, we
+manually send a shell call to tmux to change the name of the terminal:
+
+```vim file="stow/.config/nvim/plugin/tmux-title.vim
+if !has('python3')
+  echo "The tmux-title.vim plugin requires Python 3 support"
+endif
+
+python3 << EndPython3
+
+from os.path import splitext
+
+def ShortenFilename(filename: str, width: int = 15) -> str:
+  root, ext = splitext(filename)
+
+  width = width - len(ext)
+  # I'm just going to assume that len(ext) < width
+  root = (root[:width-1] + '>') if len(root) > width else root
+
+  return root + ext
+
+EndPython3
+
+function RenameTmuxWindow()
+  let filename = expand("%:t")
+  if filename != ""
+    call system("tmux rename-window 'nvim " . py3eval("ShortenFilename('" . filename . "')") . "'")
+  endif
+endfunction
+
+if exists("$TMUX")
+  autocmd BufEnter * call RenameTmuxWindow()
+  autocmd VimLeave * call system("tmux setw automatic-rename")
+endif
+```
+
+## Gruvbox
+
+I really like the gruvbox colorscheme.
+
+```vim file="stow/.config/nvim/init.vim"
+Plug 'gruvbox-community/gruvbox' " The best colorscheme ever
+```
+
+```vim file="stow/.config/nvim/init.vim"
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_light = 'hard'
+let g:gruvbox_italic=1
+let g:gruvbox_invert_selection=0
+
+colorscheme gruvbox
+set background=dark
+```
+
+## Rust
+
+For some reason, neovim doesn\'t come with syntax highlighting for Rust
+and TOML by default, so I install a couple of plugins to fix this:
+
+```vim file="stow/.config/nvim/init.vim"
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+```
+
+## Fzf
+
+`fzf` is a fuzzy-finder for the terminal. I use it in a couple of
+different places in neovim, and it's kind of handy to have.
+
+```vim file="stow/.config/nvim/init.vim"
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+```
+
+I also have a couple extra utilities that I\'ve written using `fzf` that
+are useful when you spend your whole day inside vim[^1]:
+
+[^1]: I used to do this. Now I also use VS Code and other editors, but
+    these are still useful to have around
+
+```vim
+function! RipgrepFzfIn(dir, query, fullscreen, exact)
+  let cwd = getcwd()
+  execute "cd " . a:dir
+
+  if a:exact
+    let fixed_strings="--fixed-strings"
+  else
+    let fixed_strings=""
+  endif
+
+  let command_fmt = 'rg ' . fixed_strings . ' --hidden --column --line-number --no-heading --color=always --smart-case -- %s || true'
+
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+
+  execute "cd " . cwd
+endfunction
+
+command! -nargs=* -bang Rg call RipgrepFzfIn(getcwd(), <q-args>, <bang>1, 0)
+command! -nargs=* -bang GRg call RipgrepFzfIn(GitRepo(), <q-args>, <bang>1, 0)
+
+command! -nargs=* -bang Rs call RipgrepFzfIn(getcwd(), <q-args>, <bang>1, 1)
+command! -nargs=* -bang GRs call RipgrepFzfIn(GitRepo(), <q-args>, <bang>1, 1)
+
+function! ControlP()
+  if InGitRepo()
+    exec "GitFiles"
+  else
+    exec "Files"
+  endif
+endfunction
+noremap <C-p> :call ControlP()<CR>
+```
+
+## Misc Utilities
+
+I like viewing git diffs in the gutter; `vim-signify` is a really simple
+plugin that makes this happen.
+
+```vim file="stow/.config/nvim/init.vim"
+Plug 'mhinz/vim-signify'
+```
+
+`tpope` has made lots of useful utilities that make vim behave a little
+bit more intuitively.
+
+```vim file="stow/.config/nvim/init.vim"
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+```
+
+`vim-polyglot` adds syntax files for a lot of different languages. I
+don\'t remember why I originally installed it, but it\'s useful when I
+go to open a filetype that I\'ve never touched before for the first
+time.
+
+```vim file="stow/.config/nvim/init.vim"
+Plug 'sheerun/vim-polyglot'
+```
+
+## Status Line
+
+A year or two I went down the rabbit hole that is custom statuslines for
+vim when I was trying to decrease the number of plugins that I had
+installed. Here is the result, which I\'m pretty happy with:
+
+```vim
+let g:statusline_mode_map = {
+      \ 'c'  : 'COMMAND',
+      \ 'i'  : 'INSERT',
+      \ 'n'  : 'NORMAL',
+      \ 'r'  : 'HIT-ENTER',
+      \ 'R'  : 'REPLACE',
+      \ 't'  : 'TERMINAL',
+      \ 'v'  : 'VISUAL',
+      \ 'V'  : 'V-LINE',
+      \ '' : 'V-BLOCK',
+      \ 's'  : 'SELECT',
+      \ 'S'  : 'S-LINE',
+      \ '' : 'S-BLOCK',
+      \ '!'  : 'SHELL',
+      \ }
+
+function! statusline#current_mode()
+  return g:statusline_mode_map[mode(1)[0]] . " "
+endfunction
+
+" Define the user highlights
+
+hi __root__ cterm=bold,italic ctermfg=239 ctermbg=167 gui=bold,italic guifg=#504945 guibg=#fb4934
+hi __readonly__ cterm=bold ctermfg=208 ctermbg=237 gui=bold guifg=#fe8019 guibg=#504945
+hi __mode__ cterm=bold ctermfg=109 ctermbg=239 gui=bold guifg=#83a598 guibg=#504945
+hi __file__ cterm=italic ctermfg=175 ctermbg=237 gui=italic guifg=#d3869b guibg=#3c3836
+hi __modified__ cterm=bold ctermfg=142 ctermbg=237 gui=bold guifg=#b8bb26 guibg=#3c3836
+hi __fileinfo__ cterm=italic ctermfg=246 ctermbg=237 gui=italic guifg=#a89984 guibg=#3c3836
+hi __filetype__ ctermfg=214 ctermbg=239 guifg=#fabd2f guibg=#504945
+hi __currentline__ ctermfg=108 ctermbg=239 guifg=#8ec07c guibg=#504945
+hi __columnnumber__ ctermfg=108 ctermbg=239 guifg=#8ec07c guibg=#504945
+
+" Reset the statusline
+set statusline=
+" Root indicator
+if $USER == "root"
+  set statusline+=%#__root__#
+  set statusline+=\ ﮊROOTﮊ\ " Keep the trailing space
+endif
+
+" Current mode indicator
+set statusline+=%#__mode__#
+set statusline+=\ %{statusline#current_mode()}
+set statusline+=%{&spell?'[SPELL]\ ':''}
+
+" Read-only indicator
+set statusline+=%#__readonly__#
+set statusline+=%{&readonly?'\ []\ ':''}
+
+" File path, as typed or relative to current directory
+set statusline+=%#__file__#
+set statusline+=\ %F
+
+" Modified indicator
+set statusline+=%#__modified__#
+set statusline+=%{&modified?'\ *':''}
+
+" Truncate line here
+set statusline+=%<
+
+" Separation point between left and right aligned items.
+set statusline+=%=
+
+set statusline+=%#__fileinfo__#
+set statusline+=\ %{&fileencoding}
+set statusline+=\ %{&fileformat}\ " Keep the trailing space
+
+set statusline+=%#__filetype__#
+set statusline+=\ %{&filetype!=#''?&filetype:'none'}
+
+" Location of cursor line
+set statusline+=%#__currentline__#
+set statusline+=\ [%l/%L]
+
+" Column number
+set statusline+=%#__columnnumber__#
+set statusline+=\ col:%3c\ " Keep the trailing space
+```
+
+## Guides
+
+Luke Smith has a pretty elegant solution for inserting templates in
+plain vimscript and then jumping around using \`\`guides\'\', which I
+have stolen and incorporated into my vimrc:
+
+```vim
+" From LukeSmithxyz
+inoremap <localleader><localleader> <Esc>/<++><Enter>"_c4l
+vnoremap <localleader><localleader> <Esc>/<++><Enter>"_c4l
+map <localleader><localleader> <Esc>/<++><Enter>"_c4l
+```
+
+## LaTeX
+
+```vim
+" Set how I like my indents
+setlocal expandtab
+setlocal shiftwidth=4
+setlocal softtabstop=4
+let b:sleuth_automatic = 0
+
+" Turn on spellcheck
+setlocal spell! spelllang=en_us
+
+" Runs a script that cleans out tex build files whenever I close out of a .tex file.
+autocmd VimLeave *.tex !texclear %
+
+" Pick from snippets
+command! Templates call fzf#run({
+            \    'source': 'ls $HOME/Nextcloud/templates/latex',
+            \    'options': [
+            \        '--reverse',
+            \        '--prompt', 'Template: ',
+            \        '--preview', 'bat --style=numbers --color=always --line-range :500 $HOME/Nextcloud/templates/latex/{}'
+            \    ],
+            \    'sink': '%!cd $HOME/Nextcloud/templates/latex/ && cat'
+            \})
+
+" Special symbols:
+inoremap <localleader>\| {\textbar}
+" Word count:
+map <leader>w :w !detex \| wc -w<CR>
+" Text formatting
+inoremap <localleader>tb \textbf{}<++><Esc>T{i
+inoremap <localleader>ti \textit{}<++><Esc>T{i
+inoremap <localleader>tt \texttt{}<++><Esc>T{i
+inoremap <localleader>te \emph{}<++><Esc>T{i
+inoremap <localleader>ts \textsc{}<++><Esc>T{i
+inoremap <localleader>tu \underline{}<++><Esc>T{i
+" Environments
+inoremap <localleader>be \begin{enumerate}[]<Enter>\item <++><Enter>\end{enumerate}<Enter><Enter><++><Esc>4k$i
+inoremap <localleader>bi \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
+inoremap <localleader>bf \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter>\end{frame}<Enter><Enter><++><Esc>5kf{a
+inoremap <localleader>ba \begin{align*}<Enter><Enter>\end{align*}<Enter><++><Esc>2kia<Esc>==$xA
+inoremap <localleader>bd \begin{definition}<Enter><Enter>\end{definition}<Enter><++><Esc>2kia<Esc>==$xA
+inoremap <localleader>bt \begin{theorem}<Enter><Enter>\end{theorem}<Enter><++><Esc>2kia<Esc>==$xA
+inoremap <localleader>br \begin{remark}<Enter><Enter>\end{remark}<Enter><++><Esc>2kia<Esc>==$xA
+inoremap <localleader>bp \begin{proof}<Enter><Enter>\end{proof}<Enter><++><Esc>2kia<Esc>==$xA
+inoremap <localleader>bc \begin{corollary}<Enter><Enter>\end{corollary}<Enter><++><Esc>2kia<Esc>==$xA
+" Math mode
+inoremap <localleader>mf \frac{}{<++>}<++><Esc>2F{a
+inoremap <localleader>mb \mathbb{}<++><Esc>F{a
+inoremap <localleader>mv \mathbf{}<++><Esc>F{a
+inoremap <localleader>m( \left(
+inoremap <localleader>m) \right)
+inoremap <localleader>mk \mathbb{K}
+inoremap <localleader>mq \mathbb{Q}
+inoremap <localleader>mr \mathbb{R}
+inoremap <localleader>mc \mathbb{C}
+inoremap <localleader>mz \mathbb{Z}
+inoremap <localleader>mn \mathbb{N}
+inoremap <localleader>m+ \mathbb{Z^+}
+inoremap <localleader>mp \mathcal{P}
+" Sections
+inoremap <localleader>s1 \section{}<++><Esc>F{a
+inoremap <localleader>s2 \subsection{}<++><Esc>F{a
+" Other common tex macros
+inoremap <localleader>li <Enter>\item<Space>
+
+
+" autocmd FileType tex inoremap <localleader>ref \ref{}<Space><++><Esc>T{i
+" autocmd FileType tex inoremap <localleader>tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
+" autocmd FileType tex inoremap <localleader>ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
+" autocmd FileType tex inoremap <localleader>can \cand{}<Tab><++><Esc>T{i
+" autocmd FileType tex inoremap <localleader>con \const{}<Tab><++><Esc>T{i
+" autocmd FileType tex inoremap <localleader>v \vio{}<Tab><++><Esc>T{i
+" autocmd FileType tex inoremap <localleader>a \href{}{<++>}<Space><++><Esc>2T{i
+" autocmd FileType tex inoremap <localleader>sc \textsc{}<Space><++><Esc>T{i
+" autocmd FileType tex inoremap <localleader>chap \chapter{}<Enter><Enter><++><Esc>2kf}i
+" autocmd FileType tex inoremap <localleader>sec \section{}<Enter><Enter><++><Esc>2kf}i
+" autocmd FileType tex inoremap <localleader>ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
+" autocmd FileType tex inoremap <localleader>sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
+" autocmd FileType tex inoremap <localleader>st <Esc>F{i*<Esc>f}i
+" autocmd FileType tex inoremap <localleader>beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
+" autocmd FileType tex inoremap <localleader>up <Esc>/usepackage<Enter>o\usepackage{}<Esc>i
+" autocmd FileType tex nnoremap <localleader>up /usepackage<Enter>o\usepackage{}<Esc>i
+" autocmd FileType tex inoremap <localleader>tt \texttt{}<Space><++><Esc>T{i
+" autocmd FileType tex inoremap <localleader>bt {\blindtext}
+" autocmd FileType tex inoremap <localleader>nu $\varnothing$
+" autocmd FileType tex inoremap <localleader>col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
+" autocmd FileType tex inoremap <localleader>rn (\ref{})<++><Esc>F}i
+```
+
+```vim
+" Allow syntax highlighting in the align environment
+call TexNewMathZone("M","align*",1)
+```
+
+## Shell Scripts
+
+```vim
+nnoremap <localleader>c :!shellcheck %<return>
+nnoremap <localleader>f :%!shfmt<return>
+```
+
+## Misc Settings
+
+```vim file="stow/.config/nvim/init.vim"
+filetype plugin on " Enable my individual filetype plugins
+let mapleader = " "
+let maplocalleader = ","
+set autoread " Reload file when changed by an outside tool
+set clipboard=unnamedplus " Use the global clipboard
+set list " Render leading and trailing whitespace characters
+set listchars=tab:<->,space:· " Set the whitespace characters to be rendered
+set mouse=a " Enable mouse support in every mode
+set nohlsearch " Don't highlight after searching
+set number relativenumber " Use relative line numbering
+set splitbelow splitright " Splits open at the bottom and right
+set updatetime=100 " Time until swap file is written to disk
+set wildmode=longest:full,full " Make ex-mode tab completion work more predictably
+
+" Basic key bindings
+map <leader>o :setlocal spell! spelllang=en_us<CR>
+map <localleader>c :w! \| !compiler <c-r>%<CR>
+map <localleader>p :!opout <c-r>%<CR><CR>
+nnoremap S :%s//g<Left><Left>
+
+" Don't copy to the clipboard when using 'c'
+nnoremap c "_c
+
+" Disables automatic commenting on newline:
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufRead,BufNewFile *.h set filetype=c
+
+" Automatically deletes all trailing whitespace on save.
+autocmd BufWritePre * %s/\s\+$//e
+
+" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
+
+" Set filetypes
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+autocmd BufRead,BufNewFile *.tex set filetype=tex
+
+" Read rc files properly. We have to do this check for &ft == 'rc' since if it
+" has a shebang then rcshell.vim will already detect that the file is
+" 'rcshell' and setting it again messes up syntax highlighting
+au BufRead,BufNewFile *.rc if &ft == 'rc' | set filetype=rcshell | endif
+```
+
+

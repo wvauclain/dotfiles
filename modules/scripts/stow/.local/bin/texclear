@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+set -e
+
+# Clears the build files of a LaTeX/XeLaTeX build.
+# I have vim run this file whenever I exit a .tex file.
+
+case "$1" in
+	*.tex)
+		file="$(basename "$(canonicalize "$1")")"
+		dir="$(dirname "$file")"
+		base="${file%.*}"
+		fd --maxdepth 1 --type f "^$base\\.(4tc|xref|tmp|pyc|pyo|fls|vrb|fdb_latexmk|bak|swp|aux|log|synctex\\(busy\\)|lof|lot|maf|idx|mtc|mtc0|nav|out|snm|toc|bcf|run\\.xml|synctex\\.gz|blg|bbl)" "." -X rm
+		;;
+	*) printf "Give .tex file as argument.\\n" ;;
+esac
+

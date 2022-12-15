@@ -1,0 +1,5 @@
+if ! python3 -c "import neovim" >/dev/null 2>&1; then
+    pip3 install neovim
+fi
+
+ln -s "$(canonicalize ../../neovim/spell)" .config/nvim/spell

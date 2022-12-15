@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+info() {
+	printf "\033[32minfo:\033[0m %s\n" "$@"
+}
+
+info "Mounting disk..."
+sudo mount /dev/sr0 /mnt
+
+info "Copying files..."
+install -Dvm644 -t "$HOME/pictures/$(date -Ins)/" /mnt/pictures/*
+
+info "Ejecting disk..."
+sudo umount /mnt
+sudo eject /dev/sr0

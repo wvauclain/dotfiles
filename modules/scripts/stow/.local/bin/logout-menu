@@ -1,0 +1,12 @@
+#!/bin/sh
+ACTIONS='
+Shut Down:shutdown now
+Restart:reboot
+Hibernate:systemctl hibernate
+Log Out:bspc quit
+Sleep:systemctl suspend
+'
+
+selection="$(echo "$ACTIONS" | awk -F: '/.+/ { print $1 }' | rofi -dmenu)"
+
+exec sh -c "$(echo "$ACTIONS" | awk -F: -v selection="$selection" '$1 == selection { print $2 }')"

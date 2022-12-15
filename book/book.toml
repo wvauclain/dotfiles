@@ -1,0 +1,10 @@
+[book]
+authors = ["Will Vauclain"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Will's Dotfiles"
+
+[output.html.print]
+enable = false
+page-break = true

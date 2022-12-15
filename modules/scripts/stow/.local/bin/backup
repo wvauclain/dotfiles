@@ -1,0 +1,10 @@
+#!/bin/bash
+BACKUP_PATH="$1"
+printf "Are you sure that you would like to begin a backup to $BACKUP_PATH (y/N)? "
+read choice
+case "$choice" in 
+  y|Y ) echo "Starting..." ;;
+  * ) exit 1 ;;
+esac
+
+rsync -aAXvH --delete --exclude={"/bulk/*","/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*/.cache"} / "$BACKUP_PATH"
