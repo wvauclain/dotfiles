@@ -7,7 +7,6 @@ endif
 
 " Install plugins
 call plug#begin('~/.config/nvim/plugged')
-" Plug 'bling/vim-airline' " Status bar for vim
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'fatih/vim-go'
 Plug 'gruvbox-community/gruvbox' " The best colorscheme ever
@@ -28,8 +27,6 @@ Plug 'cespare/vim-toml'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'sirver/ultisnips'
 call plug#end()
-
-source /etc/vimrc
 
 " Neovim settings
 filetype plugin on " Enable my individual filetype plugins

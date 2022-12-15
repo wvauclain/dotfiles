@@ -1,3 +1,0 @@
-#!/bin/sh
-# Fix zoom scaling issues
-QT_SCALE_FACTOR=0.5 /usr/bin/zoom
